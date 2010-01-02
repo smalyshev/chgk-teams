@@ -1,0 +1,13 @@
+.required { 
+	color: maroon; 
+	font-weight: bold;
+}
+
+#fieldset-player0 legend {
+	color: maroon; 
+}
+
+div#errors {
+	color: red;
+	padding: 5px;
+}

@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Регистрация на турнир ИЧБ-5 сезона 2006 года</title>
+  </head>
+<style>
+<!--
+.fm { color: maroon; font-weight: bold; }
+.fo { font-weight: bold; }
+// -->
+</style>
+  <body bgcolor=white>
+    <h1 align=center>Регистрация на турнир ИЧБ-6 сезона 2006 гг.</h1>
+    Пожалуйста, заполните приведенную ниже форму.<br>
+    Названия обязательных полей выделены <span class="fm">красным</span>. Первыми заполняйте, пожалуйста, данные для капитана команды.<br>
+    Очень просим Вас не лениться и заполнить все поля, по которым у Вас есть информация. Раз в год можно и потрудиться :).<br>
+    <form action="/znatoki/cgi-bin/register2006ichb.pl" method="post" onSubmit="return JsChecks()">
+      <table bgcolor="white" cellpadding=4 cellspacing=2>
+        <tr bgcolor="#CCCCCC"><td class="fm">Название команды:</td><td><input name="tname" size=30 id="tname"></td></tr>
+        <tr bgcolor="#CCCCCC"><td class="fm">E-mail регистрирующего:</td><td><input name="regmail" size=30 id="regmail"></td></tr>
+        <tr bgcolor="#CCCCCC"><td class="fo">Резервный контактный e-mail:</td><td><input name="resmail" size=30 id="resmail"></td></tr>
+        <tr bgcolor="#CCCCCC"><td class="fm">Сезон 2004:</td>
+<td>
+<input name="sezon2004" type="radio" value="Да" id="sezon2004"> Команда играла в сезоне 2004 года<br>
+<span class="fm">Регистрационный номер команды:</span> <input name="oldregno" id="oldregno" type="text" size="4"><br>
+<input name="sezon2004" type="radio" value="Нет" checked> Нет, команда не играла в прошлом сезоне 
+</td></tr>
+	
+        <tr bgcolor="#CCCCCC"><td span class="fm">Контактный адрес:</td><td>
+            <input name="kadres" type="radio" value="kap" checked id="kadres1"> Капитан команды<br>
+            <input name="kadres" type="radio" value="reg" id="kadres2"> Регистрирующий<br>
+            <input name="kadres" type="radio" value="list" id="kadres3"> Командный лист: <input name="tlist" size=30 id="tlist"><br>
+            <input name="kadres" type="radio" value="other" id="kadres4"> Другой адрес: <input name="dradr" size=30 id="dradr"><br>
+          </td></tr>
+        <tr bgcolor="#CCCCCC"><td class="fm">Лист Совета Капитанов:</td><td>
+           <input name="klist" type=radio checked value="подписан" id="klist1"> Капитан подписан на лист<br>
+            <input name="klist" type=radio value="не подписан" id="klist2"> Капитан не подписан на лист,<br>
+            просьба подписать адрес <input name="tsubs" size="30" id="tsubs"> в <select name="tsubs_kod"><option>КОИ8</option><option>translite</option></select>
+          </td></tr>
+        <tr bgcolor="#CCCCCC"><td class="fm">Листы Клуба:</td><td>
+                Подписан ли кто-либо из команды на лист ZNATOK и/или Z-INFO?<br>
+            <input name="zlist" type=radio checked value="подписан" id="zlist1"> Да, команда имеет доступ к материалам листов<br>
+            <input name="zlist" type=radio value="не подписан" id="zlist2"> Нет,<br> просьба подписать адрес <input name="zsubs" size="25" id="zsubs"> в <select name="zsubs_kod"><option>КОИ8</option><option>translite</option></select> на лист <select name="zsubs_list"><option>ZNATOK</option><option>Z-INFO</option></select>
+	  </td></tr>
+	<tr bgcolor="#CCCCCC"><td class="fo">Комментарии:</td><td width="100%"><textarea name="comment" cols=60 rows=6 wrap=virtual></textarea></td></tr>
+	<tr><td colspan=2><table>
+	      <tr><th>X</th><th class="fm">Имя</th><th class="fm">Фамилия</th><th>Город</th><th>Страна</th><th>E-mail</th><th>Дата рожд.</th><th>Пол</th><th>URL</th><th>ICQ</th></tr>
+        <tr><th colspan=10 bgcolor="#EEEEE">Капитан команды:</td></tr>
+        <tr><th colspan=10 bgcolor="#EEEEE">Если капитан уже есть в базе данных Интернет-клуба, достаточно заполнить только имя, фамилию и город и отметить поле "X".</td></tr>
+
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old1" id="old1"></td>
+                <td><input name="imia1" size=10 id="imia1"></td>
+                <td><input name="famil1" size=15 id="famil1"></td>
+                <td><input name="city1" size=15 id="city1"></td>
+                <td><input name="country1" size=15></td>
+                <td><input name="email1" size=8></td>
+                <td><input name="d1" size=2 value="дд" maxlength=2>/<input name="m1" size=2 value="мм" maxlength=2>/<input name="y1" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex1" size=1 maxlength=1></td>
+                <td><input name="url1" size=12></td>
+                <td><input name="icq1" size=8></td>
+              </tr>
+	<tr><th colspan=10 bgcolor="#EEEEE">Игроки команды:</td></tr>
+        <tr><th colspan=10 bgcolor="#EEEEE">Если игрок уже есть в базе данных Интернет-клуба, достаточно заполнить только имя, фамилию и город и отметить поле "X".</td></tr>
+      <tr><th colspan=10 bgcolor="#EEEEE">Основные игроки:</td></tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old2" id="old2"></td>
+                <td><input name="imia2" size=10 id="imia2"></td>
+                <td><input name="famil2" size=15 id="famil2"></td>
+                <td><input name="city2" size=15 id="city2"></td>
+                <td><input name="country2" size=15></td>
+                <td><input name="email2" size=8></td>
+                <td><input name="d2" size=2 value="дд" maxlength=2>/<input name="m2" size=2 value="мм" maxlength=2>/<input name="y2" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex2" size=1 maxlength=1></td>
+                <td><input name="url2" size=12></td>
+                <td><input name="icq2" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old3" id="old3"></td>
+                <td><input name="imia3" size=10 id="imia3"></td>
+                <td><input name="famil3" size=15 id="famil3"></td>
+                <td><input name="city3" size=15 id="city3"></td>
+                <td><input name="country3" size=15></td>
+                <td><input name="email3" size=8></td>
+                <td><input name="d3" size=2 value="дд" maxlength=2>/<input name="m3" size=2 value="мм" maxlength=2>/<input name="y3" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex3" size=1 maxlength=1></td>
+                <td><input name="url3" size=12></td>
+                <td><input name="icq3" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old4" id="old4"></td>
+                <td><input name="imia4" size=10 id="imia4"></td>
+                <td><input name="famil4" size=15 id="famil4"></td>
+                <td><input name="city4" size=15 id="city4"></td>
+                <td><input name="country4" size=15></td>
+                <td><input name="email4" size=8></td>
+                <td><input name="d4" size=2 value="дд" maxlength=2>/<input name="m4" size=2 value="мм" maxlength=2>/<input name="y4" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex4" size=1 maxlength=1></td>
+                <td><input name="url4" size=12></td>
+                <td><input name="icq4" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old5" id="old5"></td>
+                <td><input name="imia5" size=10 id="imia5"></td>
+                <td><input name="famil5" size=15 id="famil5"></td>
+                <td><input name="city5" size=15 id="city5"></td>
+                <td><input name="country5" size=15></td>
+                <td><input name="email5" size=8></td>
+                <td><input name="d5" size=2 value="дд" maxlength=2>/<input name="m5" size=2 value="мм" maxlength=2>/<input name="y5" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex5" size=1 maxlength=1></td>
+                <td><input name="url5" size=12></td>
+                <td><input name="icq5" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old6" id="old6"></td>
+                <td><input name="imia6" size=10 id="imia6"></td>
+                <td><input name="famil6" size=15 id="famil6"></td>
+                <td><input name="city6" size=15 id="city6"></td>
+                <td><input name="country6" size=15></td>
+                <td><input name="email6" size=8></td>
+                <td><input name="d6" size=2 value="дд" maxlength=2>/<input name="m6" size=2 value="мм" maxlength=2>/<input name="y6" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex6" size=1 maxlength=1></td>
+                <td><input name="url6" size=12></td>
+                <td><input name="icq6" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old7" id="old7"></td>
+                <td><input name="imia7" size=10 id="imia7"></td>
+                <td><input name="famil7" size=15 id="famil7"></td>
+                <td><input name="city7" size=15 id="city7"></td>
+                <td><input name="country7" size=15></td>
+                <td><input name="email7" size=8></td>
+                <td><input name="d7" size=2 value="дд" maxlength=2>/<input name="m7" size=2 value="мм" maxlength=2>/<input name="y7" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex7" size=1 maxlength=1></td>
+                <td><input name="url7" size=12></td>
+                <td><input name="icq7" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old8" id="old8"></td>
+                <td><input name="imia8" size=10 id="imia8"></td>
+                <td><input name="famil8" size=15 id="famil8"></td>
+                <td><input name="city8" size=15 id="city8"></td>
+                <td><input name="country8" size=15></td>
+                <td><input name="email8" size=8></td>
+                <td><input name="d8" size=2 value="дд" maxlength=2>/<input name="m8" size=2 value="мм" maxlength=2>/<input name="y8" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex8" size=1 maxlength=1></td>
+                <td><input name="url8" size=12></td>
+                <td><input name="icq8" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old9" id="old9"></td>
+                <td><input name="imia9" size=10 id="imia9"></td>
+                <td><input name="famil9" size=15 id="famil9"></td>
+                <td><input name="city9" size=15 id="city9"></td>
+                <td><input name="country9" size=15></td>
+                <td><input name="email9" size=8></td>
+                <td><input name="d9" size=2 value="дд" maxlength=2>/<input name="m9" size=2 value="мм" maxlength=2>/<input name="y9" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex9" size=1 maxlength=1></td>
+                <td><input name="url9" size=12></td>
+                <td><input name="icq9" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old10" id="old10"></td>
+                <td><input name="imia10" size=10 id="imia10"></td>
+                <td><input name="famil10" size=15 id="famil10"></td>
+                <td><input name="city10" size=15 id="city10"></td>
+                <td><input name="country10" size=15></td>
+                <td><input name="email10" size=8></td>
+                <td><input name="d10" size=2 value="дд" maxlength=2>/<input name="m10" size=2 value="мм" maxlength=2>/<input name="y10" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex10" size=1 maxlength=1></td>
+                <td><input name="url10" size=12></td>
+                <td><input name="icq10" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old11" id="old11"></td>
+                <td><input name="imia11" size=10 id="imia11"></td>
+                <td><input name="famil11" size=15 id="famil11"></td>
+                <td><input name="city11" size=15 id="city11"></td>
+                <td><input name="country11" size=15></td>
+                <td><input name="email11" size=8></td>
+                <td><input name="d11" size=2 value="дд" maxlength=2>/<input name="m11" size=2 value="мм" maxlength=2>/<input name="y11" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex11" size=1 maxlength=1></td>
+                <td><input name="url11" size=12></td>
+                <td><input name="icq11" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old12" id="old12"></td>
+                <td><input name="imia12" size=10 id="imia12"></td>
+                <td><input name="famil12" size=15 id="famil12"></td>
+                <td><input name="city12" size=15 id="city12"></td>
+                <td><input name="country12" size=15></td>
+                <td><input name="email12" size=8></td>
+                <td><input name="d12" size=2 value="дд" maxlength=2>/<input name="m12" size=2 value="мм" maxlength=2>/<input name="y12" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex12" size=1 maxlength=1></td>
+                <td><input name="url12" size=12></td>
+                <td><input name="icq12" size=8></td>
+              </tr>
+ 	<tr><th colspan=10 bgcolor="#EEEEE">Запасные игроки:</td></tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old13" id="old13"></td>
+                <td><input name="imia13" size=10 id="imia13"></td>
+                <td><input name="famil13" size=15 id="famil13"></td>
+                <td><input name="city13" size=15 id="city13"></td>
+                <td><input name="country13" size=15></td>
+                <td><input name="email13" size=8></td>
+                <td><input name="d13" size=2 value="дд" maxlength=2>/<input name="m13" size=2 value="мм" maxlength=2>/<input name="y13" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex13" size=1 maxlength=1></td>
+                <td><input name="url13" size=12></td>
+                <td><input name="icq13" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old14" id="old14"></td>
+                <td><input name="imia14" size=10 id="imia14"></td>
+                <td><input name="famil14" size=15 id="famil14"></td>
+                <td><input name="city14" size=15 id="city14"></td>
+                <td><input name="country14" size=15></td>
+                <td><input name="email14" size=8></td>
+                <td><input name="d14" size=2 value="дд" maxlength=2>/<input name="m14" size=2 value="мм" maxlength=2>/<input name="y14" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex14" size=1 maxlength=1></td>
+                <td><input name="url14" size=12></td>
+                <td><input name="icq14" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old15" id="old15"></td>
+                <td><input name="imia15" size=10 id="imia15"></td>
+                <td><input name="famil15" size=15 id="famil15"></td>
+                <td><input name="city15" size=15 id="city15"></td>
+                <td><input name="country15" size=15></td>
+                <td><input name="email15" size=8></td>
+                <td><input name="d15" size=2 value="дд" maxlength=2>/<input name="m15" size=2 value="мм" maxlength=2>/<input name="y15" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex15" size=1 maxlength=1></td>
+                <td><input name="url15" size=12></td>
+                <td><input name="icq15" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old16" id="old16"></td>
+                <td><input name="imia16" size=10 id="imia16"></td>
+                <td><input name="famil16" size=15 id="famil16"></td>
+                <td><input name="city16" size=15 id="city16"></td>
+                <td><input name="country16" size=15></td>
+                <td><input name="email16" size=8></td>
+                <td><input name="d16" size=2 value="дд" maxlength=2>/<input name="m16" size=2 value="мм" maxlength=2>/<input name="y16" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex16" size=1 maxlength=1></td>
+                <td><input name="url16" size=12></td>
+                <td><input name="icq16" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old17" id="old17"></td>
+                <td><input name="imia17" size=10 id="imia17"></td>
+                <td><input name="famil17" size=15 id="famil17"></td>
+                <td><input name="city17" size=15 id="city17"></td>
+                <td><input name="country17" size=15></td>
+                <td><input name="email17" size=8></td>
+                <td><input name="d17" size=2 value="дд" maxlength=2>/<input name="m17" size=2 value="мм" maxlength=2>/<input name="y17" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex17" size=1 maxlength=1></td>
+                <td><input name="url17" size=12></td>
+                <td><input name="icq17" size=8></td>
+              </tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input type="checkbox" value="x" name="old18" id="old18"></td>
+                <td><input name="imia18" size=10 id="imia18"></td>
+                <td><input name="famil18" size=15 id="famil18"></td>
+                <td><input name="city18" size=15 id="city18"></td>
+                <td><input name="country18" size=15></td>
+                <td><input name="email18" size=8></td>
+                <td><input name="d18" size=2 value="дд" maxlength=2>/<input name="m18" size=2 value="мм" maxlength=2>/<input name="y18" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex18" size=1 maxlength=1></td>
+                <td><input name="url18" size=12></td>
+                <td><input name="icq18" size=8></td>
+              </tr>
+      </table>
+	    </td></tr>
+	<tr><th colspan=2><input type=submit value="Отправить!"></th></tr>
+      </table>
+    </form>
+<p><hr noshade align=center width="80%">
+<table align=center width="80%"><tr><td align=right>
+<i>Искренне Ваши</i>,<br>
+Президент Интернет-Клуба,<br>
+Завкадр,<br>
+координатор ИЧБ
+</td></tr></table>
+<script language="Javascript">
+<!-- 
+Have_DOM = (document.getElementById) ? true : false;
+FieldDesc = Array();
+FieldDesc['sezon2004'] = 'Сезон 2004';
+FieldDesc['channel'] = 'Командный канал';
+FieldDesc['tname'] = 'Название команды';
+FieldDesc['regmail'] = 'E-mail регистрирующего';
+FieldDesc['kadres4'] = 'Контактный адрес';
+FieldDesc['kadres3'] = 'Контактный адрес';
+FieldDesc['klist2'] = 'Лист Совета Капитанов';
+FieldDesc['zlist3'] = 'Листы Клуба';
+FieldDesc['imia1'] = 'Имя капитана';
+FieldDesc['famil1'] = 'Фамилия капитана';
+FieldDesc['city1'] = 'Город капитана';
+
+function do_dump(el) {
+      res = '';
+      for (var v in el) {
+        res += 'el['+v+']='+el[v]+'\t';
+      }
+      alert(res);
+}
+
+function uncheck(cb) {
+       el = getEl(cb);
+       el.checked = false;
+}
+
+function getEl(field) {
+       if(Have_DOM) {
+        el = document.getElementById(field);
+      } else {
+        el = document.forms[0].elements[field];
+      }
+      return el;
+}     
+
+function checkFieldEmpty(field) {
+      el = getEl(field);
+      if(el.value == '') {
+        alert('Поле "' + FieldDesc[field] + '" должно быть заполнено.');
+        el.focus();
+        return false;
+      }
+      return true;
+}
+
+function checkRadioField(radio, field) {
+      rel=getEl(radio);
+      rel_c = rel.checked;
+      fel=getEl(field);
+      if(rel_c && fel.value == '') {
+        alert('Опция "' + FieldDesc[radio] + '" выбрана, но соответствующее текстовое поле не заполнено.');
+        fel.focus();
+        return false;
+      }
+      return true;
+}
+
+function checkCBField(cb, field) {
+      cel=getEl(cb);
+      fel=getEl(field);
+      if(cel.checked && fel.value == '') {
+         alert('Опция "' + FieldDesc[cb] + '" выбрана, но соответствующее текстовое поле не заполнено.');
+        fel.focus();
+        return false;
+      }
+      return true;
+}
+
+function checkOneOf(fa, name) {
+      for(i=0;i < fa.length; i++) {
+        el = getEl(fa[i]);
+        if(el.checked) {
+          return true;
+        }
+      }
+      alert('Выберите одну из опций в графе "'+name+'"');
+      return false;
+}
+
+function JsChecks() {
+      if(!checkFieldEmpty('tname')) return false;
+      if(!checkFieldEmpty('regmail')) return false;
+      if(!checkFieldEmpty('imia1')) return false;
+      if(!checkFieldEmpty('famil1')) return false;
+      if(!checkFieldEmpty('city1')) return false;
+      if(!checkFieldEmpty('channel')) return false;
+      if(!checkRadioField('sezon2004', 'oldregno')) return false;
+      if(!checkRadioField('kadres3', 'tlist')) return false;
+      if(!checkRadioField('kadres4', 'dradr')) return false;
+      if(!checkRadioField('klist2', 'tsubs')) return false;
+      if(!checkRadioField('zlist2', 'zsubs')) return false;
+
+      return true;
+}
+// -->
+</script>
+  </body>
+</html>

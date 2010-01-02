@@ -1,0 +1,24 @@
+<?php 
+$this->headTitle('Регистрация');
+$this->dojo()->enable();
+?>
+<div id="welcome">
+<h1 align=center>Регистрация на турнир ИЧБ сезона 2010 г.</h1>
+Пожалуйста, заполните приведенную ниже форму.<br>
+Названия обязательных полей выделены <span class="required">красным</span>. Первыми заполняйте, пожалуйста, данные для капитана команды.<br>
+Очень просим Вас не лениться и заполнить все поля, по которым у Вас есть информация. Раз в год можно и потрудиться :).<br>
+</div>
+<div id="errors">
+<?php
+	$errors = $this->form->getMessages();
+	$this->printErrors($errors);
+?>
+</div>
+<?= $this->form; ?>
+<p></p><hr noshade align=center width="80%"/>
+<table align=center width="80%"><tr><td align=right>
+<i>Искренне Ваши</i>,<br>
+Президент Интернет-Клуба,<br>
+Завкадр,<br>
+координатор ИЧБ
+</td></tr></table>

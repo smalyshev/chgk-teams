@@ -1,0 +1,33 @@
+<?php
+/**
+ * Default Layout
+ *  
+ * @author
+ * @version
+ */
+echo $this->doctype()?>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<?php
+echo $this->headTitle();
+echo $this->headScript();
+echo $this->headStyle();
+if ($this->dojo()->isEnabled()){
+    $this->dojo()->addStyleSheetModule('dijit.themes.tundra');
+    echo $this->dojo();
+}
+echo $this->headLink();
+?>
+	</head>
+<body class="tundra">
+<h1><?php
+echo $this->placeholder('title')?></h1>
+		<?php
+echo $this->layout()->content?>
+
+		<br />
+<br />
+<div id="nav"><?= $this->placeholder('nav') ?></div>
+</body>
+</html>

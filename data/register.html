@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Регистрация</title>
+  </head>
+
+  <body bgcolor=white>
+    <h1 align=center>Регистрация команд на ИГП-6</h1>
+    Пожалуйста, заполните приведенную ниже форму.<br>
+    Названия обязательных полей выделены <font color="maroon">красным</font>. Первыми заполняйте, пожалуйста, данные для капитана команды.<br>
+    Очень просим Вас не лениться и заполнить все поля, по которым у Вас есть информация. Раз в год можно и потрудиться :).<br>
+    <form action="../cgi-bin/register.pl" method="post">
+      <table bgcolor="white" cellpadding=4 cellspacing=2>
+	<tr bgcolor="#CCCCCC"><td><b><font color="maroon">Название команды:</font></b></td><td><input name="tname"></td></tr>
+	<tr bgcolor="#CCCCCC"><td><b><font color="maroon">E-mail регистрирующего:</font></b></td><td><input name="regmail"></td></tr>
+	<tr bgcolor="#CCCCCC"><td><b><font color="maroon">Контактный адрес:</font></b></td><td>
+	    <input name="kadres" type="radio" value="kap" checked> Капитан команды<br>
+	    <input name="kadres" type="radio" value="reg"> Регистрирующий<br>
+	    <input name="kadres" type="radio" value="list"> Командный лист: <input  name="tlist" size=20><br>
+	    <input name="kadres" type="radio" value="other"> Другой адрес: <input   name="dradr" size=20><br>
+	  </td></tr>
+	<tr bgcolor="#CCCCCC"><td><b>Командная страница (URL):</b></td><td><input name="turl"></td></tr>
+	<tr bgcolor="#CCCCCC"><td><b><font color="maroon">Лист Совета Капитанов:</font></b></td><td>
+           <input name="klist" type=radio checked value="подписан"> Капитан подписан на лист<br>
+            <input name="klist" type=radio value="не подписан"> Капитан не подписан на лист,<br>
+	    просьба подписать адрес <input name="tsubs" size="15"> в <select name="tsubs_kod"><option>КОИ8</option><option>translite</option></select> 
+          </td></tr>
+	<tr bgcolor="#CCCCCC"><td><b><font color="maroon">Листы Клуба:</font></b></td><td>
+		Подписан ли кто-либо из команды на лист ZNATOK и/или Z-INFO?<br>
+	    <input name="zlist" type=radio checked value="подписан"> Да, команда имеет доступ к материалам листов<br>
+	    <input name="zlist" type=radio value="не подписан"> Нет,<br> просьба подписать адрес <input name="zsubs" size="12"> в <select name="zsubs_kod"><option>КОИ8</option><option>translite</option></select> на лист <select name="zsubs_list"><option>ZNATOK</option><option>Z-INFO</option></select>
+	  </td></tr>
+	<tr bgcolor="#CCCCCC"><td><b>Осенний турнир:</b></td><td>Готовы провести:<br>
+	    <input type=checkbox name="osen_sam" value="да"> Самостоятельный тур<br>
+	    <input type=checkbox name="osen_sov" value="да"> Совместный тур в качестве ответственных<br>
+	    <input type=checkbox name="osen_pom" value="да"> Совместный тур в качестве помощников<br>
+	    <!-- input type=checkbox name="osen_net" value="Не готовы" checked> Не готовы<br -->
+	    Предпочтительные сроки проведения:<br>
+	    <input name="os_srok" size="20"><br>
+	    Название команды, с которой Вы предпочитаете провести тур:<br>
+	    <input name="os_predp" size="20"><br>
+	    </td></tr>
+	<tr bgcolor="#CCCCCC"><td><b>Весенний турнир:</b></td><td>Готовы провести:<br>
+	    <input type=checkbox name="vesna_sam" value="да"> Самостоятельный тур<br>
+	    <input type=checkbox name="vesna_sov" value="да"> Совместный тур в качестве ответственных<br>
+	    <input type=checkbox name="vesna_pom" value="да"> Совместный тур в качестве помощников<br>
+	    <!-- input type=checkbox name="vesna_net" value="Не готовы" checked> Не готовы<br -->
+	    Предпочтительные сроки проведения:<br>
+	    <input name="vs_srok" size="20"><br>
+	    Название команды, с которой Вы предпочитаете провести тур:<br>
+	    <input name="vs_predp" size="20"><br>
+	    </td></tr>
+	<tr bgcolor="#CCCCCC"><td><b>Комментарии:</b></td><td width="100%"><textarea name="comment" cols=40 rows=6 wrap=virtual></textarea></td></tr>
+	<tr><td colspan=2><table>
+	      <tr><th><font color="maroon">Имя</font></th><th><font color="maroon">Фамилия</font></th><th>Дата рожд.</th><th>Пол</th><th>Город</th><th>Страна</th><th>E-mail</th><th>URL</th><th>ICQ</th><th>Фотография (URL)</th></tr>
+	<tr><th colspan=10 bgcolor="#EEEEE">Капитан команды:</td></tr>
+              <tr bgcolor="#EEEEEE">
+                <td><input name="imia1" size=8></td>
+                <td><input name="famil1" size=10></td>
+                <td><input name="d1" size=2 value="дд" maxlength=2>/<input name="m1" size=2 value="мм" maxlength=2>/<input name="y1" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex1" size=1 maxlength=1></td>
+                <td><input name="city1" size=8></td>
+                <td><input name="country1" size=8></td>
+                <td><input name="email1" size=8></td>
+                <td><input name="url1" size=8></td>
+                <td><input name="icq1" size=8></td>
+                <td><input name="foto1" size=10></td>
+              </tr>
+	<tr><th colspan=10 bgcolor="#EEEEE">Игроки команды:</td></tr>
+              <tr>
+                <td><input name="imia2" size=8></td>
+                <td><input name="famil2" size=10></td>
+                <td><input name="d2" size=2 value="дд" maxlength=2>/<input name="m2" size=2 value="мм" maxlength=2>/<input name="y2" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex2" size=1 maxlength=1></td>
+                <td><input name="city2" size=8></td>
+                <td><input name="country2" size=8></td>
+                <td><input name="email2" size=8></td>
+                <td><input name="url2" size=8></td>
+                <td><input name="icq2" size=8></td>
+                <td><input name="foto2" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia3" size=8></td>
+                <td><input name="famil3" size=10></td>
+                <td><input name="d3" size=2 value="дд" maxlength=2>/<input name="m3" size=2 value="мм" maxlength=2>/<input name="y3" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex3" size=1 maxlength=1></td>
+                <td><input name="city3" size=8></td>
+                <td><input name="country3" size=8></td>
+                <td><input name="email3" size=8></td>
+                <td><input name="url3" size=8></td>
+                <td><input name="icq3" size=8></td>
+                <td><input name="foto3" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia4" size=8></td>
+                <td><input name="famil4" size=10></td>
+                <td><input name="d4" size=2 value="дд" maxlength=2>/<input name="m4" size=2 value="мм" maxlength=2>/<input name="y4" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex4" size=1 maxlength=1></td>
+                <td><input name="city4" size=8></td>
+                <td><input name="country4" size=8></td>
+                <td><input name="email4" size=8></td>
+                <td><input name="url4" size=8></td>
+                <td><input name="icq4" size=8></td>
+                <td><input name="foto4" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia5" size=8></td>
+                <td><input name="famil5" size=10></td>
+                <td><input name="d5" size=2 value="дд" maxlength=2>/<input name="m5" size=2 value="мм" maxlength=2>/<input name="y5" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex5" size=1 maxlength=1></td>
+                <td><input name="city5" size=8></td>
+                <td><input name="country5" size=8></td>
+                <td><input name="email5" size=8></td>
+                <td><input name="url5" size=8></td>
+                <td><input name="icq5" size=8></td>
+                <td><input name="foto5" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia6" size=8></td>
+                <td><input name="famil6" size=10></td>
+                <td><input name="d6" size=2 value="дд" maxlength=2>/<input name="m6" size=2 value="мм" maxlength=2>/<input name="y6" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex6" size=1 maxlength=1></td>
+                <td><input name="city6" size=8></td>
+                <td><input name="country6" size=8></td>
+                <td><input name="email6" size=8></td>
+                <td><input name="url6" size=8></td>
+                <td><input name="icq6" size=8></td>
+                <td><input name="foto6" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia7" size=8></td>
+                <td><input name="famil7" size=10></td>
+                <td><input name="d7" size=2 value="дд" maxlength=2>/<input name="m7" size=2 value="мм" maxlength=2>/<input name="y7" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex7" size=1 maxlength=1></td>
+                <td><input name="city7" size=8></td>
+                <td><input name="country7" size=8></td>
+                <td><input name="email7" size=8></td>
+                <td><input name="url7" size=8></td>
+                <td><input name="icq7" size=8></td>
+                <td><input name="foto7" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia8" size=8></td>
+                <td><input name="famil8" size=10></td>
+                <td><input name="d8" size=2 value="дд" maxlength=2>/<input name="m8" size=2 value="мм" maxlength=2>/<input name="y8" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex8" size=1 maxlength=1></td>
+                <td><input name="city8" size=8></td>
+                <td><input name="country8" size=8></td>
+                <td><input name="email8" size=8></td>
+                <td><input name="url8" size=8></td>
+                <td><input name="icq8" size=8></td>
+                <td><input name="foto8" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia9" size=8></td>
+                <td><input name="famil9" size=10></td>
+                <td><input name="d9" size=2 value="дд" maxlength=2>/<input name="m9" size=2 value="мм" maxlength=2>/<input name="y9" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex9" size=1 maxlength=1></td>
+                <td><input name="city9" size=8></td>
+                <td><input name="country9" size=8></td>
+                <td><input name="email9" size=8></td>
+                <td><input name="url9" size=8></td>
+                <td><input name="icq9" size=8></td>
+                <td><input name="foto9" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia10" size=8></td>
+                <td><input name="famil10" size=10></td>
+                <td><input name="d10" size=2 value="дд" maxlength=2>/<input name="m10" size=2 value="мм" maxlength=2>/<input name="y10" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex10" size=1 maxlength=1></td>
+                <td><input name="city10" size=8></td>
+                <td><input name="country10" size=8></td>
+                <td><input name="email10" size=8></td>
+                <td><input name="url10" size=8></td>
+                <td><input name="icq10" size=8></td>
+                <td><input name="foto10" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia11" size=8></td>
+                <td><input name="famil11" size=10></td>
+                <td><input name="d11" size=2 value="дд" maxlength=2>/<input name="m11" size=2 value="мм" maxlength=2>/<input name="y11" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex11" size=1 maxlength=1></td>
+                <td><input name="city11" size=8></td>
+                <td><input name="country11" size=8></td>
+                <td><input name="email11" size=8></td>
+                <td><input name="url11" size=8></td>
+                <td><input name="icq11" size=8></td>
+                <td><input name="foto11" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="imia12" size=8></td>
+                <td><input name="famil12" size=10></td>
+                <td><input name="d12" size=2 value="дд" maxlength=2>/<input name="m12" size=2 value="мм" maxlength=2>/<input name="y12" size=2 value="гг" maxlength=2></td>
+                <td><input name="sex12" size=1 maxlength=1></td>
+                <td><input name="city12" size=8></td>
+                <td><input name="country12" size=8></td>
+                <td><input name="email12" size=8></td>
+                <td><input name="url12" size=8></td>
+                <td><input name="icq12" size=8></td>
+                <td><input name="foto12" size=10></td>
+              </tr>
+	<tr><th colspan=10 bgcolor="#EEEEE">Запасные игроки:</td></tr>
+              <tr>
+                <td><input name="zimia1" size=8></td>
+                <td><input name="zfamil1" size=10></td>
+                <td><input name="zd1" size=2 value="дд" maxlength=2>/<input name="zm1" size=2 value="мм" maxlength=2>/<input name="zy1" size=2 value="гг" maxlength=2></td>
+                <td><input name="zsex1" size=1 maxlength=1></td>
+                <td><input name="zcity1" size=8></td>
+                <td><input name="zcountry1" size=8></td>
+                <td><input name="zemail1" size=8></td>
+                <td><input name="zurl1" size=8></td>
+                <td><input name="zicq1" size=8></td>
+                <td><input name="zfoto1" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="zimia2" size=8></td>
+                <td><input name="zfamil2" size=10></td>
+                <td><input name="zd2" size=2 value="дд" maxlength=2>/<input name="zm2" size=2 value="мм" maxlength=2>/<input name="zy2" size=2 value="гг" maxlength=2></td>
+                <td><input name="zsex2" size=1 maxlength=1></td>
+                <td><input name="zcity2" size=8></td>
+                <td><input name="zcountry2" size=8></td>
+                <td><input name="zemail2" size=8></td>
+                <td><input name="zurl2" size=8></td>
+                <td><input name="zicq2" size=8></td>
+                <td><input name="zfoto2" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="zimia3" size=8></td>
+                <td><input name="zfamil3" size=10></td>
+                <td><input name="zd3" size=2 value="дд" maxlength=2>/<input name="zm3" size=2 value="мм" maxlength=2>/<input name="zy3" size=2 value="гг" maxlength=2></td>
+                <td><input name="zsex3" size=1 maxlength=1></td>
+                <td><input name="zcity3" size=8></td>
+                <td><input name="zcountry3" size=8></td>
+                <td><input name="zemail3" size=8></td>
+                <td><input name="zurl3" size=8></td>
+                <td><input name="zicq3" size=8></td>
+                <td><input name="zfoto3" size=10></td>
+              </tr>
+              <tr>
+                <td><input name="zimia4" size=8></td>
+                <td><input name="zfamil4" size=10></td>
+                <td><input name="zd4" size=2 value="дд" maxlength=2>/<input name="zm4" size=2 value="мм" maxlength=2>/<input name="zy4" size=2 value="гг" maxlength=2></td>
+                <td><input name="zsex4" size=1 maxlength=1></td>
+                <td><input name="zcity4" size=8></td>
+                <td><input name="zcountry4" size=8></td>
+                <td><input name="zemail4" size=8></td>
+                <td><input name="zurl4" size=8></td>
+                <td><input name="zicq4" size=8></td>
+                <td><input name="zfoto4" size=10></td>
+              </tr>
+	      </table>
+	    </td></tr>
+	<tr><th colspan=2><input type=submit value="Отправить!"></th></tr>
+      </table>
+    </form>
+<p><hr noshade align=center width="80%">
+<table align=center width="80%"><tr><td align=right>
+<i>Искренне Ваши</i>,<br>
+<a href="mailto:TheHobbit@usa.net">Завкадр</a>,<br>
+<a href="mailto:eli@nerve.ls.huji.ac.il">Секретарь</a>.</td></tr></table>
+  </body>
+</html>
