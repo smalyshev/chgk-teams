@@ -31,7 +31,19 @@ class IndexController extends Zend_Controller_Action
         	return $this->_forward('index');
         }
         $values = $form->getValues();
-        $this->view->error = Zend_Registry::get('model')->addTeamData($values);
+        $result = Bootstrap::get('model')->addTeamData($values);
+        if($result === true) {
+        	// success
+        	$mail = new Reg2_Mail('newreg');
+        	$mail->getView()->data = $values;
+        	$config = Bootstrap::get('config');
+        	$mail->getMailer()
+        		->addTo($config['mail']['register'])
+        		->setSubject('ICHB-2010 - New Registration');
+        	$mail->send();
+        } else {
+        	$this->view->error = $result;	
+        }
     }
 }
 

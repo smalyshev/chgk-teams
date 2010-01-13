@@ -23,9 +23,13 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->view->teams = Bootstrap::get('model')->countPendingTeams();
     }
 
-
+    public function pendingAction()
+    {
+        $this->view->teams = Bootstrap::get('model')->getPendingTeams();
+    }
+    
 }
 
