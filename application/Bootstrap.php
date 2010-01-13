@@ -7,6 +7,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected $_logger;
 	
+    public static function get($resource)
+    {
+    	return Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource($resource);	
+    }
+    
     protected function _initLoader()
     {
     	$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
@@ -16,6 +21,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$resourceLoader->addResourceType('model', 'models/', 'Model');
 		$resourceLoader->addResourceType('validate', '../library/validate', 'Validate');
 		$resourceLoader->addResourceType('plugin', 'plugins/', 'Plugin');
+		return $resourceLoader;
     }
     
     /**
@@ -39,6 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $this->_logger = $logger;
         Zend_Registry::set('log', $logger);
+        return $logger;
     }
 	
 	/**
@@ -47,7 +54,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConfig()
     {
         $this->_logger->info('Bootstrap ' . __METHOD__);
-        Zend_Registry::set('config', $this->getOptions());
+        $config = $this->getOptions();
+        Zend_Registry::set('config', $config);
+        return $config;
     }
 
     /**
@@ -101,11 +110,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$db = $this->getPluginResource('db')->getDbAdapter();
     	Zend_Db_Table_Abstract::setDefaultAdapter($db);
     	Zend_Registry::set('db', $db);
+    	return $db;
     }
     
     protected function _initModel()
     {
-    	Zend_Registry::set('model', new Reg2_Model_Data());
+    	$model = new Reg2_Model_Data();
+    	Zend_Registry::set('model', $model);
+    	return $model;
     }
     
 }
