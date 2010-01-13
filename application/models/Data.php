@@ -26,7 +26,7 @@ class Reg2_Model_Data
 	 */
 	static public function getModel()
 	{
-		return Zend_Registry::get('model');
+		return Bootstrap::get('model');
 	} 
 	
 	/**
@@ -75,6 +75,7 @@ class Reg2_Model_Data
 		$teams = $this->getTable('Teams');
 		$player_team = $this->getTable('PlayerTeam');
 		
+		Zend_Registry::get('log')->info("Add pending team: '$values[name] $values[email]'");
 		$tid = $teams->insert(array(
 			"imia" => $values["name"],
 			"turnir" => self::PENDING_TURNIR,
@@ -102,6 +103,8 @@ class Reg2_Model_Data
 				"turnir" => self::PENDING_TURNIR,
 				"stamp" => time(),
 			));
+			Zend_Registry::get('log')->info(sprintf("Add pending player %d: '%s %s'", 
+				$uid, $values["players"]["pname$i"], $values["players"]["pfamil$i"]));
 			if($i == 0) {
 				$kap = $uid;
 			}
@@ -111,6 +114,27 @@ class Reg2_Model_Data
 		}
 		
 		return true;
+	}
+	
+	public function countPendingTeams()
+	{
+		$table = $this->getTable('Teams');
+		$select = $table->select()
+			->from($table->info('name'), array("teamcount" => 'COUNT(*)'))
+			->where('turnir = ?', self::PENDING_TURNIR);
+		$res = $table->fetchRow($select);
+		Zend_Registry::get('log')->info("Select $select");
+		if($res) {
+			return $res->teamcount;
+		}
+		return 0;
+	}
+	
+	public function getPendingTeams()
+	{
+		$table = $this->getTable('Teams');
+		$select = $table->select()->where('turnir = ?', self::PENDING_TURNIR);
+		return $table->fetchAll($select);
 	}
 	
 	public function findPlayerByName($name, $famil)
