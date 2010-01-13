@@ -1,0 +1,11 @@
+<?php
+$this->headTitle('Очередь регистрации');
+?>
+<?php if(count($this->teams) == 0) { ?>
+Очередь пуста.
+<?php } else { 
+	foreach($this->teams as $team) { ?>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "team", "id" => $team->tid)) ?>">Команда "<?= $team->imia ?>"</a><br/>
+<?php  
+	}
+} ?>

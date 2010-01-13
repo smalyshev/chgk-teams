@@ -1,2 +1,6 @@
-<br /><br /><center>View script for controller <b>admin</b> and script/action name <b>index</b></center>
-<a href="<?= $this->url(array("controller" => "user", "action" => "logout")) ?>">Logout</a>
+<?php 
+$this->headTitle('Администрация');
+?>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "pending")) ?>">Очередь регистрации (<?= $this->teams ?>)</a><br/>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "teams")) ?>">Зарегистрированные команды</a><br/>
+<a href="<?= $this->url(array("controller" => "user", "action" => "logout")) ?>">Logout</a><br/>
