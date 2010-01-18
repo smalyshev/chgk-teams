@@ -12,11 +12,16 @@ class Reg2_Model_Data
 	protected $_tables = array();
 	const TURNIR = 50;
 	const PENDING_TURNIR = -1;
-	const MAX_PLAYERS = 6;
+	const MAX_PLAYERS = 18;
 
 	public function __construct()
 	{
 		$this->_loader = new Zend_Loader_PluginLoader(array('Reg2_Models_Tables' => APPLICATION_PATH . '/models/tables'));
+	}
+	
+	public function getMaxPlayers()
+	{
+		return self::MAX_PLAYERS;
 	}
 	
 	/**
