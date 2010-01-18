@@ -22,13 +22,20 @@ class Zend_View_Helper_PrintErrors
 	/**
 	 *  
 	 */
-	public function printErrors($data) 
+	public function printErrors($data, $form) 
 	{
 		foreach($data as $key => $value) {
 			list($errno, $errmsg) = each($value);
 			if(is_array($errmsg)) {
 				$this->printErrors($value);
 			} else {
+				$element = $form->getElement($key);
+				if($element) {
+					$label = $element->getLabel();
+					if($label) {
+						$key = $label;
+					}
+				}
 				echo "$key: $errmsg<br>";
 			}
 		}
