@@ -11,3 +11,11 @@ div#errors {
 	color: red;
 	padding: 5px;
 }
+
+form#regform table tr {
+	background-color: #CCCCCC;
+}
+
+form#regform table#players tr {
+	background-color: #EEEEEE;
+}
