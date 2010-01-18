@@ -12,6 +12,7 @@ class IndexController extends Zend_Controller_Action
     {
     	$urlHelper = $this->_helper->getHelper('url');
 		$this->view->form = $form = $this->_helper->getForm('register');
+		$this->view->maxplayers = Bootstrap::get('model')->getMaxPlayers();
 		$form->setAction($urlHelper->url(array(
             'controller' => 'index' , 
             'action' => 'register'
