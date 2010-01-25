@@ -40,7 +40,7 @@ class Reg2_Form_Register extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('EmailAddress', true),
-                array('UniqueTeamEmail', true, $this->_tid),
+//                array('UniqueTeamEmail', true, $this->_tid),
             ),
             'required'   => true,
             'label'      => 'E-mail регистрирующего',
@@ -49,7 +49,6 @@ class Reg2_Form_Register extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('EmailAddress', true),
-                array('UniqueTeamEmail', true, $this->_tid),
             ),
             'required'   => false,
             'label'      => 'Резервный контактный e-mail',
@@ -175,8 +174,8 @@ class Reg2_Form_Register extends Zend_Form
         ));
         $this->addElement('Select', 'zsubs_list', array(
 			    'multioptions'   => array(
-                            'znatok' => 'ZNATOK',
-                            'zinfo' => 'Z-INFO',
+                            'ZNATOK' => 'ZNATOK',
+                            'Z-INFO' => 'Z-INFO',
         	),
         	'value' => 'znatok',
             'required'   => false,
@@ -301,11 +300,11 @@ class Reg2_Form_Register extends Zend_Form
        	//$players = $form_factory->getForm('PlayerData');
         //$this->addSubForm($players, 'players');
         
-        $this->setSubFormDecorators(array(
-        	array('ViewScript', array("viewScript" => "playerheader.phtml")),
-   			 'FormElements',
-    	 	array('HtmlTag', array('tag' => 'p', 'id' => 'players'))
-		));
+//        $this->setSubFormDecorators(array(
+//        	array('ViewScript', array("viewScript" => "playerheader.phtml")),
+//   			 'FormElements',
+//    	 	array('HtmlTag', array('tag' => 'p', 'id' => 'players'))
+//		));
         
         $this->addElement('submit', 'register', array(
             'required' => false,

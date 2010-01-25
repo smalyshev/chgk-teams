@@ -90,16 +90,16 @@ class Reg2_Model_Data
 		));
 		$kap = 0;
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
-			if($values["players"]["pname$i"] == "") {
+			if($values["pname$i"] == "") {
 				continue;
 			}
 			$uid = $players->insert(array(
-				"imia" => $values["players"]["pname$i"],
-				"famil" => $values["players"]["pfamil$i"],
-				"city" => $values["players"]["pcity$i"],
-				"country" => $values["players"]["pcountry$i"],
-				"sex" => $values["players"]["psex$i"],
-				"born" => $values["players"]["pbirth$i"],
+				"imia" => $values["pname$i"],
+				"famil" => $values["pfamil$i"],
+				"city" => $values["pcity$i"],
+				"country" => $values["pcountry$i"],
+				"sex" => $values["psex$i"],
+				"born" => $values["pbirth$i"],
 				"stamp" => time(),
 			));
 			$player_team->insert(array(
@@ -109,7 +109,7 @@ class Reg2_Model_Data
 				"stamp" => time(),
 			));
 			Zend_Registry::get('log')->info(sprintf("Add pending player %d: '%s %s'", 
-				$uid, $values["players"]["pname$i"], $values["players"]["pfamil$i"]));
+				$uid, $values["pname$i"], $values["pfamil$i"]));
 			if($i == 0) {
 				$kap = $uid;
 			}

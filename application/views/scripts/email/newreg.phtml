@@ -1,3 +1,31 @@
 New Registration:
 <?php
 var_dump($this->data); 
+?>
+Регистратор: <?= $this->data["email"] ?>
+
+Команда: <?= $this->data["name"] ?> <?= $this->data["oldid"]?"(2008: ".$this->data["oldid"].")":"" ?>
+
+Контакт: <?= $this->contact ?> (резерв: <?= $this->data["remail"] ?>)
+
+URL:     <?= $this->data["url"] ?>
+
+
+Лист: <?= $this->data["tlist"] ?> <?= $this->data["tsubs"] ?>
+
+
+Игроки:
+<?php for($i=0,$cnt=1;$i<$this->maxplayers;$i++) {
+	if(empty($this->data["pname$i"]) || empty($this->data["pfamil$i"])) {
+		continue;
+	} 
+	printf("%s%2d. %s,%s,%s,%s,%s,%s,%s\n", 
+		$this->data["pold$i"]?"*":" ", $cnt,$this->data["pname$i"],$this->data["pfamil$i"],$this->data["pbirth$i"],
+		$this->data["psex$i"],$this->data["pcity$i"],$this->data["pcountry$i"],$this->data["pemail$i"]);
+	$cnt++;
+} ?>
+
+==
+Комментарии:
+<?= $this->data["comment"] ?>
+
