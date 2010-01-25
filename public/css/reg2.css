@@ -12,6 +12,11 @@ div#errors {
 	padding: 5px;
 }
 
+.errors {
+	color: red;
+	padding: 5px;
+}
+
 form#regform table tr {
 	background-color: #CCCCCC;
 }

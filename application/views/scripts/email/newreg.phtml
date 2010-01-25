@@ -6,7 +6,7 @@ var_dump($this->data);
 
 Команда: <?= $this->data["name"] ?> <?= $this->data["oldid"]?"(2008: ".$this->data["oldid"].")":"" ?>
 
-Контакт: <?= $this->contact ?> (резерв: <?= $this->data["remail"] ?>)
+Контакт: <?= $this->data["contact"] ?> (резерв: <?= $this->data["remail"] ?>)
 
 URL:     <?= $this->data["url"] ?>
 
@@ -20,7 +20,7 @@ URL:     <?= $this->data["url"] ?>
 		continue;
 	} 
 	printf("%s%2d. %s,%s,%s,%s,%s,%s,%s\n", 
-		$this->data["pold$i"]?"*":" ", $cnt,$this->data["pname$i"],$this->data["pfamil$i"],$this->data["pbirth$i"],
+		$this->data["pold$i"]?"*":" ", $cnt,$this->data["pname$i"],$this->data["pfamil$i"],$this->data["pborn$i"],
 		$this->data["psex$i"],$this->data["pcity$i"],$this->data["pcountry$i"],$this->data["pemail$i"]);
 	$cnt++;
 } ?>

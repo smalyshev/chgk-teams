@@ -32,12 +32,11 @@ class IndexController extends Zend_Controller_Action
         	return $this->_forward('index');
         }
         $values = $form->getValues();
-        $result = Bootstrap::get('model')->addTeamData($values);
         if($result === true) {
         	// success
         	switch($values["kadres"]) {
         		case "kap":
-        			$contact = sprintf("%s %s <%s>", $values["pname0"], $values["pfamil0"], $values["pemail0"]);
+        			$contact = sprintf("\"%s %s\" <%s>", $values["pname0"], $values["pfamil0"], $values["pemail0"]);
         			break;
         		case "reg":
         			$contact = $values["email"];
@@ -51,9 +50,11 @@ class IndexController extends Zend_Controller_Action
         		default: 
         			$contact = '';
         	}
+        	$values["contact"] = $contact;
+        	$result = Bootstrap::get('model')->addTeamData($values);
+        	
         	$mail = new Reg2_Mail('newreg');
         	$view = $mail->getView();
-        	$view->contact = $contact;
         	$view->maxplayers = Bootstrap::get('model')->getMaxPlayers();
         	$view->data = $values;
         	$config = Bootstrap::get('config');
@@ -68,7 +69,7 @@ class IndexController extends Zend_Controller_Action
 	        	$mail->getMailer()
 	        		->addTo($config['mail']['pochta'])
 	        		->setSubject('ICHB-2010 - Subscribe');
-	        	$view->name = $data["name"];
+	        	$view->name = $values["name"];
 	        	if($values["klist"] == 'n') {
 	        		$view->list = "Совета Капитанов";
 	        		$view->kod = $values["tsubs_kod"];

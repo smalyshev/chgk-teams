@@ -8,6 +8,14 @@ class Reg2_Form_Register extends Zend_Form
 	 */
 	protected $_tid;
 	
+	public function __construct($options = null) {
+		if(isset($options['tid'])) {
+			$this->setTeamID($options['tid']);
+			unset($options['tid']);
+		}
+		parent::__construct($options);
+	}
+	
 	public function setTeamID($tid) 
 	{
 		$this->_tid = $tid;
@@ -40,7 +48,6 @@ class Reg2_Form_Register extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('EmailAddress', true),
-//                array('UniqueTeamEmail', true, $this->_tid),
             ),
             'required'   => true,
             'label'      => 'E-mail регистрирующего',
@@ -271,7 +278,7 @@ class Reg2_Form_Register extends Zend_Form
 //        		"value"	=> "1970-01-01",
 //        		"datePattern" => 'yyyy-MM-dd',
 //        	));
-			$this->addElement('Date', "pbirth$i", array(
+			$this->addElement('Date', "pborn$i", array(
 				'validators' => array(
                 	array('Date', true),
             	),
@@ -285,7 +292,9 @@ class Reg2_Form_Register extends Zend_Form
             ));
         	$this->addElement('text', "pemail$i", array(
             	'filters'    => array('StringTrim'),
-            	'required'   => false,
+        	    'required'   => $i == 0,
+	    		'allowEmpty' => $i!=0,
+	    		'autoInsertNotEmptyValidator' => $i==0,
         		'validators' => array(
                 		array('EmailAddress', true),
                 ),

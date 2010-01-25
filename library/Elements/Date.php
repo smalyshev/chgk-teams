@@ -40,7 +40,10 @@ class Reg2_Form_Element_Date extends Zend_Form_Element_Xhtml
     }
 
     public function setValue($value)
-    {
+    {	
+    	if($value == null) {
+    		$value = 0;
+    	}
         if (is_int($value)) {
             $this->setDay(date('d', $value))
                  ->setMonth(date('m', $value))

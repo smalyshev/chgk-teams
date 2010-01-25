@@ -21,6 +21,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$resourceLoader->addResourceType('model', 'models/', 'Model');
 		$resourceLoader->addResourceType('validate', '../library/validate', 'Validate');
 		$resourceLoader->addResourceType('plugin', 'plugins/', 'Plugin');
+		$resourceLoader->addResourceType('form', 'forms/', 'Form');
 		return $resourceLoader;
     }
     
