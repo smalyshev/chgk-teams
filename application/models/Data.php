@@ -14,6 +14,91 @@ class Reg2_Model_Data
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 18;
 
+	public static $femnames = array(
+"Александра" => 1,
+"Алена" => 1,
+"Алина" => 1,
+"Алиса" => 1,
+"Алла" => 1,
+"Альмира" => 1,
+"Анастасия" => 1,
+"Анна" => 1,
+"Арина" => 1,
+"Белла" => 1,
+"Валентина" => 1,
+"Валерия" => 1,
+"Василина" => 1,
+"Вера" => 1,
+"Вероника" => 1,
+"Виктория" => 1,
+"Веста" => 1,
+"Вика" => 1,
+"Виктория" => 1,
+"Виолетта" => 1,
+"Василиса" => 1,
+"Влада" => 1,
+"Галина" => 1,
+"Гела" => 1,
+"Гелена" => 1,
+"Гульнара" => 1,
+"Дарья" => 1,
+"Диана" => 1,
+"Дина" => 1,
+"Динара" => 1,
+"Евгения" => 1,
+"Екатерина" => 1,
+"Елена" => 1,
+"Елизавета" => 1,
+"Жанна" => 1,
+"Инга" => 1,
+"Инна" => 1,
+"Ира" => 1,
+"Ирина" => 1,
+"Карина" => 1,
+"Кира" => 1,
+"Клавдия" => 1,
+"Ксения" => 1,
+"Кама" => 1,
+"Лариса" => 1,
+"Лейла" => 1,
+"Лида" => 1,
+"Лора" => 1,
+"Любовь" => 1,
+"Людмила" => 1,
+"Майя" => 1,
+"Марианна" => 1,
+"Марина" => 1,
+"Мария" => 1,
+"Марьяна" => 1,
+"Надежда" => 1,
+"Наза" => 1,
+"Настя" => 1,
+"Наталия" => 1,
+"Наталья" => 1,
+"Оксана" => 1,
+"Олеся" => 1,
+"Ольга" => 1,
+"Регина" => 1,
+"Рената" => 1,
+"Сабина" => 1,
+"Саида" => 1,
+"Света" => 1,
+"Светлана" => 1,
+"Tатьяна" => 1,
+"Тина" => 1,
+"Таня" => 1,
+"Руслана" => 1,
+"Тамара" => 1,
+"Полина" => 1,
+"Элеонора" => 1,
+"Элла" => 1,
+"Эльмира" => 1,
+"Эльвира" => 1,
+"Эльнур" => 1,
+"Юлия" => 1,
+"Яна" => 1,
+	);
+	
 	public function __construct()
 	{
 		$this->_loader = new Zend_Loader_PluginLoader(array('Reg2_Models_Tables' => APPLICATION_PATH . '/models/tables'));
@@ -317,6 +402,9 @@ class Reg2_Model_Data
 	
 	protected function _suggestGender($name, $uid = 0)
 	{
+		if(isset(self::$femnames[$name])) {
+			return 'f';
+		}
 		$players = $this->getTable('Players');
 		$select = $players->select()->distinct()->from($players, 'sex')
 				->where("imia = ?", $name)
@@ -372,27 +460,44 @@ class Reg2_Model_Data
 				if($name_player->uid == $values["oldpid$i"]) {
 					continue;
 				}
-				$errors["p$i"][] = sprintf("Игрок с одинаковым именем: id=%d город=%s страна=%s", $name_player->uid, $name_player->city, $name_player->country);
+				$errors["p$i"][] = array(
+					sprintf("Игрок с одинаковым именем: id=%d город=%s страна=%s", $name_player->uid, $name_player->city, $name_player->country),
+					"SetFormField('pid$i', '{$name_player->uid}')");
 			}
 			// player: check city, no country
 			if(!empty($values["pcity$i"])) {
 				$suggest = $this->_suggestCountry($values["pcity$i"], $values["oldpid$i"]);
-				if(empty($values["pcountry$i"])) {
-					$errors["p$i"][] = "Страна не указана, предлагаю: ".($suggest?$suggest:"нет вариантов");
+				if(empty($values["pcountry$i"]) && $suggest) {
+					$errors["p$i"][] = array(
+						"Страна не указана, предлагаю: $suggest",
+						"SetFormField('pcountry$i', '$suggest')");
 				} elseif($suggest && $suggest != $values["pcountry$i"]) {
-					$errors["p$i"][] = "Страна не совпадает с другими записями, предлагаю: $suggest";
+					$errors["p$i"][] = array(
+						"Страна не совпадает с другими записями, предлагаю: $suggest",
+						"SetFormField('pcountry$i', '$suggest')");
 				}
 			}
 			// player: check wrong gender
 			if($values["psex$i"]) {
 				$suggest =  $this->_suggestGender($values["pname$i"], $values["oldpid$i"]);
 				if($suggest && $values["psex$i"] != $suggest) {
-					$errors["p$i"][] = "Пол не совпадает с другими записями, предлагаю: $suggest";
+					$errors["p$i"][] = array(
+						"Пол не совпадает с другими записями, предлагаю: $suggest",
+						"SetFormField('psex$i', '$suggest')");
+				}
+			} else {
+				$suggest =  $this->_suggestGender($values["pname$i"], $values["oldpid$i"]);
+				if($suggest) {
+					$errors["p$i"][] = array(
+						"Пол не указан, предлагаю: $suggest",
+						"SetFormField('psex$i', '$suggest')");
 				}
 			}
 			// check swapped family name
 			if($this->_checkImFam($values["pfamil$i"], $values["oldpid$i"])) {
-				$errors["p$i"][] = sprintf("Фамилия: %s, имя: %s - подозреваю перепутаные имя и фамилию", $values["pfamil$i"], $values["pname$i"]);
+				$errors["p$i"][] = array(
+					sprintf("Фамилия: %s, имя: %s - подозреваю перепутаные имя и фамилию", $values["pfamil$i"], $values["pname$i"]),
+					"SwapFormFields('pname$i', 'pfamil$i')");
 			}
 			
 		}

@@ -1,7 +1,22 @@
 <?php 
 $this->headTitle('Редактирование записи команды');
-//$this->dojo()->enable();
+$this->dojo()->enable();
 ?>
+<?php $this->headScript()->captureStart(); ?>
+function SetFormField(field, val)
+{
+	var el = dojo.byId(field);
+	el.value = val;
+}
+function SwapFormFields(field1, field2)
+{
+	var el1 = dojo.byId(field1);
+	var el2 = dojo.byId(field2);
+	var t = el1.value;
+	el1.value = el2.value;
+	el2.value = t;
+}
+<?php $this->headScript()->captureEnd(); ?>
 <h1 align="center">Данные команды номер <?= $this->tid?></h1>
 <div id="errors" class="errors">
 <?php
