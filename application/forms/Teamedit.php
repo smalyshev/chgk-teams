@@ -50,7 +50,7 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
         ));
         $this->addElement('submit', 'confirm', array(
             'required' => false,
-            'label'    => 'Подтвердить',
+            'label'    => 'Утвердить регистрацию!',
         	'decorators' => array('ViewHelper')
         ));
     }

@@ -53,6 +53,32 @@ class AdminController extends Zend_Controller_Action
 		        	$this->view->error = $result;	
 			 	} elseif($form->confirm->isChecked()) {
 			 		 // confirm data
+			 		 $result = $model->saveTeamData($values);
+			 		 if($result) {
+			 		 	$model->confirmTeam($id);
+			 		 	$config = Bootstrap::get('config');
+			 		 	// send confirmation mail
+			 		 	$mail = new Reg2_Mail('confirmed');
+			 		 	$team = $model->findTeam($id);
+			 		 	$mail->getMailer()
+			        		->addTo($team->list)
+	    		    		->setSubject('ICHB-2010 - Confirmed');
+			 		 	if(!empty($team->second_email)) {
+			 		 		$mail->getMailer()->addCC($team->second_email);
+			 		 	}
+			 		 	$mail->getView()->team = $team;
+			 		 	$mail->getView()->kadavr = $config['mail']['kadavr'];
+	    		    	$mail->send();
+	    		    	// send kap's pwd mail
+	    		    	$mail = new Reg2_Mail('cappwd');
+	    		    	$kap = $model->findPlayer($team->kap);
+	    		    	$mail->getMailer()
+			        		->addTo($kap->email)
+			        		->setSubject('ICHB-2010 - Captain\'s Access');
+			        	$mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
+			 		 	$mail->getView()->kadavr = $config['mail']['kadavr'];
+			        	return $this->_helper->redirector('pending');
+			 		 }
 			 	}
 			 }
         } else {

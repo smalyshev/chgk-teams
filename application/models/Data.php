@@ -13,7 +13,12 @@ class Reg2_Model_Data
 	const TURNIR = 50;
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 18;
+	const CODE_LEN = 8;
 
+    public static $V  = array("a", "e", "i", "o", "u", "y");
+    public static $VN = array("a", "e", "i", "o", "u", "y","2","3","4","5","6","7","8","9");
+    public static $C  = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z");
+    public static $CN = array("b","c","d","f","g","h","j","k","m","n","p","q","r","s","t","u","v","w","x","z","2","3","4","5","6","7","8","9");
 	public static $femnames = array(
 "Александра" => 1,
 "Алена" => 1,
@@ -147,7 +152,7 @@ class Reg2_Model_Data
     public function findTeam ($id)
     {
         $res = $this->getTable('Teams')->find($id);
-        if (! empty($res)) {
+        if (!empty($res) && $res->count() >0) {
             return $res->current();
         }
         // TODO: better handling for unknown ID
@@ -445,7 +450,7 @@ class Reg2_Model_Data
 		// team: if has no regno, check if had same name
 		// +player: check players with the same name
 		// +player: check city, no country
-		// player: check switch im/fam
+		// +player: check switch im/fam
 		// +player: check wrong gender
 		$players = $this->getTable('Players');
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
@@ -504,6 +509,39 @@ class Reg2_Model_Data
 		return $errors;
 	}
 	
+	/**
+	 * Confirm team in database
+	 * 
+	 * @param int $tid team
+	 */
+	public function confirmTeam($tid)
+	{
+		$teams = $this->getTable('Teams');
+		$player_team = $this->getTable('PlayerTeam');
+		
+		$tid = (int)$tid;
+		$teams->update(array("turnir" => self::TURNIR), "tid = $tid");
+		$player_team->update(array("turnir" => self::TURNIR), "tid = $tid");
+		return $true;
+	}
+	
+	/**
+	 * Find team contact address 
+	 * 
+	 * @param int $tid
+	 */
+	public function getTeamContact($tid)
+	{
+		$team = $this->findTeam($tid);
+		return $team->list;
+	}
+	
+	public function getTeamKap($tid)
+	{
+		$team = $this->findTeam($tid);
+		return $this->findPlayer($team->kap);
+	}
+	
 	public function countPendingTeams()
 	{
 		$table = $this->getTable('Teams');
@@ -524,12 +562,84 @@ class Reg2_Model_Data
 		return $table->fetchAll($select);
 	}
 	
+    /**
+     * @param int  $id
+     * @return Zend_Db_Table_Row
+     */
+    public function findPlayer ($id)
+    {
+        $res = $this->getTable('Players')->find($id);
+        if (! empty($res)) {
+            return $res->current();
+        }
+        // TODO: better handling for unknown ID
+        throw new Exception("Unknown player ID!");
+    }
+	
+    
+	/**
+	 * Find player by first & last name
+	 * 
+	 * @param string $name
+	 * @param string $famil
+	 * @return Zend_Db_Table_Row
+	 */
 	public function findPlayerByName($name, $famil)
 	{
 		Zend_Registry::get('log')->info("Get Player: '$name $famil'");
 		$table = $this->getTable('Players');
         $select = $table->select()->where("imia = ?", $name)->where("famil = ?", $famil);
         return $table->fetchRow($select);
+	}
+	
+	/**
+	 * Generate password
+	 * 
+	 * @return string
+	 */
+	protected function _generatePassword() 
+	{
+        for ($i=0; $i < self::CODE_LEN; $i = $i + 2) {
+            // generate word with mix of vowels and consonants
+            $consonant = self::$CN[array_rand(self::$CN)];
+            $vowel     = self::$VN[array_rand(self::$VN)];
+            $word     .= $consonant . $vowel;
+        }
+
+        if (strlen($word) > self::CODE_LEN) {
+            $word = substr($word, 0, self::CODE_LEN);
+        }
+		return $word;
+	}
+	
+	/**
+	 * Create username or change password
+	 * 
+	 * @param string $mail
+	 * @return string new password
+	 */
+	public function createUserPassword($mail, $tid)
+	{
+		$users = $this->getTable('Users');
+		$oldusr = $users->find($mail);
+		$pwd = $this->_generatePassword();
+		if($oldusr) {
+			if($oldusr->tid != $tid) {
+				throw new Exception("Мейл $mail заргистрирован для другой команды!");
+			}
+			$oldusr->password = $pwd;
+			$oldusr->save();
+			Zend_Registry::get('log')->info("Saved password for: '$mail'");
+		} else {
+			$users->insert(array(
+				"email" => $mail,
+				"password" => $pwd,
+				"tid" => $tid,
+			));
+			Zend_Registry::get('log')->info("Created password for: '$mail'");
+		}
+		
+		return $pwd;
 	}
 }
 

@@ -54,7 +54,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initConfig()
     {
-        $this->_logger->info('Bootstrap ' . __METHOD__);
+        $this->_logger->debug('Bootstrap ' . __METHOD__);
         $config = $this->getOptions();
         Zend_Registry::set('config', $config);
         return $config;
@@ -73,7 +73,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initViewSettings()
     {
-        $this->_logger->info('Bootstrap ' . __METHOD__);
+        $this->_logger->debug('Bootstrap ' . __METHOD__);
 
         $this->bootstrap('view');
 
@@ -107,7 +107,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     
     protected function _initDb()
     {
-    	$this->_logger->info('Bootstrap ' . __METHOD__);
+    	$this->_logger->debug('Bootstrap ' . __METHOD__);
     	$db = $this->getPluginResource('db')->getDbAdapter();
     	Zend_Db_Table_Abstract::setDefaultAdapter($db);
     	Zend_Registry::set('db', $db);
