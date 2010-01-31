@@ -265,7 +265,7 @@ class Reg2_Model_Data
     	$player_team->delete("uid = ".(int)$uid);
     } 
     
-	/**
+    /**
 	 * Get team data from registration form
 	 * 
 	 * @param array $values
@@ -528,6 +528,15 @@ class Reg2_Model_Data
 		return $true;
 	}
 	
+    public function deleteTeam($tid)
+    {
+    	$teams = $this->getTable('Teams');
+    	$player_team = $this->getTable('PlayerTeam');
+		Zend_Registry::get('log')->info("Delete team: $tid");
+    	$teams->delete("tid = ".(int)$tid);
+    	$player_team->delete("uid = ".(int)$tid);
+    } 
+    
 	/**
 	 * Find team contact address 
 	 * 
@@ -568,11 +577,12 @@ class Reg2_Model_Data
 	
 	/**
 	 * Get registered teams
+	 * @param int tid Turnir ID
 	 */
-	public function getTeams()
+	public function getTeams($tid = self::TURNIR)
 	{
 		$table = $this->getTable('Teams');
-		$select = $table->select()->where('turnir = ?', self::TURNIR);
+		$select = $table->select()->where('turnir = ?', $tid);
 		return $table->fetchAll($select);
 	}
 	
@@ -581,9 +591,21 @@ class Reg2_Model_Data
 	 */
 	public function getPendingTeams()
 	{
-		$table = $this->getTable('Teams');
-		$select = $table->select()->where('turnir = ?', self::PENDING_TURNIR);
-		return $table->fetchAll($select);
+		return $this->getTeams(self::PENDING_TURNIR);
+	}
+	
+	public function getTeamsWithData($tid = self::TURNIR)
+	{
+		$team = $this->getTable('Teams');
+		$player_team = $this->getTable('PlayerTeam');
+		$select = $team->getAdapter()->select()->distinct()
+			->from(array("t" => $team->info('name')), "*")
+			->join(array("pt" => $player_team->info('name')), "t.tid = pt.tid", array("count" => "COUNT(pt.uid)"))
+			->where('t.turnir = ?', $tid)
+			->group('pt.tid')
+			->order('t.imia')
+			;
+		return $select->query()->fetchAll();
 	}
 	
     /**
@@ -664,6 +686,16 @@ class Reg2_Model_Data
 		}
 		
 		return $pwd;
+	}
+	
+	public function findTurnir($id)
+	{
+        $res = $this->getTable('Turnir')->find($id);
+        if (!empty($res) && $res->count() >0) {
+            return $res->current();
+        }
+        // TODO: better handling for unknown ID
+        throw new Exception("Unknown turnir ID!");
 	}
 }
 

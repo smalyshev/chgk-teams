@@ -1,5 +1,6 @@
 <?php 
 $this->headTitle('Редактирование записи команды');
+if($this->isadmin) {
 $this->dojo()->enable();
 ?>
 <?php $this->headScript()->captureStart(); ?>
@@ -16,7 +17,8 @@ function SwapFormFields(field1, field2)
 	el1.value = el2.value;
 	el2.value = t;
 }
-<?php $this->headScript()->captureEnd(); ?>
+<?php $this->headScript()->captureEnd(); 
+} ?>
 <h1 align="center">Данные команды номер <?= $this->tid?></h1>
 <div id="errors" class="errors">
 <?php
@@ -34,13 +36,13 @@ function SwapFormFields(field1, field2)
 	    <?= $this->form->name->render() ?>
 	    <?= $this->form->contact->render() ?>
 	    <?= $this->form->remail->render() ?>
-	    <?= $this->form->sezon2008->render() ?>
+	    <?= ($this->isadmin)?$this->form->sezon2008->render():'' ?>
 	    <?= $this->form->url->render() ?>
         <?php for($i=0; $i<$this->maxplayers; $i++) {
         	echo $this->form->getElement("oldpid$i")->render();
         }
         ?>
-    <?= $this->printDataErrors($this->data_errors, "team", 2); ?>
+    <?= ($this->isadmin)?$this->printDataErrors($this->data_errors, "team", 2):"" ?>
 	<tr><td colspan=2 bgcolor="white"><table id="players">
 	      <tr><th>ID</th><th class="required">Имя</th><th class="required">Фамилия</th><th>Город</th><th>Страна</th><th>E-mail</th><th>Дата рожд.</th><th>Пол</th></tr>
         <tr><th colspan=8>Капитан команды:</th></tr>
@@ -54,7 +56,7 @@ function SwapFormFields(field1, field2)
               	<?= $this->form->pborn0->render() ?>
               	<?= $this->form->psex0->render() ?>
               </tr>
-	    <?= $this->printDataErrors($this->data_errors, "p0", 8); ?>
+	    <?= ($this->isadmin)?$this->printDataErrors($this->data_errors, "p0", 8):"" ?>
 		<tr><th colspan=8>Игроки команды:</th></tr>
         <?php for($i=1; $i<$this->maxplayers; $i++) {?>
         <tr>
@@ -67,12 +69,12 @@ function SwapFormFields(field1, field2)
         <?= $this->form->getElement("pborn$i")->render() ?>
         <?= $this->form->getElement("psex$i")->render() ?>
         </tr>
-	    <?= $this->printDataErrors($this->data_errors, "p$i", 8); ?>
+	    <?= ($this->isadmin)?$this->printDataErrors($this->data_errors, "p$i", 8):"" ?>
         <?php } ?>
       </table>
 	    </td></tr>
 
-	<tr><th colspan=2><?= $this->form->save->render() ?>&nbsp;<?= $this->form->confirm->render() ?><?= $this->form->delete->render() ?></th></tr>
+	<tr><th colspan=2><?= $this->form->save->render() ?>&nbsp;<?= ($this->isadmin)?$this->form->delete->render():"" ?></th></tr>
       </table>
     </form>
 

@@ -8,4 +8,9 @@ class Reg2_Model_Identity
         $this->data = $data;
     }
     
+    public function getUID()
+    {
+    	return $this->data->uid;
+    }
+    
 }

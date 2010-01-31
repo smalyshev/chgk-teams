@@ -19,9 +19,14 @@ class AdminController extends Zend_Controller_Action
 	/**
 	 * Admin menu
 	 */
-    public function indexAction()
+	public function postDispatch()
+	{
+		$this->view->placeholder('nav')->set($this->view->render("admin/nav.phtml"));
+	}
+    
+	public function indexAction()
     {
-        $this->view->teams = Bootstrap::get('model')->countPendingTeams();
+        $this->view->teams = Reg2_Model_Data::getModel()->countPendingTeams();
     }
 
     /**
@@ -29,7 +34,7 @@ class AdminController extends Zend_Controller_Action
      */
     public function pendingAction()
     {
-        $this->view->teams = Bootstrap::get('model')->getPendingTeams();
+        $this->view->teams = Reg2_Model_Data::getModel()->getPendingTeams();
     }
     
     /**
@@ -37,7 +42,7 @@ class AdminController extends Zend_Controller_Action
      */
     public function teamsAction()
     {
-        $this->view->teams = Bootstrap::get('model')->getTeams();
+        $this->view->teams = Reg2_Model_Data::getModel()->getTeams();
     }
     
     /**
@@ -49,7 +54,7 @@ class AdminController extends Zend_Controller_Action
             return $this->_helper->redirector('index');
         }
         
-        $this->view->form = $form = $this->_helper->getForm('teamedit', array("tid" => $id));
+        $this->view->form = $form = $this->_helper->getForm('teamconfirm', array("tid" => $id));
         $model = Bootstrap::get('model');
 		$this->view->maxplayers = $model->getMaxPlayers();
 		$this->view->tid = $id;
@@ -63,6 +68,9 @@ class AdminController extends Zend_Controller_Action
 		        	$form->reset();
 		        	$form->populate($model->getTeamData($id));
 		        	$this->view->error = $result;	
+			 	} elseif($form->delete->isChecked()) {
+			 		$model->deleteTeam($id);
+			 		return $this->_helper->redirector('pending');
 			 	} elseif($form->confirm->isChecked()) {
 			 		 // confirm data
 			 		 $result = $model->saveTeamData($values);

@@ -1,1 +1,8 @@
-<br /><br /><center>View script for controller <b>Members</b> and script/action name <b>index</b></center>
+<h1 align=center>Список турниров Интернет-Клуба "Что-Где-Когда"</h1>
+<table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
+<tr bgcolor="#EEFFEE">
+<td>Турнир <a href="<?= $this->url(array("controller" => "members", "action" => "turnir", "id" => $this->turnir)) ?>">ИЧБ-2010</a><br /><nobr><?= count($this->teams)?> команд.</nobr></td></tr>
+<?php foreach($this->teams as $team) {?>
+<tr><td><a href="<?= $this->url(array("controller" => "members", "action" => "team", "id" => $team->tid)) ?>"><?= $team->imia ?></a></td></tr>
+<?php } ?>
+</table>

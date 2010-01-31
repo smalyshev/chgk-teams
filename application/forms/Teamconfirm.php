@@ -1,28 +1,15 @@
 <?php
-class Reg2_Form_Teamedit extends Reg2_Form_Register
+class Reg2_Form_Teamconfirm extends Reg2_Form_Register
 {
-	protected $_isAdmin = false;
-	
-	public function __construct($options = null) {
-		if(isset($options["admin"])) {
-			$this->_isAdmin = $options["admin"];
-			unset($options["admin"]);
-		}
-		parent::__construct($options);
-	}
-	
-	public function init()
+    public function init()
     {
     	parent::init();
-    	$this->setName("teamedit");
+    	$this->setName("teamconfirm");
     	
     	$this->removeElement("email");
     	$this->removeElement("kadres");
     	$this->removeElement("klist");
     	$this->removeElement("zlist");
-    	if(!$this->_isAdmin) {
-    		$this->removeElement("sezon2008");
-    	}
     	
     	$max = Bootstrap::get('model')->getMaxPlayers();
     	$decorators = array(
@@ -55,19 +42,22 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
 	            'required'   => false,
 	            'decorators' => array('ViewHelper')
         	));
-        }
+    	}
         $this->addElement('submit', 'save', array(
             'required' => false,
             'label'    => 'Записать',
         	'decorators' => array('ViewHelper')
         ));
-        if($this->_isAdmin) {
-	        $this->addElement('submit', 'delete', array(
-	            'required' => false,
-	            'label'    => 'Удалить!',
-	        	'decorators' => array('ViewHelper')
-	        ));
-        }
+        $this->addElement('submit', 'confirm', array(
+            'required' => false,
+            'label'    => 'Утвердить регистрацию!',
+        	'decorators' => array('ViewHelper')
+        ));
+        $this->addElement('submit', 'delete', array(
+            'required' => false,
+            'label'    => 'Удалить!',
+        	'decorators' => array('ViewHelper')
+        ));
     }
 }
 
