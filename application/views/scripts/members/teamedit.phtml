@@ -24,7 +24,7 @@ function SwapFormFields(field1, field2)
 <?php
 	$errors = $this->form->getMessages();
 	$this->printErrors($errors, $this->form);
-	if(isset($this->error)) {
+	if(isset($this->error) && $this->error !== true) {
 		echo $this->printArr($this->error);
 	}
 ?>
@@ -36,7 +36,7 @@ function SwapFormFields(field1, field2)
 	    <?= $this->form->name->render() ?>
 	    <?= $this->form->contact->render() ?>
 	    <?= $this->form->remail->render() ?>
-	    <?= ($this->isadmin)?$this->form->sezon2008->render():'' ?>
+	    <?= ($this->isadmin)?$this->form->oldid->render():'' ?>
 	    <?= $this->form->url->render() ?>
         <?php for($i=0; $i<$this->maxplayers; $i++) {
         	echo $this->form->getElement("oldpid$i")->render();

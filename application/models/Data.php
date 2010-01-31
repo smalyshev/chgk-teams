@@ -265,6 +265,15 @@ class Reg2_Model_Data
     	$player_team->delete("uid = ".(int)$uid);
     } 
     
+    public function deletePlayerFromTeam($uid, $tid)
+    {
+    	$player_team = $this->getTable('PlayerTeam');
+		Zend_Registry::get('log')->info("Remove player $uid from $tid");
+		$uid = (int)$uid;
+		$tid = (int)$tid;
+    	$player_team->delete("uid = $uid AND tid = $tid");
+    } 
+    
     /**
 	 * Get team data from registration form
 	 * 
@@ -302,7 +311,7 @@ class Reg2_Model_Data
 		return true;
 	}
 	
-	public function saveTeamData($values)
+	public function saveTeamData($values, $allowBind = true)
 	{
 		$players = $this->getTable('Players');
 		$teams = $this->getTable('Teams');
@@ -328,11 +337,11 @@ class Reg2_Model_Data
 				$this->_addPlayerData($values, $i, $tid, $team->turnir);
 			} else {
 				if($values["pid$i"] != $values["oldpid$i"]) {
-					if(!empty($values["pid$i"])) {
+					if(!empty($values["pid$i"]) && $allowBind) {
 						// player id change
 						$this->_bindPlayers($values, $i);
 					} else {
-						$this->deletePlayer($values["oldpid$i"]);
+						$this->deletePlayerFromTeam($values["oldpid$i"], $tid);
 					}
 				} else {
 					// edit player data
@@ -371,6 +380,7 @@ class Reg2_Model_Data
 			"remail" => $team->second_email,
 			"contact" => $team->list,
 			"oldid" => $team->regno,
+			"turnir" => $team->turnir,
 			"sezon2008" => $team->regno?'y':'n',
 		);
 		
@@ -688,6 +698,11 @@ class Reg2_Model_Data
 		return $pwd;
 	}
 	
+	/**
+	 * Find tur data by ID
+	 * @param int $id
+	 * @return Zend_Db_Table_Row
+	 */
 	public function findTurnir($id)
 	{
         $res = $this->getTable('Turnir')->find($id);
@@ -696,6 +711,25 @@ class Reg2_Model_Data
         }
         // TODO: better handling for unknown ID
         throw new Exception("Unknown turnir ID!");
+	}
+	
+	/**
+	 * Find turs in which team with this reg.no participated
+	 * @param int $regno
+	 * @return array
+	 */
+	public function getTurs($regno)
+	{
+		$team = $this->getTable('Teams');
+		$turnir = $this->getTable('Turnir');
+		$select = $team->getAdapter()->select()->distinct()
+			->from(array("t" => $team->info('name')), "tid")
+			->join(array("tr" => $turnir->info('name')), "tr.id = t.turnir", array("imia", "id"))
+			->where('t.regno = ?', $regno)
+			->where('t.turnir > 0')
+			->order('tr.id')
+			;
+		return $select->query()->fetchAll();
 	}
 }
 

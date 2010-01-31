@@ -20,15 +20,17 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
     	$this->removeElement("kadres");
     	$this->removeElement("klist");
     	$this->removeElement("zlist");
-    	if(!$this->_isAdmin) {
-    		$this->removeElement("sezon2008");
-    	}
+   		$this->removeElement("sezon2008");
     	
     	$max = Bootstrap::get('model')->getMaxPlayers();
     	$decorators = array(
     		'ViewHelper',
     		array("HtmlTag", array("tag" => "td"))
     	);
+   		$this->getElement("oldid")->setDecorators(array(
+    		'ViewHelper',
+    		'TableRow',
+    	));
     	$this->addElement('hidden', 'tid', array(
     		'required'   => true,
     		'decorators' => array('ViewHelper')

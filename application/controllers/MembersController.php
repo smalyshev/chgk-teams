@@ -58,6 +58,24 @@ class MembersController extends Zend_Controller_Action
     	$this->view->turnir = $model->findTurnir($id);
     }
     
+    public function teamAction()
+    {
+    	if (! $id = (int) $this->_getParam('id', false)) {
+            return $this->_helper->redirector('index');
+        }
+    	$model = Reg2_Model_Data::getModel();
+        $this->view->team = $model->getTeamData($id);
+        if($this->view->team["turnir"] <= 0) {
+        	// not a registered team
+        	return $this->_helper->redirector('index');
+        }
+        $this->view->turnir = $model->findTurnir($this->view->team["turnir"]);
+        if(!empty($this->view->team["oldid"])) {
+        	$this->view->turs = $model->getTurs($this->view->team["oldid"]);
+        }
+        $this->view->maxplayers = $model->getMaxPlayers();
+    }
+    
     public function teameditAction()
     {
     	if (! $id = (int) $this->_getParam('id', false)) {
