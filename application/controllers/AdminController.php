@@ -35,7 +35,7 @@ class AdminController extends Zend_Controller_Action
     /**
      * List of registered teams
      */
-    public function teamAction()
+    public function teamsAction()
     {
         $this->view->teams = Bootstrap::get('model')->getTeams();
     }

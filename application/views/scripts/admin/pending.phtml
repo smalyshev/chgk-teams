@@ -1,11 +1,11 @@
 <?php
-$this->headTitle('п·я┤п╣я─п╣п╢я▄ я─п╣пЁп╦я│я┌я─п╟я├п╦п╦');
+$this->headTitle('Очередь регистрации');
 ?>
 <?php if(count($this->teams) == 0) { ?>
-п·я┤п╣я─п╣п╢я▄ п©я┐я│я┌п╟.
+Очередь пуста.
 <?php } else { 
 	foreach($this->teams as $team) { ?>
-<a href="<?= $this->url(array("controller" => "admin", "action" => "team", "id" => $team->tid)) ?>">п п╬п╪п╟п╫п╢п╟ "<?= $team->imia ?>"</a><br/>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "team", "id" => $team->tid)) ?>">Команда "<?= $team->imia ?>"</a><br/>
 <?php  
 	}
 } ?>

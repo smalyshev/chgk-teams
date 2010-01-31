@@ -85,7 +85,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		//$this->_view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 		
         // set encoding and doctype
-        $this->_view->setEncoding('UTF-8');
+        $this->_view->setEncoding('koi8-r');
         $this->_view->doctype('XHTML1_STRICT');
 
         // set css links and a special import for the accessibility styles
@@ -95,7 +95,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet('/reg2/css/reg2.css');
         
         // setting the site in the title
-        $this->_view->headTitle('Ğ˜Ğ§Ğ‘-2010');
+        $this->_view->headTitle('éşâ-2010');
 
         // setting a separator string for segments:
         $this->_view->headTitle()->setSeparator(' - ');

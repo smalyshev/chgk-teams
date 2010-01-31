@@ -1,6 +1,6 @@
 <?php 
-$this->headTitle('п░п╢п╪п╦п╫п╦я│я┌я─п╟я├п╦я▐');
+$this->headTitle('Администрация');
 ?>
-<a href="<?= $this->url(array("controller" => "admin", "action" => "pending")) ?>">п·я┤п╣я─п╣п╢я▄ я─п╣пЁп╦я│я┌я─п╟я├п╦п╦ (<?= $this->teams ?>)</a><br/>
-<a href="<?= $this->url(array("controller" => "admin", "action" => "teams")) ?>">п≈п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫п╫я▀п╣ п╨п╬п╪п╟п╫п╢я▀</a><br/>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "pending")) ?>">Очередь регистрации (<?= $this->teams ?>)</a><br/>
+<a href="<?= $this->url(array("controller" => "admin", "action" => "teams")) ?>">Зарегистрированные команды</a><br/>
 <a href="<?= $this->url(array("controller" => "user", "action" => "logout")) ?>">Logout</a><br/>

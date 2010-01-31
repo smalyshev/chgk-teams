@@ -73,7 +73,7 @@ class IndexController extends Zend_Controller_Action
         		->setSubject('ICHB-2010 - Subscribe');
         	$view->name = $values["name"];
         	if($values["klist"] == 'n') {
-        		$view->list = "Ğ¡Ğ¾Ğ²ĞµÑ‚Ğ° ĞšĞ°Ğ¿Ğ¸Ñ‚Ğ°Ğ½Ğ¾Ğ²";
+        		$view->list = "óÏ×ÅÔÁ ëÁĞÉÔÁÎÏ×";
         		$view->kod = $values["tsubs_kod"];
         		$view->addr = $values["tsubs"];
         		$mail->send();

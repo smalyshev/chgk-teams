@@ -2,19 +2,19 @@ New Registration:
 <?php
 var_dump($this->data); 
 ?>
-п═п╣пЁп╦я│я┌я─п╟я┌п╬я─: <?= $this->data["email"] ?>
+Регистратор: <?= $this->data["email"] ?>
 
-п п╬п╪п╟п╫п╢п╟: <?= $this->data["name"] ?> <?= $this->data["oldid"]?"(2008: ".$this->data["oldid"].")":"" ?>
+Команда: <?= $this->data["name"] ?> <?= $this->data["oldid"]?"(2008: ".$this->data["oldid"].")":"" ?>
 
-п п╬п╫я┌п╟п╨я┌: <?= $this->data["contact"] ?> (я─п╣п╥п╣я─п╡: <?= $this->data["remail"] ?>)
+Контакт: <?= $this->data["contact"] ?> (резерв: <?= $this->data["remail"] ?>)
 
 URL:     <?= $this->data["url"] ?>
 
 
-п⌡п╦я│я┌: <?= $this->data["tlist"] ?> <?= $this->data["tsubs"] ?>
+Лист: <?= $this->data["tlist"] ?> <?= $this->data["tsubs"] ?>
 
 
-п≤пЁя─п╬п╨п╦:
+Игроки:
 <?php for($i=0,$cnt=1;$i<$this->maxplayers;$i++) {
 	if(empty($this->data["pname$i"]) || empty($this->data["pfamil$i"])) {
 		continue;
@@ -26,6 +26,6 @@ URL:     <?= $this->data["url"] ?>
 } ?>
 
 ==
-п п╬п╪п╪п╣п╫я┌п╟я─п╦п╦:
+Комментарии:
 <?= $this->data["comment"] ?>
 

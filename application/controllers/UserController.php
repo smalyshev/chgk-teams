@@ -26,7 +26,7 @@ class UserController extends Zend_Controller_Action
                 if (!$result->isValid()) {
                     // Invalid credentials
                     //$this->_helper->getHelper('FlashMessenger')->addMessage($result->getMessages());
-                    $this->_helper->getHelper('FlashMessenger')->addMessage('п²п╣п╡п╣я─п╫я▀п╧ п╨п╬п╢ п╢п╬я│я┌я┐п©п╟');
+                    $this->_helper->getHelper('FlashMessenger')->addMessage('Неверный код доступа');
                 } else {
                     $auth->getStorage()->write($result->getIdentity());
                     //var_dump($request);

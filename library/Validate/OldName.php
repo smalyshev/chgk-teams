@@ -6,7 +6,7 @@ class Reg2_Validate_OldName extends Zend_Validate_Abstract
     const NAME_NOT_OLD = 'player-noOldName';   
 
     protected $_messageTemplates = array(   
-        self::NAME_NOT_OLD => "п▓ п╠п╟п╥п╣ п╫п╣я┌ п╦пЁя─п╬п╨п╟ п©п╬ п╦п╪п╣п╫п╦ %value% (п╦п╪я▐ п©п╣я─п╣п╢ я└п╟п╪п╦п╩п╦п╣п╧)",   
+        self::NAME_NOT_OLD => "В базе нет игрока по имени %value% (имя перед фамилией)",   
     );   
 	
     public function __construct($id = null)

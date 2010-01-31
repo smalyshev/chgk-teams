@@ -26,7 +26,7 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
                 array('EmailAddress', true),
             ),
             'required'   => true,
-            'label'      => 'E-mail п╢п╩я▐ п╨п╬п╫я┌п╟п╨я┌п╟',
+            'label'      => 'E-mail для контакта',
         ));
     	for($i=0;$i<$max;$i++) {
     		$this->addElement('text', "pid$i", array(
@@ -45,12 +45,12 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
     	}
         $this->addElement('submit', 'save', array(
             'required' => false,
-            'label'    => 'п≈п╟п©п╦я│п╟я┌я▄',
+            'label'    => 'Записать',
         	'decorators' => array('ViewHelper')
         ));
         $this->addElement('submit', 'confirm', array(
             'required' => false,
-            'label'    => 'пёя┌п╡п╣я─п╢п╦я┌я▄ я─п╣пЁп╦я│я┌я─п╟я├п╦я▌!',
+            'label'    => 'Утвердить регистрацию!',
         	'decorators' => array('ViewHelper')
         ));
     }

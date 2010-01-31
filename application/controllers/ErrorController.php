@@ -34,7 +34,7 @@ class ErrorController extends Zend_Controller_Action
     
     public function noauthAction()
     {
-		$this->_helper->getHelper('FlashMessenger')->addMessage('Ð­Ñ‚Ð° ÑÐµÐºÑ†Ð¸Ñ Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ ÐºÐ¾Ð´Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð°');
+		$this->_helper->getHelper('FlashMessenger')->addMessage('üÔÁ ÓÅËÃÉÑ ÔÒÅÂÕÅÔ ËÏÄÁ ÄÏÓÔÕÐÁ');
 		return $this->_forward('login', 'user');
     }
 
