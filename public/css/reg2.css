@@ -24,3 +24,8 @@ form#regform table tr {
 form#regform table#players tr {
 	background-color: #EEEEEE;
 }
+
+input#delete {
+	float: right;
+	background-color: red;
+}
