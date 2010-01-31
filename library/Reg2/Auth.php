@@ -43,12 +43,16 @@ class Reg2_Auth extends Zend_Controller_Plugin_Abstract
             $acl = new Zend_Acl();
             $acl->add(new Zend_Acl_Resource('admin'))
                 ->add(new Zend_Acl_Resource('kap'))
+                ->add(new Zend_Acl_Resource('members'))
                 ->addRole(new Zend_Acl_Role('guest'))
                 ->addRole(new Zend_Acl_Role('kap'), 'guest')
                 ->addRole(new Zend_Acl_Role('admin'), 'kap')
                 ->deny()
                 ->allow('admin', 'admin')
+                ->allow('admin', 'members')
                 ->allow('kap', 'kap')
+                ->allow('kap', 'members')
+                ->allow('guest', 'members', array('index','team','player','turnir'))
                 ;
             $this->_acl = $acl;
         }
