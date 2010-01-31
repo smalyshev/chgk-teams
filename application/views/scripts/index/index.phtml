@@ -12,6 +12,9 @@ $this->dojo()->enable();
 <?php
 	$errors = $this->form->getMessages();
 	$this->printErrors($errors, $this->form);
+	if(isset($this->error)) {
+		echo $this->printArr($this->error);
+	}
 ?>
 </div>
 

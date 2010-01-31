@@ -226,7 +226,9 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$player_team = $this->getTable('PlayerTeam');
 		$teams = $this->getTable('Teams');
-    	
+
+		// TODO: check that this player isn't registered with other team
+		
 		// NB: we move entries from newid to oldid
 		$newid = (int)$values["oldpid$i"];
 		$oldid = (int)$values["pid$i"];
@@ -522,6 +524,7 @@ class Reg2_Model_Data
 		$tid = (int)$tid;
 		$teams->update(array("turnir" => self::TURNIR), "tid = $tid");
 		$player_team->update(array("turnir" => self::TURNIR), "tid = $tid");
+		// TODO: add team to IDs list in same_team
 		return $true;
 	}
 	
@@ -536,12 +539,20 @@ class Reg2_Model_Data
 		return $team->list;
 	}
 	
+	/**
+	 * Get User record for team's captain
+	 * 
+	 * @param int $tid
+	 */
 	public function getTeamKap($tid)
 	{
 		$team = $this->findTeam($tid);
 		return $this->findPlayer($team->kap);
 	}
 	
+	/**
+	 * Find how many teams are pending registration
+	 */
 	public function countPendingTeams()
 	{
 		$table = $this->getTable('Teams');
@@ -555,6 +566,19 @@ class Reg2_Model_Data
 		return 0;
 	}
 	
+	/**
+	 * Get registered teams
+	 */
+	public function getTeams()
+	{
+		$table = $this->getTable('Teams');
+		$select = $table->select()->where('turnir = ?', self::TURNIR);
+		return $table->fetchAll($select);
+	}
+	
+	/**
+	 * Get teams pending registration
+	 */
 	public function getPendingTeams()
 	{
 		$table = $this->getTable('Teams');

@@ -16,21 +16,33 @@ class AdminController extends Zend_Controller_Action
 		}
 	}
 	
-	public function init()
-    {
-        /* Initialize action controller here */
-    }
-
+	/**
+	 * Admin menu
+	 */
     public function indexAction()
     {
         $this->view->teams = Bootstrap::get('model')->countPendingTeams();
     }
 
+    /**
+     * List of pending teams
+     */
     public function pendingAction()
     {
         $this->view->teams = Bootstrap::get('model')->getPendingTeams();
     }
     
+    /**
+     * List of registered teams
+     */
+    public function teamAction()
+    {
+        $this->view->teams = Bootstrap::get('model')->getTeams();
+    }
+    
+    /**
+     * Edit/confirm pending team
+     */
     public function teamAction()
     {
     	if (! $id = (int) $this->_getParam('id', false)) {
@@ -54,7 +66,7 @@ class AdminController extends Zend_Controller_Action
 			 	} elseif($form->confirm->isChecked()) {
 			 		 // confirm data
 			 		 $result = $model->saveTeamData($values);
-			 		 if($result) {
+			 		 if($result === true) {
 			 		 	$model->confirmTeam($id);
 			 		 	$config = Bootstrap::get('config');
 			 		 	// send confirmation mail
@@ -78,6 +90,8 @@ class AdminController extends Zend_Controller_Action
 			        	$mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
 			 		 	$mail->getView()->kadavr = $config['mail']['kadavr'];
 			        	return $this->_helper->redirector('pending');
+			 		 } else {
+			 		 	$this->view->error = $result;
 			 		 }
 			 	}
 			 }
