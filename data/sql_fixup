@@ -1,0 +1,9 @@
+alter table team modify column tid  int(11) NOT NULL auto_increment;
+alter table igrok modify column uid  int(11) NOT NULL auto_increment;
+CREATE table users (
+	email varchar(255) not null primary key,
+	password varchar(255) not null,
+	role varchar(10) not null,
+	tid integer not null
+);
+
