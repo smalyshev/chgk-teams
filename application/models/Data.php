@@ -715,7 +715,7 @@ class Reg2_Model_Data
 		} else {
 			$users->insert(array(
 				"email" => $mail,
-				"password" => $pwd,
+				"password" => md5($pwd),
 				"tid" => $tid,
 			    "role" => 'kap'
 			));
