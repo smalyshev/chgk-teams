@@ -30,7 +30,7 @@ class Reg2_Mail
     function send ()
     {
     	Zend_Registry::get('log')->info("Sending email {$this->_template}");
-        $this->_mailer->setBodyText($this->_view->render($this->_template . ".phtml"), 'UTF-8');
+        $this->_mailer->setBodyText($this->_view->render($this->_template . ".phtml"), 'koi8-r');
         $this->_mailer->send();
     }
 }
