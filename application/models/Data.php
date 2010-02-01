@@ -191,8 +191,8 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$player_team = $this->getTable('PlayerTeam');
     	
-		Zend_Registry::get('log')->info(sprintf("Add pending player %d: '%s %s'", 
-				$uid, $values["pname$i"], $values["pfamil$i"]));
+		Zend_Registry::get('log')->info(sprintf("Add pending player: '%s %s'", 
+				 $values["pname$i"], $values["pfamil$i"]));
 		$uid = $players->insert(array(
 			"imia" => $values["pname$i"],
 			"famil" => $values["pfamil$i"],
