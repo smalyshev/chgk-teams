@@ -25,7 +25,8 @@ class Reg2_Auth_Adapter implements Zend_Auth_Adapter_Interface
     			Zend_Registry::get('db'),
     			'users',
 		    	'email',
-    			'password'
+    			'password',
+    			'MD5(?)'
 		);
     }
     /**
