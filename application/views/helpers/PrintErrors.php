@@ -1,16 +1,4 @@
 <?php
-/**
- *
- * @author stas
- * @version 
- */
-require_once 'Zend/View/Interface.php';
-
-/**
- * PrintErrors helper
- *
- * @uses viewHelper Zend_View_Helper
- */
 class Zend_View_Helper_PrintErrors
 {
 	

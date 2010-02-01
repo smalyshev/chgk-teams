@@ -1,11 +1,10 @@
 <?php
-
 /**
- * PrintEmail helper
+ * printCardRow helper
  *
  * @uses viewHelper Zend_View_Helper
  */
-class Zend_View_Helper_printEmail
+class Zend_View_Helper_printCardRow
 {
     
     /**
@@ -16,11 +15,11 @@ class Zend_View_Helper_printEmail
     /**
      * 
      */
-    public function printEmail($email)
+    public function printCardRow($name, $data, $bold = true)
     {
-        if (empty($email))
-            return null;
-        return preg_replace('|(.+)@(.+)|', '$1 <b><small>AT</small></b> $2', $email);
+        if(empty($data)) return null;
+        if($bold) $name = "<B>$name</B>";
+        return "<TR class=\"cardrow\"><TD>$name</TD><TD class=\"datacell\">$data</TD></TR>";
     }
 
     /**

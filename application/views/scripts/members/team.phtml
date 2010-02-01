@@ -1,32 +1,27 @@
 <?php
 $this->headTitle("Команда знатоков \"{$this->team["name"]}\"");
 ?>
-<h1 align=center>Команда знатоков "<?= $this->team["name"] ?>", турнир "<a href="<?= $this->url(array("controller" => "members", "action" => "turnir", "id" => $this->turnir->id)) ?>"><?= $this->turnir->imia ?></a>"</h1>
+<h1 align=center>Команда знатоков "<?= $this->team["name"] ?>", 
+турнир "<?= $this->actionLink($this->turnir->imia, "members", "turnir", array("id" => $this->turnir->id)) ?>"</h1>
 
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<tr bgcolor="white">
-<td bgcolor="#CCCCCC"><b>Номер команды:</b></td>
-<td bgcolor="#EEEEEE"><?= $this->team["oldid"] ?></td>
-</tr>
-<?php if($this->team["url"]) { ?>
-<tr bgcolor="white">
-<td bgcolor="#CCCCCC"><b>Командная страница:</b></td>
-<td bgcolor="#EEEEEE"><a href="<?= $this->team["url"] ?>"><?= $this->team["url"] ?></a></td>
-</tr>
-<?php } ?>
-<TR BGCOLOR="white"><TD BGCOLOR="#CCCCCC"><B>Контактный адрес:</B></TD> <TD BGCOLOR="#EEEEEE"><?= $this->printEmail($this->team["contact"]) ?></TD></TR>
-<tr bgcolor="#EEFFEE"><td colspan=2 align=center><a href="<?= $this->url(array("controller" => "members", "action" => "teamedit", "id" => $this->team["tid"])) ?>">Изменить данные</a></td></tr>
+<?= $this->printCardRow("Номер команды:", $this->team["oldid"]) ?>
+<?= $this->printCardRow("Командная страница:", $this->a($this->team["url"], $this->team["url"])) ?>
+<?= $this->printCardRow("Контактный адрес:", $this->printEmail($this->team["contact"])) ?>
+<tr class="cardhead"><td colspan=2 align=center>
+<?= $this->actionLink("Изменить данные", "members", "teamedit", array("id" => $this->team["tid"])) ?>
+</td></tr>
 </table>
 <br/>
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<TR BGCOLOR="#EEFFEE"><TD ALIGN="center" COLSPAN="4">Игроки команды "<?= $this->team["name"] ?>"</TD></TR>
-<TR BGCOLOR="#EEEEEE"><TH>Имя</TH> <TH>E-mail</TH> <TH>Город</TH> <TH>Страна</TH></TR>
+<TR class="cardhead"><TD ALIGN="center" COLSPAN="4">Игроки команды "<?= $this->team["name"] ?>"</TD></TR>
+<TR class="cardrow1"><TH>Имя</TH> <TH>E-mail</TH> <TH>Город</TH> <TH>Страна</TH></TR>
 <?php for($i=0;$i<$this->maxplayers;$i++) {
 	if(empty($this->team["pname$i"])) continue;
 ?>
-<TR BGCOLOR="#CCCCCC">
+<TR class="<?= $i%1?"cardrow1":"cardrow2" ?>">
 <TD><?php if($i == 0) { ?><b>Капитан</b><?php } ?> 
-<A HREF="<?= $this->url(array("controller" => "members", "action" => "player", "id" => $this->team["pid$i"])) ?>"><?= $this->team["pfamil$i"]." ".$this->team["pname$i"] ?></A>
+<?= $this->actionLink($this->team["pfamil$i"]." ".$this->team["pname$i"], "members", "player", array("id" => $this->team["pid$i"])) ?>
 </TD> 
 <TD><?= $this->printEmail($this->team["pemail$i"]) ?> &nbsp;</TD> 
 <TD><?= $this->team["pcity$i"] ?> &nbsp;</TD> 
@@ -34,13 +29,13 @@ $this->headTitle("Команда знатоков \"{$this->team["name"]}\"");
 </TR>
 <?php } ?>
 </table><br>
-<?php if(isset($this->turs) && count($this->turs) > 1) { $out = array(); ?>
+<?php if(isset($this->turs) && count($this->turs) > 1) { ?>
 <center><B>В прошлых чемпионатах участвовала в: </B>
 <?php foreach($this->turs as $tur) {
 	if($tur["id"] == $this->team["turnir"]) continue;
-	$out[] =  sprintf("<A HREF=\"%s\">%s</A>", $this->url(array("controller" => "members", "action" => "team", "id" => $tur["tid"])), $tur->imia);
+	$this->placeholder('turs')->append($this->actionLink($tur["imia"], "members", "team", array("id" => $tur["tid"])));
 }
 ?>
-<?= join(", ", $out) ?> 
+<?= $this->placeholder('turs')->setSeparator(", ") ?> 
 </center>
 <?php } ?>

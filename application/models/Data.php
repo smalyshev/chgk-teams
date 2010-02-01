@@ -649,6 +649,26 @@ class Reg2_Model_Data
 	}
 	
 	/**
+	 * Find turs and teams where the player played
+	 */
+	public function findPlayerTeams($uid)
+	{
+	    $team = $this->getTable('Teams');
+		$turnir = $this->getTable('Turnir');
+		$player_teams = $this->getTable('PlayerTeam');
+		$select = $team->getAdapter()->select()->distinct()
+			->from(array("pt" => $player_teams->info('name')))
+			->join(array("t" => $team->info('name')), "t.tid = pt.tid", array("tname" => "imia", "tid"))
+			->join(array("tr" => $turnir->info('name')), "tr.id = pt.turnir", array("turname" => "imia", "id"))
+			->where('pt.uid = ?', $uid)
+			->where('t.turnir > 0')
+			->order('tr.id DESC')
+			;
+		return $select->query()->fetchAll();
+	    
+	}
+	
+	/**
 	 * Generate password
 	 * 
 	 * @return string

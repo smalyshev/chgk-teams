@@ -1,11 +1,6 @@
 <?php
 
-/**
- * PrintEmail helper
- *
- * @uses viewHelper Zend_View_Helper
- */
-class Zend_View_Helper_printEmail
+class Zend_View_Helper_A
 {
     
     /**
@@ -16,11 +11,9 @@ class Zend_View_Helper_printEmail
     /**
      * 
      */
-    public function printEmail($email)
+    public function a($href, $content)
     {
-        if (empty($email))
-            return null;
-        return preg_replace('|(.+)@(.+)|', '$1 <b><small>AT</small></b> $2', $email);
+        return "<a href=\"$href\">$content</a>";
     }
 
     /**

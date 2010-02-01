@@ -29,3 +29,27 @@ input#delete {
 	float: right;
 	background-color: red;
 }
+
+tr.cardrow {
+	background-color: white;
+}
+
+tr.cardrow td {
+	background-color: #CCCCCC;
+}
+
+tr.cardrow td.datarow {
+	background-color: #EEEEEE;
+}
+
+.cardhead {
+	background-color: #EEFFEE;
+}
+
+.cardrow1 {
+	background-color: #EEEEEE;
+}
+
+.cardrow2 {
+	background-color: #CCCCCC;
+}
