@@ -95,6 +95,7 @@ class AdminController extends Zend_Controller_Action
 	    		    	$mail->getMailer()
 			        		->addTo($kap->email)
 			        		->setSubject('ICHB-2010 - Captain\'s Access');
+			 		 	$mail->getView()->team = $team;
 			        	$mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
 			 		 	$mail->getView()->kadavr = $config['mail']['kadavr'];
 			 		 	$mail->send();
