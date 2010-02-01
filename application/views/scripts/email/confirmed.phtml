@@ -4,7 +4,7 @@
 <?= $this->serverUrl($this->url(array("controller" => "members", "action" => "team", "id" => $this->team->tid))) ?>
 
 Список команд расположен по адресу:
-<?= $this->serverUrl($this->url(array("controller" => "members", "action" => "index"), true)) ?>
+<?= $this->serverUrl($this->url(array("controller" => "members", "action" => "index"), null, true)) ?>
 
 Капитанский доступ к базе будет выслан капитану отдельным письмом.
 
