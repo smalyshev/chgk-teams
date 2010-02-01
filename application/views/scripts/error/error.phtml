@@ -12,7 +12,8 @@
 
   <h3>Exception information:</h3>
   <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?><br/>
+      <b>In:</b> <?php echo $this->exception->getFile()?>:<?php echo $this->exception->getLine()?>
   </p>
 
   <h3>Stack trace:</h3>
