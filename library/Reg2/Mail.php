@@ -27,6 +27,10 @@ class Reg2_Mail
     {
         return $this->_view;
     }
+    function setTemplate($template)
+    {
+        $this->_template = $template;
+    }
     function send ()
     {
     	Zend_Registry::get('log')->info("Sending email {$this->_template}");
