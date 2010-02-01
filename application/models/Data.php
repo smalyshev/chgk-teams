@@ -698,7 +698,12 @@ class Reg2_Model_Data
 	public function createUserPassword($mail, $tid)
 	{
 		$users = $this->getTable('Users');
-		$oldusr = $users->find($mail);
+		$res = $users->find($mail);
+		if(!empty($res) && $res->count() >0) {
+		    $oldusr = $res->current();
+		} else {
+		    $oldusr = false;
+		}
 		$pwd = $this->_generatePassword();
 		if($oldusr) {
 			if($oldusr->tid != $tid) {
