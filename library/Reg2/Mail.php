@@ -12,7 +12,7 @@ class Reg2_Mail
     protected $_template;
     function __construct ($template)
     {
-        $this->_mailer = new Zend_Mail('utf-8');
+        $this->_mailer = new Zend_Mail('koi8-r');
         $this->_view = new Zend_View();
         $this->_template = $template;
         $this->_view->setScriptPath(APPLICATION_PATH. '/views/scripts/email');
