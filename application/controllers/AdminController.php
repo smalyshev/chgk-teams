@@ -97,6 +97,7 @@ class AdminController extends Zend_Controller_Action
 			        		->setSubject('ICHB-2010 - Captain\'s Access');
 			        	$mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
 			 		 	$mail->getView()->kadavr = $config['mail']['kadavr'];
+			 		 	$mail->send();
 			        	return $this->_helper->redirector('pending');
 			 		 } else {
 			 		 	$this->view->error = $result;
