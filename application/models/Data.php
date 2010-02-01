@@ -191,6 +191,8 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$player_team = $this->getTable('PlayerTeam');
     	
+		Zend_Registry::get('log')->info(sprintf("Add pending player %d: '%s %s'", 
+				$uid, $values["pname$i"], $values["pfamil$i"]));
 		$uid = $players->insert(array(
 			"imia" => $values["pname$i"],
 			"famil" => $values["pfamil$i"],
@@ -201,14 +203,13 @@ class Reg2_Model_Data
 			"email" => $values["pemail$i"],
 			"stamp" => time(),
 		));
+		Zend_Registry::get('log')->info(sprintf("Add link %d->%d", $uid, $tid));
 		$player_team->insert(array(
 			"uid" => $uid,
 			"tid" => $tid,
 			"turnir" => $turnir,
 			"stamp" => time(),
 		));
-		Zend_Registry::get('log')->info(sprintf("Add pending player %d: '%s %s'", 
-				$uid, $values["pname$i"], $values["pfamil$i"]));
 		return $uid;
     }
     
@@ -711,6 +712,7 @@ class Reg2_Model_Data
 				"email" => $mail,
 				"password" => $pwd,
 				"tid" => $tid,
+			    "role" => 'kap'
 			));
 			Zend_Registry::get('log')->info("Created password for: '$mail'");
 		}
