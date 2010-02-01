@@ -6,7 +6,7 @@ $this->headTitle("Команда знатоков \"{$this->team["name"]}\"");
 
 <table align=center border=0 cellpadding=5 cellspacing=2>
 <?= $this->printCardRow("Номер команды:", $this->team["oldid"]) ?>
-<?= $this->printCardRow("Командная страница:", $this->a($this->team["url"], $this->team["url"])) ?>
+<?= $this->printCardRow("Командная страница:", $this->team["url"]?$this->a($this->team["url"], $this->team["url"]):"") ?>
 <?= $this->printCardRow("Контактный адрес:", $this->printEmail($this->team["contact"])) ?>
 <tr class="cardhead"><td colspan=2 align=center>
 <?= $this->actionLink("Изменить данные", "members", "teamedit", array("id" => $this->team["tid"])) ?>

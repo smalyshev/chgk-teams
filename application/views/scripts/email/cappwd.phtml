@@ -2,7 +2,10 @@
 
 Регистрация вашей команды утверждена, теперь вы можете редактировать данные команды
 непосредстенно на сайте, по адресу:
-<?= $this->url(array("controller" => "kap", "action" => "index")) ?>
+<?= $this->serverUrl($this->url(array("controller" => "kap", "action" => "index"))) ?>
+или нажав на ссылку "Изменить данные" в форме с данными вашей команды:
+<?= $this->serverUrl($this->url(array("controller" => "members", "action" => "team", "id" => $this->team->tid))) ?>
+
 
 Используйте ваш адрес e-mail и пароль: <?= $this->pwd ?>
 
