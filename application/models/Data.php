@@ -1,12 +1,4 @@
 <?php
-
-/**
- * Data
- *  
- * @author stas
- * @version 
- */
-
 class Reg2_Model_Data
 {
 	protected $_tables = array();
@@ -159,6 +151,10 @@ class Reg2_Model_Data
         throw new Exception("Unknown team ID!");
     }
     
+    /*
+     * Find team by list email
+     * @param string $email
+     */
     public function findTeamByEmail($email)
     {
         $table = $this->getTable('Teams');
@@ -172,6 +168,25 @@ class Reg2_Model_Data
         $select = $table->select()
         		->where("imia = ?", $name)
         		->where("turnir = ".self::TURNIR." OR turnir =".self::PENDING_TURNIR);
+        return $table->fetchRow($select);
+    }
+    
+    /**
+     * Find team by club no
+     * 
+     * @param int $regno Club no
+     * @param bool $newreg Should we look for newly registered ones or for old ones?
+     */
+    public function findTeamByRegno($regno, $newreg)
+    {
+        $table = $this->getTable('Teams');
+        $select = $table->select()
+        		->where("regno = ?", $regno);
+        if($newreg) {
+            $select->where("turnir = ? OR turnir = ?", self::TURNIR, self::PENDING_TURNIR);
+        } else {
+            $select->where("turnir != ?", self::TURNIR)->where("turnir != ?", self::PENDING_TURNIR);
+        }
         return $table->fetchRow($select);
     }
 		
@@ -436,6 +451,9 @@ class Reg2_Model_Data
 		return null;
 	}
 	
+	/*
+	 * Check if first and last name potentially reversed
+	 */
 	protected function _checkImFam($famil, $uid = 0)
 	{
 		$players = $this->getTable('Players');
@@ -652,7 +670,7 @@ class Reg2_Model_Data
 	/**
 	 * Find turs and teams where the player played
 	 */
-	public function findPlayerTeams($uid)
+	public function findPlayerTeams($uid, $also_pending = false)
 	{
 	    $team = $this->getTable('Teams');
 		$turnir = $this->getTable('Turnir');
@@ -662,15 +680,38 @@ class Reg2_Model_Data
 			->join(array("t" => $team->info('name')), "t.tid = pt.tid", array("tname" => "imia", "tid"))
 			->join(array("tr" => $turnir->info('name')), "tr.id = pt.turnir", array("turname" => "imia", "id"))
 			->where('pt.uid = ?', $uid)
-			->where('t.turnir > 0')
 			->order('tr.id DESC')
+			;
+		if(!$also_pending) {
+		    $select->where('t.turnir > 0');
+		}
+		return $select->query()->fetchAll();
+	    
+	}
+	
+	/**
+	 * Find turs and teams where the player played
+	 * @param string $imia 
+	 * @param string $famil First & last name of the player
+	 */
+	public function findRegByName($imia, $famil)
+	{
+	    $team = $this->getTable('Teams');
+		$player = $this->getTable('Players');
+		$player_teams = $this->getTable('PlayerTeam');
+		$select = $team->getAdapter()->select()->distinct()
+		    ->from(array("p" => $player->info('name')), array("uid"))
+			->join(array("pt" => $player_teams->info('name')), "p.uid = pt.uid", array("tid"))
+			->join(array("t" => $team->info('name')), "t.tid = pt.tid", array("tname" => "imia"))
+			->where("p.imia = ?", $imia)->where("p.famil = ?", $famil)
+			->where("pt.turnir = ? OR pt.turnir = ?", self::TURNIR, self::PENDING_TURNIR)
 			;
 		return $select->query()->fetchAll();
 	    
 	}
 	
 	/**
-	 * Generate password
+	 * Generate user password
 	 * 
 	 * @return string
 	 */
@@ -698,12 +739,7 @@ class Reg2_Model_Data
 	public function createUserPassword($mail, $tid)
 	{
 		$users = $this->getTable('Users');
-		$res = $users->find($mail);
-		if(!empty($res) && $res->count() >0) {
-		    $oldusr = $res->current();
-		} else {
-		    $oldusr = false;
-		}
+		$oldusr = $this->findUserByEmail($mail);
 		$pwd = $this->_generatePassword();
 		if($oldusr) {
 			if($oldusr->tid != $tid) {
@@ -723,6 +759,21 @@ class Reg2_Model_Data
 		}
 		
 		return $pwd;
+	}
+	
+	/**
+	 * Find users by email
+	 * 
+	 * @param unknown_type $email
+	 */
+	public function findUserByEmail($email) 
+	{
+	    $users = $this->getTable('Users');
+		if(!empty($res) && $res->count() >0) {
+		    return $res->current();
+		} else {
+		    return false;
+		}
 	}
 	
 	/**

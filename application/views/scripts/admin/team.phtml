@@ -34,7 +34,7 @@ function SwapFormFields(field1, field2)
 	    <?= $this->form->name->render() ?>
 	    <?= $this->form->contact->render() ?>
 	    <?= $this->form->remail->render() ?>
-	    <?= $this->form->sezon2008->render() ?>
+	    <?= $this->form->oldid->render() ?>
 	    <?= $this->form->url->render() ?>
         <?php for($i=0; $i<$this->maxplayers; $i++) {
         	echo $this->form->getElement("oldpid$i")->render();

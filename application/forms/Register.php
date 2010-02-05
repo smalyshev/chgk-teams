@@ -38,7 +38,7 @@ class Reg2_Form_Register extends Zend_Form
     	$this->addElement('text', 'name', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(1, 30)),
+                array('StringLength', true, array(1, 50)),
                 array('UniqueTeamName', true, $this->_tid),
              ),
             'required'   => true,
@@ -76,10 +76,10 @@ class Reg2_Form_Register extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('Digits'),
+                array('ValidRegno', $this->_tid)
             ),
             'trim' 		 => true,
             'required'   => false,
-            'regExp' => '[0-9]+',
             'label'      => 'Регистрационный номер команды:',
             'decorators' => array(array('Label', array("class" => "required")), 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
         ));
@@ -219,6 +219,7 @@ class Reg2_Form_Register extends Zend_Form
         		'class'		=> "player-req",
 	    	    'validators' => array(
                 	new Reg2_Validate_OldName($i),
+                	new Reg2_Validate_UniquePlayerReg($i, $this->_tid)
              	),
 				"decorators" => $decorators, 
         		"label" => "Имя $who",
@@ -297,6 +298,7 @@ class Reg2_Form_Register extends Zend_Form
 	    		'autoInsertNotEmptyValidator' => $i==0,
         		'validators' => array(
                 		array('EmailAddress', true),
+                		new Reg2_Validate_UniqueKapEmail($i, true)
                 ),
         		'class'		=> "player",
 				"decorators" => $decorators, 

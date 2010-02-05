@@ -10,6 +10,11 @@ class Reg2_Form_Teamconfirm extends Reg2_Form_Register
     	$this->removeElement("kadres");
     	$this->removeElement("klist");
     	$this->removeElement("zlist");
+    	$this->removeElement("sezon2008");
+   		$this->getElement("oldid")->setDecorators(array(
+    		'ViewHelper',
+    		'TableRow',
+    	));
     	
     	$max = Bootstrap::get('model')->getMaxPlayers();
     	$decorators = array(
