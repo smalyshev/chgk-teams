@@ -1,6 +1,7 @@
 <?php 
 $this->headTitle('Администрация');
 ?>
-<a href="<?= $this->url(array("controller" => "admin", "action" => "pending")) ?>">Очередь регистрации (<?= $this->teams ?>)</a><br/>
-<a href="<?= $this->url(array("controller" => "admin", "action" => "teams")) ?>">Зарегистрированные команды</a><br/>
-<a href="<?= $this->url(array("controller" => "user", "action" => "logout")) ?>">Logout</a><br/>
+<?= $this->actionLink("Очередь регистрации {$this->teams}", "admin", "kap") ?><br/>
+<?= $this->actionLink("Зарегистрированные команды", "admin", "teams") ?><br/>
+<?= $this->actionLink("Logout", "user", "logout") ?><br/>
+<?= $this->actionLink("Капитаны", "admin", "kap") ?><br/>

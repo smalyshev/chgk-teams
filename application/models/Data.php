@@ -758,5 +758,21 @@ class Reg2_Model_Data
 			;
 		return $select->query()->fetchAll();
 	}
+	
+	/**
+	 * Get captains of all current teams
+	 */
+	public function getKaps()
+	{
+		$team = $this->getTable('Teams');
+		$player = $this->getTable('Players');
+		$select = $team->getAdapter()->select()->distinct()
+			->from(array("t" => $team->info('name')), array("tid", "imia"))
+			->join(array("p" => $player->info('name')), "t.kap = p.uid", array("uid" => "uid", "pfamil" => "famil", "pimia" => "imia"))
+			->where('t.turnir = ? OR t.turnir = ?', self::TURNIR, self::PENDING_TURNIR)
+			->order('t.imia')
+			;
+	    return $select->query()->fetchAll();
+	}
 }
 
