@@ -206,8 +206,6 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$player_team = $this->getTable('PlayerTeam');
     	
-		Zend_Registry::get('log')->info(sprintf("Add pending player: '%s %s'", 
-				 $values["pname$i"], $values["pfamil$i"]));
 		$uid = $players->insert(array(
 			"imia" => $values["pname$i"],
 			"famil" => $values["pfamil$i"],
@@ -218,13 +216,15 @@ class Reg2_Model_Data
 			"email" => $values["pemail$i"],
 			"stamp" => time(),
 		));
-		Zend_Registry::get('log')->info(sprintf("Add link %d->%d", $uid, $tid));
+		Zend_Registry::get('log')->info(sprintf("Add pending player: '%s %s' uid %d", 
+				 $values["pname$i"], $values["pfamil$i"], $uid));
 		$player_team->insert(array(
 			"uid" => $uid,
 			"tid" => $tid,
 			"turnir" => $turnir,
 			"stamp" => time(),
 		));
+		Zend_Registry::get('log')->info(sprintf("Add link uid:%d->tid:%d", $uid, $tid));
 		return $uid;
     }
     
@@ -300,7 +300,7 @@ class Reg2_Model_Data
 	{
 		$teams = $this->getTable('Teams');
 		
-		Zend_Registry::get('log')->info("Add pending team: '$values[name] $values[email]'");
+		Zend_Registry::get('log')->info("Add pending team: '$values[name] $values[email]' by '{$values[email]}'");
 		$tid = $teams->insert(array(
 			"imia" => $values["name"],
 			"turnir" => self::PENDING_TURNIR,
@@ -550,6 +550,7 @@ class Reg2_Model_Data
 		$teams = $this->getTable('Teams');
 		$player_team = $this->getTable('PlayerTeam');
 		
+		Zend_Registry::get('log')->info(sprintf("Confirm team: %d", $tid));
 		$tid = (int)$tid;
 		$teams->update(array("turnir" => self::TURNIR), "tid = $tid");
 		$player_team->update(array("turnir" => self::TURNIR), "tid = $tid");
@@ -755,7 +756,7 @@ class Reg2_Model_Data
 				"tid" => $tid,
 			    "role" => 'kap'
 			));
-			Zend_Registry::get('log')->info("Created password for: '$mail'");
+			Zend_Registry::get('log')->info("Created password for: '$mail' team $tid");
 		}
 		
 		return $pwd;
