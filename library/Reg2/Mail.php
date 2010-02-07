@@ -18,6 +18,7 @@ class Reg2_Mail
         $this->_view->setScriptPath(APPLICATION_PATH. '/views/scripts/email');
         $config = Bootstrap::get('config');
         $this->_mailer->addCc($config["mail"]["kadavr"]);
+        $this->_mailer->addCc($config["mail"]["cc"]);
     }
     function getMailer ()
     {

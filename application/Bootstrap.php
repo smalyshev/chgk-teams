@@ -31,21 +31,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initLogging()
     {
         $this->bootstrap('frontController');
+        $this->bootstrap('config');
         $logger = new Zend_Log();
 
 //        $writer = 'production' == $this->getEnvironment() ?
 //			new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../data/logs/app.log') :
 //			new Zend_Log_Writer_Firebug();
 //        $logger->addWriter($writer);
-		$logger->addWriter(new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../data/logs/reg2.log'));
+        $config = $this->getResource('config');
+        $writer = new Zend_Log_Writer_Stream($config["log"]["file"]);
+        $writer->setFormatter(new Reg2_Log_Formatter($config["log"]["format"]));
+		$logger->addWriter($writer);
 
-//		if ('production' == $this->getEnvironment()) {
-//			$filter = new Zend_Log_Filter_Priority(Zend_Log::CRIT);
-//			$logger->addFilter($filter);
-//		}
+		if ('production' == $this->getEnvironment()) {
+			$filter = new Zend_Log_Filter_Priority(Zend_Log::INFO);
+			$logger->addFilter($filter);
+		}
 
         $this->_logger = $logger;
         Zend_Registry::set('log', $logger);
+        $logger->debug("Start logging");
         return $logger;
     }
 	
@@ -54,7 +59,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initConfig()
     {
-        $this->_logger->debug('Bootstrap ' . __METHOD__);
         $config = $this->getOptions();
         Zend_Registry::set('config', $config);
         return $config;
@@ -73,8 +77,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initViewSettings()
     {
-        $this->_logger->debug('Bootstrap ' . __METHOD__);
-
         $this->bootstrap('view');
 
         $this->_view = $this->getResource('view');
@@ -107,7 +109,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     
     protected function _initDb()
     {
-    	$this->_logger->debug('Bootstrap ' . __METHOD__);
     	$db = $this->getPluginResource('db')->getDbAdapter();
     	Zend_Db_Table_Abstract::setDefaultAdapter($db);
     	Zend_Registry::set('db', $db);
