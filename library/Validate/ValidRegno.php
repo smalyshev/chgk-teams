@@ -33,7 +33,7 @@ class Reg2_Validate_ValidRegno extends Zend_Validate_Abstract
 			// find olf team by regno
 	    	$team = Reg2_Model_Data::getModel()->findTeamByRegno($value, false);
 	        if(!$team) {
-	            $this->_error(self::REGNO_REGISTERED);   
+	            $this->_error(self::REGNO_MISSING);   
 	            return false;   
 	        }
 		}
