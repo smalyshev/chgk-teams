@@ -16,20 +16,24 @@ resources.layout.layout = "main"
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 resources.view = ""
 
-resources.mail.transport.type = smtp
-
-resources.mail.defaultfrom.email = "stas@zend.com"
+resources.mail.transport.type = sendmail
+resources.mail.defaultfrom.email = "stas-regrobot@zend.com"
 resources.mail.defaultfrom.name = "Register Robot"
-resources.mail.defaultreplyto.email = "stas@zend.com"
+resources.mail.defaultreplyto.email = "stas-zavkadr@zend.com"
 resources.mail.defaultreplyto.name = "Zavkadr"
 
 mail.kadavr = "stas@zend.com"
 
+log.format = "[%role%] %timestamp% %priorityName% (%priority%): %message%"
+log.file = APPLICATION_PATH "/../data/logs/reg2.log"
 [staging : production]
 
 [testing : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+mail.register = "stas-reg@zend.com"
+mail.pochta = "stas-pochta@zend.com"
+mail.cc = "smalyshev@gmail.com"
 
 [development : production]
 phpSettings.display_startup_errors = 1
