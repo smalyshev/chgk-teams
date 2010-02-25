@@ -90,11 +90,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->setEncoding('koi8-r');
         $this->_view->doctype('XHTML1_STRICT');
 
+        $config = $this->getResource('config');
+        $prefix = $config["urlprefix"];
         // set css links and a special import for the accessibility styles
 //        $this->_view->headStyle()->setStyle('@import "/css/access.css";');
 //        $this->_view->headLink()->appendStylesheet('/reg2/css/reset.css');
-        $this->_view->headLink()->appendStylesheet('/reg2/css/form.css');
-        $this->_view->headLink()->appendStylesheet('/reg2/css/reg2.css');
+        $this->_view->headLink()->appendStylesheet($prefix.'/css/form.css');
+        $this->_view->headLink()->appendStylesheet($prefix.'/css/reg2.css');
         
         // setting the site in the title
         $this->_view->headTitle('éþâ-2010');
