@@ -1,0 +1,28 @@
+<?php
+$this->headTitle('Список прошлых турниров Интернет-Клуба "Что-Где-Когда"');
+?>
+<h1 align=center>Список прошлых турниров Интернет-Клуба "Что-Где-Когда"</h1>
+<table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
+<tr bgcolor="#EEFFEE">
+<?php foreach($this->turs as $tur) { ?>
+<td><nobr>Турнир <?= $this->actionLink($tur->imia, "members", "turnir", array("id" => $tur->id)) ?></nobr><br /><nobr><?= $this->Plural(count($this->teams[$tur->id]), " команд", "а", "ы", "")?>.</nobr></td>
+<?php } ?>
+</tr>
+<?php for($row=0, $cnt=1; $cnt>0; $row++) {  $cnt=0; ?>
+<tr> 
+<?php  
+    foreach($this->turs as $tur) {
+        echo "<td>";
+    	if(isset($this->teams[$tur->id][$row])) { 
+    	    $team = $this->teams[$tur->id][$row];
+    	    $cnt++;
+?>
+<?= $this->actionLink($team->imia, "members", "team", array("id" => $team->tid)) ?>
+<?php     	
+        }
+        echo "</td>";
+    }
+?>
+</tr>
+<?php } ?>
+</table>

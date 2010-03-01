@@ -6,7 +6,8 @@ $this->headTitle('Список капитанов');
 <?php } else { 
 	foreach($this->kaps as $kap) { ?>
 Команда "<?= $this->actionLink($kap["imia"], "members", "team", array("id" => $kap["tid"]))?>" - 
-капитан <?= $this->actionLink($kap["pfamil"]." ".$kap["pimia"], "members", "player", array("id" => $kap["uid"]))?><br/>
+капитан <?= $this->actionLink($kap["pfamil"]." ".$kap["pimia"], "members", "player", array("id" => $kap["uid"]))?>
+ [<?= $this->actionLink("Выслать пароль", "admin", "newpwd", array("id" => $kap["uid"])) ?>]<br/>
 <?php  
 	}
 } ?>

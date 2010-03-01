@@ -120,7 +120,31 @@ class AdminController extends Zend_Controller_Action
         $this->view->kaps = Reg2_Model_Data::getModel()->getKaps();
     }
 
-
+    public function newpwdAction()
+    {
+        if (! $id = (int) $this->_getParam('id', false)) {
+            return $this->_helper->redirector('kap');
+        }
+        $model = Reg2_Model_Data::getModel();
+        $kap = $model->findPlayer($id);
+        $user = $model->findUserByEmail($kap->email);
+        if(!$user) {
+            throw new Exception("Не найдено капитанской записи для игрока номер $id"); 
+        }
+        $team = $model->findTeam($user->tid);
+        if(!$team || $team->kap != $id) {
+            throw new Exception("Не найдено капитанской записи для игрока номер $id"); 
+        }
+        $mail = new Reg2_Mail('cappwd');
+        $config = Bootstrap::get('config');
+       	$mail->getMailer()->addTo($kap->email)
+       	    ->setSubject('ICHB-2010 - Captain\'s Access');
+        $mail->getView()->team = $team;
+        $mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
+        $mail->getView()->kadavr = $config['mail']['kadavr'];
+	 	$mail->send();
+        $this->view->user = $kap;
+    }
 }
 
 

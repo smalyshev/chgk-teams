@@ -327,6 +327,35 @@ class Reg2_Model_Data
 		return true;
 	}
 	
+	/**
+	 * Save player's data from a form
+	 * 
+	 * @param int $id
+	 * @param array $values
+	 * @return bool
+	 */
+	public function savePlayerData($id, $values)
+	{
+	    $players = $this->getTable('Players');
+		Zend_Registry::get('log')->info("Updating player $id");
+	    $players->update(array(
+			"imia" => $values["pname"],
+			"famil" => $values["pfamil"],
+			"city" => $values["pcity"],
+			"country" => $values["pcountry"],
+			"sex" => $values["psex"],
+			"born" => $values["pborn"],
+			"email" => $values["pemail"],
+		), "uid = $id");
+        return true;
+	}
+	
+	/**
+	 * Save team data from a form
+	 * 
+	 * @param array $values Form values
+	 * @param bool $allowBind Allow binding player records?
+	 */
 	public function saveTeamData($values, $allowBind = true)
 	{
 		$players = $this->getTable('Players');
@@ -374,6 +403,25 @@ class Reg2_Model_Data
 			}
 		}			
 		return true;
+	}
+	
+	/**
+	 * Get player data as array
+	 * 
+	 * @param int $id User ID
+	 */
+	public function getPlayerData($id)
+	{
+	    $player = $this->findPlayer($id);
+		$values["pid"] = $values["oldpid"] = $player->uid;
+		$values["pname"] = $player->imia;
+		$values["pfamil"] = $player->famil;
+		$values["pcity"] = $player->city;
+		$values["pcountry"] = $player->country;
+		$values["psex"] = $player->sex;
+		$values["pborn"] = $player->born;
+		$values["pemail"] = $player->email;
+		return $values;
 	}
 	
 	/**
@@ -617,6 +665,27 @@ class Reg2_Model_Data
 	}
 	
 	/**
+	 * Get registered teams for old turs
+	 * @param int tid Turnir ID
+	 */
+	public function getOldTeams($tid = self::TURNIR)
+	{
+		$table = $this->getTable('Teams');
+		$select = $table->select()->where('turnir < ? AND turnir != -1', $tid)->order(array('turnir DESC', 'imia'));
+		return $table->fetchAll($select);
+	}
+	
+	/**
+	 * Get old turs
+	 */
+	public function getOldTurs()
+	{
+		$table = $this->getTable('Turnir');
+		$select = $table->select()->where('id < ?', self::TURNIR)->order('id DESC');
+		return $table->fetchAll($select);
+	}
+	
+	/**
 	 * Get teams pending registration
 	 */
 	public function getPendingTeams()
@@ -770,6 +839,7 @@ class Reg2_Model_Data
 	public function findUserByEmail($email) 
 	{
 	    $users = $this->getTable('Users');
+	    $res = $users->find($email);
 		if(!empty($res) && $res->count() >0) {
 		    return $res->current();
 		} else {

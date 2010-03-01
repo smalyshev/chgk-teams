@@ -1,0 +1,28 @@
+<?php
+$this->headTitle("Редактирование данных игрока");
+?>
+<h1 align="center">Данные игрока <?= $this->id ?></h1>
+
+<div id="errors" class="errors">
+<?php
+	$errors = $this->form->getMessages();
+	$this->printErrors($errors, $this->form);
+	if(isset($this->error) && $this->error !== true) {
+		echo $this->printArr($this->error);
+	}
+?>
+</div>
+
+    <form action="<?= $this->form->getAction(); ?>" method="post" id="regform">
+      <table bgcolor="white" cellpadding=4 cellspacing=2>
+<?= $this->form->pfamil->render() ?>
+<?= $this->form->pname->render() ?>
+<?= $this->form->pcity->render() ?>
+<?= $this->form->pcountry->render() ?>
+<?= $this->form->pemail->render() ?>
+<?= $this->form->pborn->render() ?>
+<?= $this->form->psex->render() ?>
+	<tr><th colspan=2><?= $this->form->edit->render() ?></th></tr>
+      </table>
+    </form>
+      

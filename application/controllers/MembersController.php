@@ -41,7 +41,7 @@ class MembersController extends Zend_Controller_Action
     {
         if ($this->_role == 'kap') {
             $kap_tid = Zend_Auth::getInstance()->getIdentity()->tid;
-            if ($kap_tid != $uid) {
+            if ($kap_tid != $tid) {
                 $this->_forward('noacl', 'error');
             }
         }
@@ -51,6 +51,20 @@ class MembersController extends Zend_Controller_Action
     {
         $this->view->teams = Reg2_Model_Data::getModel()->getTeams();
         $this->view->turnir = Reg2_Model_Data::TURNIR;
+    }
+
+    public function oldAction()
+    {
+        $turs = Reg2_Model_Data::getModel()->getOldTurs();
+        $teams = Reg2_Model_Data::getModel()->getOldTeams();
+        foreach($turs as $tur) {
+            $turs_table[$tur->id] = $tur;
+        }
+        foreach($teams as $team) {
+            $teams_table[$team->turnir][] = $team;
+        }
+        $this->view->turs = $turs_table;
+        $this->view->teams = $teams_table;
     }
 
     public function turnirAction()
@@ -130,6 +144,41 @@ class MembersController extends Zend_Controller_Action
         }
         $this->view->turs = $model->findPlayerTeams($id);
         $this->view->turnir = Reg2_Model_Data::TURNIR;
+    }
+    
+    public function playereditAction()
+    {
+        if (! $id = (int) $this->_getParam('id', false)) {
+            return $this->_helper->redirector('index');
+        }
+        
+        if(!$this->_isAdmin) {
+            // TODO: allow captains too
+            $this->_forward('noacl', 'error');
+        }
+
+        $this->view->form = $form = $this->_helper->getForm('player', 
+            array("uid" => $id));
+        
+        $model = Reg2_Model_Data::getModel();
+        
+        $request = $this->getRequest();
+        $this->view->id = $id;
+        
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $values = $form->getValues();
+                $result = $model->savePlayerData($id, $values);
+                $form->reset();
+                $form->populate($model->getPlayerData($id));
+                $this->view->error = $result;
+                if($result) {
+                    return $this->_helper->redirector('player', 'members', 'default', array("id" => $id));
+                }
+            }
+        } else {
+            $form->populate($model->getPlayerData($id));
+        }
     }
 
 }
