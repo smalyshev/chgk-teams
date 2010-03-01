@@ -53,7 +53,7 @@ class Reg2_Auth extends Zend_Controller_Plugin_Abstract
                 ->allow('admin', 'kap')
                 ->allow('kap', 'kap')
                 ->allow('kap', 'members')
-                ->allow('guest', 'members', array('index','team','player','turnir'))
+                ->allow('guest', 'members', array('index','team','player','turnir','old'))
                 ;
             $this->_acl = $acl;
         }
