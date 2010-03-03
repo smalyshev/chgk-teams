@@ -40,7 +40,8 @@ class MembersController extends Zend_Controller_Action
     protected function _checkKap($tid)
     {
         if ($this->_role == 'kap') {
-            $kap_tid = Zend_Auth::getInstance()->getIdentity()->tid;
+            $id = Zend_Auth::getInstance()->getIdentity();
+            $kap_tid = $id["data"]->tid;
             if ($kap_tid != $tid) {
                 $this->_forward('noacl', 'error');
             }
