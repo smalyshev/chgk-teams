@@ -35,7 +35,7 @@ class MembersController extends Zend_Controller_Action
 
     /**
      * Check if captain belongs to the team which is being edited 
-     * 
+     * @param int $tid Team ID
      */
     protected function _checkKap($tid)
     {

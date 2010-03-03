@@ -29,6 +29,7 @@ class ErrorController extends Zend_Controller_Action
 
     public function noaclAction()
     {
+        Zend_Registry::get('log')->info("Denied access to ".$this->getRequest()->getRequestUri());
     	/* display it */
     }
     
