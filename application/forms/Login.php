@@ -3,10 +3,10 @@ class Reg2_Form_Login extends Zend_Form
 {
     public function init()
     {
-        $this->addElement('hash', '_confhash', array(
-            'required'   => true,
-            'ignore'   => true,
-        ));
+//        $this->addElement('hash', '_confhash', array(
+//            'required'   => true,
+//            'ignore'   => true,
+//        ));
         $this->addElement('text', 'email', array(
             'required' => true,
             'ignore'   => false,

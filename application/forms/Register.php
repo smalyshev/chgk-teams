@@ -36,10 +36,10 @@ class Reg2_Form_Register extends Zend_Form
     	));
 
     	if(APPLICATION_ENV == 'production') {
-    	    $this->addElement('hash', '_confhash', array(
-            	'required'   => true,
-            	'ignore'   => true,
-            ));
+//    	    $this->addElement('hash', '_confhash', array(
+//            	'required'   => true,
+//            	'ignore'   => true,
+//            ));
     	}
     	
     	$this->addElement('text', 'name', array(
