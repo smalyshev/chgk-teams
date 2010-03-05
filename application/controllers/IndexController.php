@@ -55,6 +55,7 @@ class IndexController extends Zend_Controller_Action
         	$this->view->error = $result;	
         	return; // redisplay form with error
         }
+        $teamname = $this->_helper->translit($values["name"]);
         $mail = new Reg2_Mail('newreg');
         $view = $mail->getView();
         $view->maxplayers = Bootstrap::get('model')->getMaxPlayers();
@@ -62,7 +63,7 @@ class IndexController extends Zend_Controller_Action
         $config = Bootstrap::get('config');
         $mail->getMailer()
         	->addTo($config['mail']['register'])
-        	->setSubject('ICHB-2010 - New Registration');
+        	->setSubject("ICHB-2010 - New Registration: $teamname");
         $mail->send();
         
         if($values["klist"] == 'n' || $values["zlist"] == 'n') {
