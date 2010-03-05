@@ -305,7 +305,7 @@ class Reg2_Form_Register extends Zend_Form
 	    		'autoInsertNotEmptyValidator' => $i==0,
         		'validators' => array(
                 		array('EmailAddress', true),
-                		new Reg2_Validate_UniqueKapEmail($i, true)
+                		new Reg2_Validate_UniqueKapEmail($i, $this->_tid)
                 ),
         		'class'		=> "player",
 				"decorators" => $decorators, 

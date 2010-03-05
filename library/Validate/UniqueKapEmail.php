@@ -3,6 +3,7 @@
 class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
 {
     protected $_tid; /* team id */
+    protected $_id; /* team id */
     
     public $team;
     
@@ -14,14 +15,18 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
     protected $_messageVariables = array(
         'team' => 'team',
     );	
-    public function __construct($tid)
+    public function __construct($id, $tid)
     {   
         $this->_tid = $tid;
+        $this->_id = $id;
     }   
 
     public function isValid($value, $context = null)
     {   
         $this->_setValue($value);
+        if($this->_id > 0) {
+            return true;
+        }
     	if($value) {
     		$user = Reg2_Model_Data::getModel()->findUserByEmail($value);
     		if($user && $user->tid != $this->_tid) {
