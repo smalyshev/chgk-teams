@@ -35,7 +35,7 @@ class IndexController extends Zend_Controller_Action
        	// success
         switch($values["kadres"]) {
         	case "kap":
-        		$contact = sprintf("\"%s %s\" <%s>", $values["pname0"], $values["pfamil0"], $values["pemail0"]);
+        		$contact = $values["pemail0"];
         		break;
         	case "reg":
         		$contact = $values["email"];
