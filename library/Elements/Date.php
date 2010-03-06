@@ -41,8 +41,9 @@ class Reg2_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     public function setValue($value)
     {	
-    	if($value == null) {
-    		$value = 0;
+    	if($value == null || $value == 0) {
+		$this->setDay(0)->setMonth(0)->setYear(0);
+		return $this;
     	}
         if (is_int($value)) {
             $this->setDay(date('d', $value))
@@ -71,6 +72,11 @@ class Reg2_Form_Element_Date extends Zend_Form_Element_Xhtml
 
     public function getValue()
     {
+	if($this->getYear() == 0 &&
+		$this->getMonth() == 0 &&
+		$this->getDay() == 0) {
+		return '';
+	}
         return str_replace(
             array('%year%', '%month%', '%day%'),
             array($this->getYear(), sprintf("%02d", $this->getMonth()),

@@ -18,6 +18,9 @@ class Reg2_Decorator_Date extends Zend_Form_Decorator_Abstract
         $day   = $element->getDay();
         $month = $element->getMonth();
         $year  = $element->getYear();
+	if($day == 0) $day = '';
+	if($month == 0) $month = '';
+	if($year == 0) $year = '';
         $name  = $element->getFullyQualifiedName();
 
         $params = array(
