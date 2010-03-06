@@ -290,7 +290,6 @@ class Reg2_Form_Register extends Zend_Form
 				'validators' => array(
                 	array('Date', true),
             	),
-				"value"	=> "1970-01-01",
 				"decorators" => array(
     				'Date',
     				array("HtmlTag", array("tag" => "td"))
