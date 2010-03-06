@@ -117,6 +117,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	return $db;
     }
     
+    protected function _initLang() 
+    {
+	$cache = Zend_Cache::factory('Core',
+                             'File',
+                             array('automatic_serialization' => true),
+                             array('cache_dir' => APPLICATION_PATH.'/../data/cache'));
+	Zend_Translate::setCache($cache);
+        $translator = new Zend_Translate(
+          'array',
+          ZF_PATH.'/resources/languages',
+          'ru',
+	  array("scan" => Zend_Translate::LOCALE_DIRECTORY)
+      );
+      Zend_Validate_Abstract::setDefaultTranslator($translator);
+    }
+
     protected function _initModel()
     {
     	$model = new Reg2_Model_Data();

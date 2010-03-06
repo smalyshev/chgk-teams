@@ -6,10 +6,17 @@ defined('APPLICATION_PATH')
 
 // Define application environment
 define('APPLICATION_ENV', isset($_SERVER['APPLICATION_ENV'])?$_SERVER['APPLICATION_ENV']:'development');
+//define('APPLICATION_ENV', isset($_SERVER['APPLICATION_ENV'])?$_SERVER['APPLICATION_ENV']:'production');
 
 // Ensure library/ is on include_path
+if(isset($_SERVER['ZF_PATH'])) {
+  define('ZF_PATH', $_SERVER['ZF_PATH']);
+} else {
+  define('ZF_PATH',  dirname(__FILE__)."/../../zf");
+}
 set_include_path(implode(PATH_SEPARATOR, array(
-    isset($_SERVER['ZF_PATH'])?$_SERVER['ZF_PATH']:".",
+	ZF_PATH."/library",
+    ".",
     realpath(APPLICATION_PATH . '/../library'),
     get_include_path(),
 )));
