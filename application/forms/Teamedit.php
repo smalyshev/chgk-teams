@@ -30,7 +30,7 @@ class Reg2_Form_Teamedit extends Reg2_Form_Register
    		$this->getElement("oldid")->setDecorators(array(
     		'ViewHelper',
     		'TableRow',
-    	));
+    	))->setValidators(array(array('Digits')));
     	$this->addElement('hidden', 'tid', array(
     		'required'   => true,
     		'decorators' => array('ViewHelper')
