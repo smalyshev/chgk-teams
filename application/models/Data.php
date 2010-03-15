@@ -363,7 +363,7 @@ class Reg2_Model_Data
 		$player_team = $this->getTable('PlayerTeam');
 		
 		$tid = (int)$values["tid"];
-		Zend_Registry::get('log')->info("Editing team $tid: '$values[name]'");
+		Zend_Registry::get('log')->info("Editing team $tid: '$values[name]' id: $values[oldid]");
 		
 		$team = $this->findTeam($tid);
 		$team->imia = $values["name"];
