@@ -534,6 +534,14 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$teams = $this->getTable('Teams');
 		if($values["oldid"]) {
+            $select = $teams->select()
+        		->where("imia = ?", $values["name"])
+        		->where("regno != '' AND regno != ?", $values["oldid"])
+        		->where("turnir != ".self::TURNIR." AND turnir !=".self::PENDING_TURNIR);
+            $othert = $teams->fetchAll($select);
+            foreach($othert as $other) {
+               $errors["team"][] = array(sprintf("Другой регистрационный номер: команда=%d, regno=%s", $other->tid, $other->regno)); 
+            }
 		} else {
             $select = $teams->select()
         		->where("imia = ?", $values["name"])
