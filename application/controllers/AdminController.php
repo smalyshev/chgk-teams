@@ -47,7 +47,7 @@ class AdminController extends Zend_Controller_Action
     {
         $model = Reg2_Model_Data::getModel();
         $teams = $model->getTeams();
-        foreach($this->teams as $team) { 
+        foreach($teams as $team) { 
             $teamdata[$id] = $model->getTeamData($team->id);
             $teamdata[$id]["check"] = $model->checkTeamData($teamdata[$id]);
         }
