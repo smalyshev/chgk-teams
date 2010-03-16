@@ -532,6 +532,21 @@ class Reg2_Model_Data
 		// +player: check switch im/fam
 		// +player: check wrong gender
 		$players = $this->getTable('Players');
+		$teams = $this->getTable('Teams');
+		if($values["oldid"]) {
+		} else {
+            $select = $table->select()
+        		->where("imia = ?", $values["name"])
+        		->where("regno != ''")
+        		->where("turnir != ".self::TURNIR." AND turnir !=".self::PENDING_TURNIR);
+            $othert = $table->fetchRow($select);
+            if($othert) {
+                $errors["team"][] = array("Регистрационный номер не указан, предлагаю: ".$othert->regno,
+                    "SetFormField('oldid', '{$othert->regno}')" 
+                );
+            }
+		}
+		$players = $this->getTable('Players');
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
 			if(empty($values["pname$i"]) || empty($values["oldpid$i"])) {
 				continue;
