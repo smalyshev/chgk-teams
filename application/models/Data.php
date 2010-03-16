@@ -535,11 +535,11 @@ class Reg2_Model_Data
 		$teams = $this->getTable('Teams');
 		if($values["oldid"]) {
 		} else {
-            $select = $table->select()
+            $select = $teams->select()
         		->where("imia = ?", $values["name"])
         		->where("regno != ''")
         		->where("turnir != ".self::TURNIR." AND turnir !=".self::PENDING_TURNIR);
-            $othert = $table->fetchRow($select);
+            $othert = $teams->fetchRow($select);
             if($othert) {
                 $errors["team"][] = array("Регистрационный номер не указан, предлагаю: ".$othert->regno,
                     "SetFormField('oldid', '{$othert->regno}')" 
