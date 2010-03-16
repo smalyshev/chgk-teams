@@ -6,7 +6,7 @@ $this->headTitle('Список команд');
 <?php } else { 
 	foreach($this->teams as $id => $team) { ?>
 <?= $this->actionLink("Команда {$team["name"]}", "members", "teamedit", array("id" => $id)) ?>
-<?php if(($cnt = count($team["errors"])) > 0) { echo "<span class=\"errors\">($cnt!)</span>"; } ?>
+<?php if(($cnt = count($team["check"])) > 0) { echo "<span class=\"errors\">($cnt!)</span>"; } ?>
 <br/>
 <?php  
 	}
