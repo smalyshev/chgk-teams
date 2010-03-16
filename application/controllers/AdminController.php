@@ -45,9 +45,15 @@ class AdminController extends Zend_Controller_Action
      */
     public function teamsAction()
     {
-        $this->view->teams = Reg2_Model_Data::getModel()->getTeams();
+        $model = Reg2_Model_Data::getModel();
+        $teams = $model->getTeams();
+        foreach($this->teams as $team) { 
+            $teamdata[$id] = $model->getTeamData($team->id);
+            $teamdata[$id]["check"] = $model->checkTeamData($teamdata[$id]);
+        }
+        $this->view->teams = $teamdata;
     }
-
+ 
     /**
      * Edit/confirm pending team
      * 

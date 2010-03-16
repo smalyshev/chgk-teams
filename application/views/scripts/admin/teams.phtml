@@ -4,8 +4,10 @@ $this->headTitle('Список команд');
 <?php if(count($this->teams) == 0) { ?>
 Очередь пуста.
 <?php } else { 
-	foreach($this->teams as $team) { ?>
-<a href="<?= $this->url(array("controller" => "members", "action" => "teamedit", "id" => $team->tid)) ?>">Команда "<?= $team->imia ?>"</a><br/>
+	foreach($this->teams as $id => $team) { ?>
+<?= $this->actionLink("Команда {$team["name"]}", "members", "teamedit", array("id" => $id)) ?>
+<?php if(($cnt = count($team["errors"])) > 0) { echo "<span class=\"errors\">($cnt!)</span>"; } ?>
+<br/>
 <?php  
 	}
 } ?>
