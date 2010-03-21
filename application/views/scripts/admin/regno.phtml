@@ -1,0 +1,27 @@
+<?php 
+$this->headTitle('Регистрационные номера');
+?>
+<h1 align="center">Регистрационные номера</h1>
+<div id="errors" class="errors">
+<?php
+	$errors = $this->form->getMessages();
+	$this->printErrors($errors, $this->form);
+	if(isset($this->error) && $this->error !== true) {
+		echo $this->printArr($this->error);
+	}
+?>
+</div>
+    <form action="<?= $this->form->getAction(); ?>" method="post" id="regform">
+        <?php for($i=0; $i<$this->teamcount; $i++) {
+        	echo $this->form->getElement("tid$i")->render();
+        }
+        ?>
+      <table bgcolor="white" cellpadding=4 cellspacing=2>
+        <?php for($i=0; $i<$this->teamcount; $i++) {
+        	echo $this->form->getElement("regno$i")->render();
+        }
+        ?>
+		<tr><th colspan=2><?= $this->form->regsubmit->render() ?></th></tr>
+      </table>
+    </form>
+        

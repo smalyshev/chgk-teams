@@ -699,6 +699,17 @@ class Reg2_Model_Data
 	}
 	
 	/**
+	 * Get teams for regno form
+	 * @param string $order Order argument
+	 */
+	function getTeamsRegno()
+	{
+		$table = $this->getTable('Teams');
+		$select = $table->select()->where('turnir = ?', self::TURNIR)->order(array('imia'));
+		return $table->fetchAll($select);
+	}
+	
+	/**
 	 * Get old turs
 	 */
 	public function getOldTurs()

@@ -3,5 +3,7 @@ $this->headTitle('Администрация');
 ?>
 <?= $this->actionLink("Очередь регистрации ({$this->teams})", "admin", "pending") ?><br/>
 <?= $this->actionLink("Зарегистрированные команды", "admin", "teams") ?><br/>
-<?= $this->actionLink("Logout", "user", "logout") ?><br/>
+<?= $this->actionLink("Регистрационные номера", "admin", "regno") ?><br/>
 <?= $this->actionLink("Капитаны", "admin", "kap") ?><br/>
+<br/>
+<?= $this->actionLink("Logout", "user", "logout") ?><br/>
