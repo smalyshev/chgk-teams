@@ -168,7 +168,11 @@ class AdminController extends Zend_Controller_Action
         $request = $this->getRequest();
         
         if($request->isPost()) {
-            
+            if($form->isValid($request->getPost())) {
+                $values = $form->getValues();
+                $result = $model->saveTeamRegno($values);
+                $this->view->error = $result;
+            }
         } else {
             $form->populate($teamdata);
         }

@@ -405,6 +405,20 @@ class Reg2_Model_Data
 		return true;
 	}
 	
+	public function saveTeamRegno($values)
+	{
+		$teams = $this->getTable('Teams');
+		$i=0;
+	    while(true) {
+	        if(empty($values["tid$i"])) {
+	            break;
+	        }
+	        $teams->update(array("regno" => $values["regno$i"]), "tid = ".(int)$values["tid$i"]);
+	        $i++;
+	    }
+	    return true;
+	}
+	
 	/**
 	 * Get player data as array
 	 * 
