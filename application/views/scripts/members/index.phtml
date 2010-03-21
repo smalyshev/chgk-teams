@@ -2,7 +2,7 @@
 $this->headTitle('Список турниров Интернет-Клуба "Что-Где-Когда"');
 ?>
 <h1 align=center>Список турниров Интернет-Клуба "Что-Где-Когда"</h1>
-[<?= $this->actionLink("Прошлые турниры", "members", "old") ?>]<br/>
+<center>[<?= $this->actionLink("Прошлые турниры", "members", "old") ?>]</center><br/>
 <table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
 <tr bgcolor="#EEFFEE">
 <td>Турнир <?= $this->actionLink("ИЧБ-8", "members", "turnir", array("id" => $this->turnir)) ?><br /><nobr><?= $this->Plural(count($this->teams), " команд", "а", "ы", "") ?>.</nobr></td></tr>
