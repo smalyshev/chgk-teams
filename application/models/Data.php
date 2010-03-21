@@ -697,7 +697,7 @@ class Reg2_Model_Data
 	public function getTeams($tid = self::TURNIR)
 	{
 		$table = $this->getTable('Teams');
-		$select = $table->select()->where('turnir = ?', $tid);
+		$select = $table->select()->where('turnir = ?', $tid)->order(array('imia'));
 		return $table->fetchAll($select);
 	}
 	
@@ -719,7 +719,7 @@ class Reg2_Model_Data
 	function getTeamsRegno()
 	{
 		$table = $this->getTable('Teams');
-		$select = $table->select()->where('turnir = ?', self::TURNIR)->order(array('imia'));
+		$select = $table->select()->where('turnir = ?', self::TURNIR)->order(array('regno', 'tid'));
 		return $table->fetchAll($select);
 	}
 	

@@ -155,7 +155,7 @@ class AdminController extends Zend_Controller_Action
     public function regnoAction()
     {
         $model = Reg2_Model_Data::getModel();
-        $teams = $model->getTeamsRegno();
+        $teams = $model->getTeams();
         $teamdata = array(); $tnames = array(); $i = 0;
 		foreach($teams as $team) {
 		    $teamdata["regno$i"] = $team->regno;
