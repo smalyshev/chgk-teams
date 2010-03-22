@@ -31,7 +31,7 @@ class Reg2_Validate_ValidRegno extends Zend_Validate_Abstract
 		
 		if(is_array($context) && isset($context["sezon2008"]) && $context["sezon2008"] == 'y') {
 			// find old team by regno
-	    	$team = Reg2_Model_Data::getModel()->findTeamByRegno($value, false);
+	    	$team = Reg2_Model_Data::getModel()->findTeamByRegno((int)$value, false);
 	        if(!$team) {
 	            $this->_error(self::REGNO_MISSING);   
 	            return false;   
