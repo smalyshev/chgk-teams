@@ -370,7 +370,7 @@ class Reg2_Model_Data
 		$team->list = $values["contact"];
 		$team->url = $values["url"];
 		$team->second_email = $values["remail"];
-		$team->regno = $values["oldid"];
+		$team->regno = $values["oldid"]>0?$values["oldid"]:null;
 		$team->save();
 				
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
