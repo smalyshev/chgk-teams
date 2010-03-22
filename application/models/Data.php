@@ -138,7 +138,7 @@ class Reg2_Model_Data
 	 */
 	public function getKnownErrors()
 	{
-	    return $this->$known_team_err;
+	    return $this->known_team_err;
 	}
 	/**
 	 * Create Zend_Db_Table for given table
