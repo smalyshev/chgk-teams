@@ -2,7 +2,6 @@
 
 class AdminController extends Zend_Controller_Action
 {
-
     public function preDispatch()
     {
         $acl = Zend_Registry::get('acl');
@@ -56,6 +55,7 @@ class AdminController extends Zend_Controller_Action
             $teamdata[$id]["check"] = $model->checkTeamData($teamdata[$id]);
         }
         $this->view->teams = $teamdata;
+        $this->view->known_err = $model->getKnownErrors();
     }
 
     /**

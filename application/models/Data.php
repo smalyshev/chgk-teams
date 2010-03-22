@@ -95,7 +95,15 @@ class Reg2_Model_Data
 "Юлия" => 1,
 "Яна" => 1,
 	);
-	
+    
+	protected $known_team_err = array(
+        1500 => 2, // Александр Иванов, Андрей Абрамов
+        1526 => 1, // другой Инсайт
+        1520 => 1, // Дмитрий Смирнов
+        1511 => 1, // Владимир Степанов
+        1521 => 1, // Ольга Ефремова 
+    );
+    
 	public function __construct()
 	{
 		$this->_loader = new Zend_Loader_PluginLoader(array('Reg2_Models_Tables' => APPLICATION_PATH . '/models/tables'));
@@ -114,13 +122,24 @@ class Reg2_Model_Data
 	/**
 	 * Get registreted model instance
 	 * 
-	 * @returns Reg2_Model_Data
+	 * @return Reg2_Model_Data
 	 */
 	static public function getModel()
 	{
 		return Bootstrap::get('model');
 	} 
 	
+	/**
+	 * Get known errors 
+	 * 
+	 * usually same names of different persons
+	 * 
+	 * @return array tid => error count
+	 */
+	public function getKnownErrors()
+	{
+	    return $this->$known_team_err;
+	}
 	/**
 	 * Create Zend_Db_Table for given table
 	 * 
