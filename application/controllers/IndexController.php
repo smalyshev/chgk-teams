@@ -77,12 +77,14 @@ class IndexController extends Zend_Controller_Action
         		$view->list = "Совета Капитанов";
         		$view->kod = $values["tsubs_kod"];
         		$view->addr = $values["tsubs"];
+        		$mail->getMailer()->setReplyTo($values["tsubs"], $values["name"]);
         		$mail->send();
         	}
         	if($values["zlist"] == 'n') {
         		$view->list = $values["zsubs_list"];
         		$view->kod = $values["zsubs_kod"];
         		$view->addr = $values["zsubs"];
+        		$mail->getMailer()->setReplyTo($values["zsubs"], $values["name"]);
         		$mail->send();
         	}
         	$this->view->list_desc = 1;
