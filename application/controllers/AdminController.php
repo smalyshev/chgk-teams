@@ -95,7 +95,7 @@ class AdminController extends Zend_Controller_Action
                         // send confirmation mail
                         $mail = new Reg2_Mail('confirmed');
                         $team = $model->findTeam($id);
-                        $mail->getMailer()->addTo($team->list)->setSubject('ICHB-2010 - Confirmed');
+                        $mail->getMailer()->addTo($team->list)->setSubject('ICHB-2013 - Confirmed');
                         if(!empty($team->second_email)) {
                             $mail->getMailer()->addCC($team->second_email);
                         }
@@ -105,7 +105,7 @@ class AdminController extends Zend_Controller_Action
                         // send kap's pwd mail
                         $mail = new Reg2_Mail('cappwd');
                         $kap = $model->findPlayer($team->kap);
-                        $mail->getMailer()->addTo($kap->email)->setSubject('ICHB-2010 - Captain\'s Access');
+                        $mail->getMailer()->addTo($kap->email)->setSubject('ICHB-2013 - Captain\'s Access');
                         $mail->getView()->team = $team;
                         $mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
                         $mail->getView()->kadavr = $config['mail']['kadavr'];
@@ -144,7 +144,7 @@ class AdminController extends Zend_Controller_Action
         }
         $mail = new Reg2_Mail('cappwd');
         $config = Bootstrap::get('config');
-        $mail->getMailer()->addTo($kap->email)->setSubject('ICHB-2010 - Captain\'s Access');
+        $mail->getMailer()->addTo($kap->email)->setSubject('ICHB-2013 - Captain\'s Access');
         $mail->getView()->team = $team;
         $mail->getView()->pwd = $model->createUserPassword($kap->email, $team->tid);
         $mail->getView()->kadavr = $config['mail']['kadavr'];

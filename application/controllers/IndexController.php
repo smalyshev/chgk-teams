@@ -63,7 +63,7 @@ class IndexController extends Zend_Controller_Action
         $config = Bootstrap::get('config');
         $mail->getMailer()
         	->addTo($config['mail']['register'])
-        	->setSubject("ICHB-2010 - New Registration: $teamname");
+        	->setSubject("ICHB-2013 - New Registration: $teamname");
         $mail->send();
         
         if($values["klist"] == 'n' || $values["zlist"] == 'n') {
@@ -71,7 +71,7 @@ class IndexController extends Zend_Controller_Action
         	$view = $mail->getView();
         	$mail->getMailer()
         		->addTo($config['mail']['pochta'])
-        		->setSubject('ICHB-2010 - Subscribe');
+        		->setSubject('ICHB-2013 - Subscribe');
         	$view->name = $values["name"];
         	if($values["klist"] == 'n') {
         		$view->list = "Совета Капитанов";

@@ -99,7 +99,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet($prefix.'/css/reg2.css');
         
         // setting the site in the title
-        $this->_view->headTitle('éşâ-8');
+        $this->_view->headTitle('éşâ-9');
 
         // setting a separator string for segments:
         $this->_view->headTitle()->setSeparator(' - ');

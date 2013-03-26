@@ -70,12 +70,12 @@ class Reg2_Form_Register extends Zend_Form
 
         $this->addElement('RadioPlus', 'sezon2008', array(
 			    'multioptions'   => array(
-                            'y' => 'Команда играла в сезоне 2008 года',
+                            'y' => 'Команда играла в сезоне 2010 года',
                             'n' => 'Нет, команда не играла в прошлом сезоне',
                            ),
             'value' => 'n',
             'required'   => true,
-            'label'      => 'Сезон 2008',
+            'label'      => 'Сезон 2010',
             'links'		=> array('y' => 'oldid'),
         ));
         

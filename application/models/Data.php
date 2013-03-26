@@ -2,7 +2,7 @@
 class Reg2_Model_Data
 {
 	protected $_tables = array();
-	const TURNIR = 50;
+	const TURNIR = 60;
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 25;
 	const CODE_LEN = 8;
