@@ -27,10 +27,15 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
         if($this->_id > 0) {
             return true;
         }
+	Zend_Registry::get('log')->info("Unique kap: $value {$this->_tid}.");
     	if($value) {
     		$user = Reg2_Model_Data::getModel()->findUserByEmail($value);
     		if($user && $user->tid != $this->_tid) {
     		    $this->team = Reg2_Model_Data::getModel()->findTeam($user->tid)->imia;
+    			if(!empty($context["pold0"]) || !empty($context['pid0']) && $context['name'] == $this->team) {
+    				return true;
+    			}
+
                	$this->_error(self::MAIL_ALREADY);
        	        return false;   
     		}	
