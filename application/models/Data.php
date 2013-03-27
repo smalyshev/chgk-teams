@@ -880,10 +880,11 @@ class Reg2_Model_Data
 		$oldusr = $this->findUserByEmail($mail);
 		$pwd = $this->_generatePassword();
 		if($oldusr) {
-			if($oldusr->tid != $tid) {
-				throw new Exception("Мейл $mail заргистрирован для другой команды!");
-			}
+// 			if($oldusr->tid != $tid) {
+// 				throw new Exception("Мейл $mail заргистрирован для другой команды!");
+// 			}
 			$oldusr->password = md5($pwd);
+			$oldusr->tid = $tid;
 			$oldusr->save();
 			Zend_Registry::get('log')->info("Saved password for: '$mail'");
 		} else {
