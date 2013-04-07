@@ -80,6 +80,12 @@ class IndexController extends Zend_Controller_Action
         		$mail->getMailer()->setReplyTo($values["tsubs"], $values["name"]);
         		$mail->send();
         	}
+		$mail = new Reg2_Mail('subscribe');
+                $view = $mail->getView();
+                $mail->getMailer()
+                        ->addTo($config['mail']['pochta'])
+                        ->setSubject('ICHB-2013 - Subscribe');
+                $view->name = $values["name"];
         	if($values["zlist"] == 'n') {
         		$view->list = $values["zsubs_list"];
         		$view->kod = $values["zsubs_kod"];
