@@ -2,7 +2,7 @@
 class Reg2_Model_Data
 {
 	protected $_tables = array();
-	const TURNIR = 60;
+	const TURNIR = 70;
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 25;
 	const CODE_LEN = 8;
@@ -95,46 +95,46 @@ class Reg2_Model_Data
 "Юлия" => 1,
 "Яна" => 1,
 	);
-    
+
 	protected $known_team_err = array(
         1500 => 3, // Александр Иванов, Андрей Абрамов, Александр Рождествин
         1526 => 1, // другой Инсайт
         1520 => 1, // Дмитрий Смирнов
         1511 => 1, // Владимир Степанов
-        1521 => 1, // Ольга Ефремова 
+        1521 => 1, // Ольга Ефремова
 	1535 => 1, // other Stalker
     );
-    
+
 	public function __construct()
 	{
 		$this->_loader = new Zend_Loader_PluginLoader(array('Reg2_Models_Tables' => APPLICATION_PATH . '/models/tables'));
 	}
-	
+
 	/**
 	 * Get max number of playes
-	 * 
+	 *
 	 * @return int
 	 */
 	public function getMaxPlayers()
 	{
 		return self::MAX_PLAYERS;
 	}
-	
+
 	/**
 	 * Get registreted model instance
-	 * 
+	 *
 	 * @return Reg2_Model_Data
 	 */
 	static public function getModel()
 	{
 		return Bootstrap::get('model');
-	} 
-	
+	}
+
 	/**
-	 * Get known errors 
-	 * 
+	 * Get known errors
+	 *
 	 * usually same names of different persons
-	 * 
+	 *
 	 * @return array tid => error count
 	 */
 	public function getKnownErrors()
@@ -143,7 +143,7 @@ class Reg2_Model_Data
 	}
 	/**
 	 * Create Zend_Db_Table for given table
-	 * 
+	 *
 	 * @param string $id
 	 * @return Zend_Db_Table_Abstract
 	 */
@@ -154,9 +154,9 @@ class Reg2_Model_Data
             $this->_tables[$id] = new $class();
         }
         return $this->_tables[$id];
-		
+
 	}
-	
+
     /**
      * @param int  $id
      * @return Zend_Db_Table_Row
@@ -170,7 +170,7 @@ class Reg2_Model_Data
         // TODO: better handling for unknown ID
         throw new Exception("Unknown team ID!");
     }
-    
+
     /*
      * Find team by list email
      * @param string $email
@@ -181,7 +181,7 @@ class Reg2_Model_Data
         $select = $table->select()->where("list = ?", $email);
         return $table->fetchRow($select);
     }
-    
+
     public function findTeamByName($name)
     {
         $table = $this->getTable('Teams');
@@ -190,10 +190,10 @@ class Reg2_Model_Data
         		->where("turnir = ".self::TURNIR." OR turnir =".self::PENDING_TURNIR);
         return $table->fetchRow($select);
     }
-    
+
     /**
      * Find team by club no
-     * 
+     *
      * @param int $regno Club no
      * @param bool $newreg Should we look for newly registered ones or for old ones?
      */
@@ -209,12 +209,12 @@ class Reg2_Model_Data
         }
         return $table->fetchRow($select);
     }
-		
+
     /**
      * Insert data for player into the DB
-     * 
+     *
      * Also binds to the team
-     * 
+     *
      * @param array $values
      * @param int $i index in the array
      * @param int $tid team id
@@ -225,7 +225,7 @@ class Reg2_Model_Data
     {
 		$players = $this->getTable('Players');
 		$player_team = $this->getTable('PlayerTeam');
-    	
+
 		$uid = $players->insert(array(
 			"imia" => $values["pname$i"],
 			"famil" => $values["pfamil$i"],
@@ -236,7 +236,7 @@ class Reg2_Model_Data
 			"email" => $values["pemail$i"],
 			"stamp" => time(),
 		));
-		Zend_Registry::get('log')->info(sprintf("Add pending player: '%s %s' uid %d", 
+		Zend_Registry::get('log')->info(sprintf("Add pending player: '%s %s' uid %d",
 				 $values["pname$i"], $values["pfamil$i"], $uid));
 		$player_team->insert(array(
 			"uid" => $uid,
@@ -247,13 +247,13 @@ class Reg2_Model_Data
 		Zend_Registry::get('log')->info(sprintf("Add link uid:%d->tid:%d", $uid, $tid));
 		return $uid;
     }
-    
+
     /**
      * Bind two player's records in the DB
-     * 
+     *
      * Takes player $i in $values and makes it bind to newly specified PID
      * i.e. destroys new record and moves team binding and data to an old one
-     * 
+     *
      * @param array $values
      * @param int $i
      */
@@ -264,21 +264,21 @@ class Reg2_Model_Data
 		$teams = $this->getTable('Teams');
 
 		// TODO: check that this player isn't registered with other team
-		
+
 		// NB: we move entries from newid to oldid
 		$newid = (int)$values["oldpid$i"];
 		$oldid = (int)$values["pid$i"];
-		
+
 		Zend_Registry::get('log')->info("Bind player $newid->$oldid");
-		
+
 		if($oldid == 0 || $newid == 0) {
 			return;
 		}
-		
+
 		$player_team->update(array("uid" => $oldid), "uid = $newid");
 		$teams->update(array("kap" => $oldid), "kap = $newid");
 		$players->delete("uid = $newid");
-		
+
 		// copy new values
 		$data = array();
 		$fields = array("city", "country", "sex", "email", "born");
@@ -291,7 +291,7 @@ class Reg2_Model_Data
 			$players->update($data, "uid = $oldid");
 		}
     }
-    
+
     public function deletePlayer($uid)
     {
     	$players = $this->getTable('Players');
@@ -299,8 +299,8 @@ class Reg2_Model_Data
 		Zend_Registry::get('log')->info("Delete player: $uid");
     	$players->delete("uid = ".(int)$uid);
     	$player_team->delete("uid = ".(int)$uid);
-    } 
-    
+    }
+
     public function deletePlayerFromTeam($uid, $tid)
     {
     	$player_team = $this->getTable('PlayerTeam');
@@ -308,18 +308,18 @@ class Reg2_Model_Data
 		$uid = (int)$uid;
 		$tid = (int)$tid;
     	$player_team->delete("uid = $uid AND tid = $tid");
-    } 
-    
+    }
+
     /**
 	 * Get team data from registration form
-	 * 
+	 *
 	 * @param array $values
 	 * @return bool
 	 */
 	public function addTeamData($values)
 	{
 		$teams = $this->getTable('Teams');
-		
+
 		Zend_Registry::get('log')->info("Add pending team: '$values[name] $values[email]' by '{$values[email]}'");
 		$tid = $teams->insert(array(
 			"imia" => $values["name"],
@@ -343,13 +343,13 @@ class Reg2_Model_Data
 		if($kap) {
 			$teams->update(array("kap" => $kap), "tid = $tid");
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Save player's data from a form
-	 * 
+	 *
 	 * @param int $id
 	 * @param array $values
 	 * @return bool
@@ -369,10 +369,10 @@ class Reg2_Model_Data
 		), "uid = $id");
         return true;
 	}
-	
+
 	/**
 	 * Save team data from a form
-	 * 
+	 *
 	 * @param array $values Form values
 	 * @param bool $allowBind Allow binding player records?
 	 */
@@ -381,10 +381,10 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$teams = $this->getTable('Teams');
 		$player_team = $this->getTable('PlayerTeam');
-		
+
 		$tid = (int)$values["tid"];
 		Zend_Registry::get('log')->info("Editing team $tid: '$values[name]' id: $values[oldid]");
-		
+
 		$team = $this->findTeam($tid);
 		$team->imia = $values["name"];
 		$team->list = $values["contact"];
@@ -392,12 +392,12 @@ class Reg2_Model_Data
 		$team->second_email = $values["remail"];
 		$team->regno = $values["oldid"]>0?$values["oldid"]:null;
 		$team->save();
-				
+
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
 			if(empty($values["pname$i"])) {
 				continue;
 			}
-			
+
 			if(empty($values["oldpid$i"])) {
 				$this->_addPlayerData($values, $i, $tid, $team->turnir);
 			} else {
@@ -421,10 +421,10 @@ class Reg2_Model_Data
 					), "uid = ".(int)$values["pid$i"]);
 				}
 			}
-		}			
+		}
 		return true;
 	}
-	
+
 	public function saveTeamRegno($values)
 	{
 		$teams = $this->getTable('Teams');
@@ -438,10 +438,10 @@ class Reg2_Model_Data
 	    }
 	    return true;
 	}
-	
+
 	/**
 	 * Get player data as array
-	 * 
+	 *
 	 * @param int $id User ID
 	 */
 	public function getPlayerData($id)
@@ -457,10 +457,10 @@ class Reg2_Model_Data
 		$values["pemail"] = $player->email;
 		return $values;
 	}
-	
+
 	/**
 	 * Get team data for populating form
-	 * 
+	 *
 	 * @param int $tid
 	 * @return array
 	 */
@@ -469,7 +469,7 @@ class Reg2_Model_Data
 		$players = $this->getTable('Players');
 		$teams = $this->getTable('Teams');
 		$player_team = $this->getTable('PlayerTeam');
-		
+
 		$team = $this->findTeam($tid);
 		$values = array(
 			"tid" => $tid,
@@ -481,7 +481,7 @@ class Reg2_Model_Data
 			"turnir" => $team->turnir,
 			"sezon2008" => $team->regno?'y':'n',
 		);
-		
+
 		$players = $team->findManyToManyRowset($players, $player_team);
 		$cnt=1;
 		foreach($players as $player) {
@@ -501,7 +501,7 @@ class Reg2_Model_Data
 		}
 		return $values;
 	}
-	
+
 	protected function _suggestCountry($city, $uid = 0)
 	{
 		$players = $this->getTable('Players');
@@ -514,7 +514,7 @@ class Reg2_Model_Data
 		}
 		return null;
 	}
-	
+
 	protected function _suggestGender($name, $uid = 0)
 	{
 		if(isset(self::$femnames[$name])) {
@@ -532,7 +532,7 @@ class Reg2_Model_Data
 		}
 		return null;
 	}
-	
+
 	/*
 	 * Check if first and last name potentially reversed
 	 */
@@ -548,10 +548,10 @@ class Reg2_Model_Data
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Check data for errors and return array with error messages
-	 * 
+	 *
 	 * @param array $values
 	 * @return array
 	 */
@@ -574,7 +574,7 @@ class Reg2_Model_Data
         		->where("turnir != ".self::TURNIR." AND turnir !=".self::PENDING_TURNIR);
             $othert = $teams->fetchAll($select);
             foreach($othert as $other) {
-               $errors["team"][] = array(sprintf("Другой регистрационный номер: команда=%d, regno=%s", $other->tid, $other->regno)); 
+               $errors["team"][] = array(sprintf("Другой регистрационный номер: команда=%d, regno=%s", $other->tid, $other->regno));
             }
 		} else {
             $select = $teams->select()
@@ -584,7 +584,7 @@ class Reg2_Model_Data
             $othert = $teams->fetchRow($select);
             if($othert) {
                 $errors["team"][] = array("Регистрационный номер не указан, предлагаю: ".$othert->regno,
-                    "SetFormField('oldid', '{$othert->regno}')" 
+                    "SetFormField('oldid', '{$othert->regno}')"
                 );
             }
 		}
@@ -593,7 +593,7 @@ class Reg2_Model_Data
 			if(empty($values["pname$i"]) || empty($values["oldpid$i"])) {
 				continue;
 			}
-			
+
 			// player: check players with the same name
 			$select = $players->select()->where("imia = ?", $values["pname$i"])->where("famil = ?", $values["pfamil$i"]);
 			$names = $players->fetchAll($select);
@@ -640,21 +640,21 @@ class Reg2_Model_Data
 					sprintf("Фамилия: %s, имя: %s - подозреваю перепутаные имя и фамилию", $values["pfamil$i"], $values["pname$i"]),
 					"SwapFormFields('pname$i', 'pfamil$i')");
 			}
-			
+
 		}
 		return $errors;
 	}
-	
+
 	/**
 	 * Confirm team in database
-	 * 
+	 *
 	 * @param int $tid team
 	 */
 	public function confirmTeam($tid)
 	{
 		$teams = $this->getTable('Teams');
 		$player_team = $this->getTable('PlayerTeam');
-		
+
 		Zend_Registry::get('log')->info(sprintf("Confirm team: %d", $tid));
 		$tid = (int)$tid;
 		$teams->update(array("turnir" => self::TURNIR), "tid = $tid");
@@ -662,7 +662,7 @@ class Reg2_Model_Data
 		// TODO: add team to IDs list in same_team
 		return $true;
 	}
-	
+
     public function deleteTeam($tid)
     {
     	$teams = $this->getTable('Teams');
@@ -670,11 +670,11 @@ class Reg2_Model_Data
 		Zend_Registry::get('log')->info("Delete team: $tid");
     	$teams->delete("tid = ".(int)$tid);
     	$player_team->delete("uid = ".(int)$tid);
-    } 
-    
+    }
+
 	/**
-	 * Find team contact address 
-	 * 
+	 * Find team contact address
+	 *
 	 * @param int $tid
 	 */
 	public function getTeamContact($tid)
@@ -682,10 +682,10 @@ class Reg2_Model_Data
 		$team = $this->findTeam($tid);
 		return $team->list;
 	}
-	
+
 	/**
 	 * Get User record for team's captain
-	 * 
+	 *
 	 * @param int $tid
 	 */
 	public function getTeamKap($tid)
@@ -693,7 +693,7 @@ class Reg2_Model_Data
 		$team = $this->findTeam($tid);
 		return $this->findPlayer($team->kap);
 	}
-	
+
 	/**
 	 * Find how many teams are pending registration
 	 */
@@ -709,7 +709,7 @@ class Reg2_Model_Data
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Get registered teams
 	 * @param int tid Turnir ID
@@ -720,7 +720,7 @@ class Reg2_Model_Data
 		$select = $table->select()->where('turnir = ?', $tid)->order(array('imia'));
 		return $table->fetchAll($select);
 	}
-	
+
 	/**
 	 * Get registered teams for old turs
 	 * @param int tid Turnir ID
@@ -731,7 +731,7 @@ class Reg2_Model_Data
 		$select = $table->select()->where('turnir < ? AND turnir != -1', $tid)->order(array('turnir DESC', 'imia'));
 		return $table->fetchAll($select);
 	}
-	
+
 	/**
 	 * Get teams for regno form
 	 * @param string $order Order argument
@@ -742,7 +742,7 @@ class Reg2_Model_Data
 		$select = $table->select()->where('turnir = ?', self::TURNIR)->order(array('regno', 'tid'));
 		return $table->fetchAll($select);
 	}
-	
+
 	/**
 	 * Get old turs
 	 */
@@ -752,7 +752,7 @@ class Reg2_Model_Data
 		$select = $table->select()->where('id < ?', self::TURNIR)->order('id DESC');
 		return $table->fetchAll($select);
 	}
-	
+
 	/**
 	 * Get teams pending registration
 	 */
@@ -760,7 +760,7 @@ class Reg2_Model_Data
 	{
 		return $this->getTeams(self::PENDING_TURNIR);
 	}
-	
+
 	public function getTeamsWithData($tid = self::TURNIR)
 	{
 		$team = $this->getTable('Teams');
@@ -774,7 +774,7 @@ class Reg2_Model_Data
 			;
 		return $select->query()->fetchAll();
 	}
-	
+
     /**
      * @param int  $id
      * @return Zend_Db_Table_Row
@@ -788,11 +788,11 @@ class Reg2_Model_Data
         // TODO: better handling for unknown ID
         throw new Exception("Unknown player ID!");
     }
-	
-    
+
+
 	/**
 	 * Find player by first & last name
-	 * 
+	 *
 	 * @param string $name
 	 * @param string $famil
 	 * @return Zend_Db_Table_Row
@@ -804,7 +804,7 @@ class Reg2_Model_Data
         $select = $table->select()->where("imia = ?", $name)->where("famil = ?", $famil);
         return $table->fetchRow($select);
 	}
-	
+
 	/**
 	 * Find turs and teams where the player played
 	 */
@@ -824,12 +824,12 @@ class Reg2_Model_Data
 		    $select->where('t.turnir > 0');
 		}
 		return $select->query()->fetchAll();
-	    
+
 	}
-	
+
 	/**
 	 * Find turs and teams where the player played
-	 * @param string $imia 
+	 * @param string $imia
 	 * @param string $famil First & last name of the player
 	 */
 	public function findRegByName($imia, $famil)
@@ -845,15 +845,15 @@ class Reg2_Model_Data
 			->where("pt.turnir = ? OR pt.turnir = ?", self::TURNIR, self::PENDING_TURNIR)
 			;
 		return $select->query()->fetchAll();
-	    
+
 	}
-	
+
 	/**
 	 * Generate user password
-	 * 
+	 *
 	 * @return string
 	 */
-	protected function _generatePassword() 
+	protected function _generatePassword()
 	{
         for ($i=0; $i < self::CODE_LEN; $i = $i + 2) {
             // generate word with mix of vowels and consonants
@@ -867,10 +867,10 @@ class Reg2_Model_Data
         }
 		return $word;
 	}
-	
+
 	/**
 	 * Create username or change password
-	 * 
+	 *
 	 * @param string $mail
 	 * @return string new password
 	 */
@@ -896,16 +896,16 @@ class Reg2_Model_Data
 			));
 			Zend_Registry::get('log')->info("Created password for: '$mail' team $tid");
 		}
-		
+
 		return $pwd;
 	}
-	
+
 	/**
 	 * Find users by email
-	 * 
+	 *
 	 * @param unknown_type $email
 	 */
-	public function findUserByEmail($email) 
+	public function findUserByEmail($email)
 	{
 	    $users = $this->getTable('Users');
 	    $res = $users->find($email);
@@ -915,7 +915,7 @@ class Reg2_Model_Data
 		    return false;
 		}
 	}
-	
+
 	/**
 	 * Find tur data by ID
 	 * @param int $id
@@ -930,7 +930,7 @@ class Reg2_Model_Data
         // TODO: better handling for unknown ID
         throw new Exception("Unknown turnir ID!");
 	}
-	
+
 	/**
 	 * Find turs in which team with this reg.no participated
 	 * @param int $regno
@@ -949,7 +949,7 @@ class Reg2_Model_Data
 			;
 		return $select->query()->fetchAll();
 	}
-	
+
 	/**
 	 * Get captains of all current teams
 	 */
