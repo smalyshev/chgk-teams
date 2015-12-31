@@ -2,9 +2,9 @@
 
 class MembersController extends Zend_Controller_Action
 {
-    
+
     protected $_role = null;
-    
+
     protected $_isAdmin = false;
 
     public function preDispatch()
@@ -23,8 +23,8 @@ class MembersController extends Zend_Controller_Action
 
     /**
      * Admin menu
-     * 
-     * 
+     *
+     *
      */
     public function postDispatch()
     {
@@ -34,9 +34,9 @@ class MembersController extends Zend_Controller_Action
     }
 
     /**
-     * Check if captain belongs to the team which is being edited 
+     * Check if captain belongs to the team which is being edited
      * @param int $tid Team ID
-     * 
+     *
      */
     protected function _checkKap($tid)
     {
@@ -50,8 +50,9 @@ class MembersController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->teams = Reg2_Model_Data::getModel()->getTeams();
-        $this->view->turnir = Reg2_Model_Data::TURNIR;
+    	$model = Reg2_Model_Data::getModel();
+        $this->view->teams = $model->getTeams();
+        $this->view->turnir = $this->view->turnir = $model->findTurnir(Reg2_Model_Data::TURNIR);
     }
 
     public function oldAction()
@@ -100,15 +101,15 @@ class MembersController extends Zend_Controller_Action
             return $this->_helper->redirector('index');
         }
         $this->_checkKap($id);
-        
-        $this->view->form = $form = $this->_helper->getForm('teamedit', array("tid" => $id, 
+
+        $this->view->form = $form = $this->_helper->getForm('teamedit', array("tid" => $id,
         "admin" => $this->_isAdmin));
         $model = Bootstrap::get('model');
         $this->view->maxplayers = $model->getMaxPlayers();
         $this->view->tid = $id;
         $request = $this->getRequest();
         $this->view->isadmin = $this->_isAdmin;
-        
+
         if($request->isPost()) {
             if($form->isValid($request->getPost())) {
                 $values = $form->getValues();
@@ -134,7 +135,7 @@ class MembersController extends Zend_Controller_Action
         if(!$id = (int)$this->_getParam('id', false)) {
             return $this->_helper->redirector('index');
         }
-        
+
         $model = Reg2_Model_Data::getModel();
         $this->view->player = $model->findPlayer($id);
         if(empty($this->view->player->foto)) {
@@ -152,19 +153,19 @@ class MembersController extends Zend_Controller_Action
         if(!$id = (int)$this->_getParam('id', false)) {
             return $this->_helper->redirector('index');
         }
-        
+
         if(!$this->_isAdmin) {
             // TODO: allow captains too
             $this->_forward('noacl', 'error');
         }
-        
+
         $this->view->form = $form = $this->_helper->getForm('player', array("uid" => $id));
-        
+
         $model = Reg2_Model_Data::getModel();
-        
+
         $request = $this->getRequest();
         $this->view->id = $id;
-        
+
         if($request->isPost()) {
             if($form->isValid($request->getPost())) {
                 $values = $form->getValues();
@@ -183,7 +184,7 @@ class MembersController extends Zend_Controller_Action
     }
 
     public function regnoAction()
-    {    
+    {
         $this->view->teams = Reg2_Model_Data::getModel()->getTeamsRegno();
     }
 
