@@ -602,7 +602,7 @@ class Reg2_Model_Data
 					continue;
 				}
 				$errors["p$i"][] = array(
-					sprintf("Игрок с одинаковым именем: id=%d город=%s страна=%s", $name_player->uid, $name_player->city, $name_player->country),
+					sprintf("Игрок с одинаковым именем: id=<a href=\"/members/player/id/%d\">%d</a> город=%s страна=%s", $name_player->uid, $name_player->uid, $name_player->city, $name_player->country),
 					"SetFormField('pid$i', '{$name_player->uid}')");
 			}
 			// player: check city, no country
