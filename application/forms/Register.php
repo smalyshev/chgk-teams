@@ -3,11 +3,11 @@ class Reg2_Form_Register extends Zend_Form
 {
 	/**
 	 * team ID - for editing
-	 * 
+	 *
 	 * @var int
 	 */
 	protected $_tid;
-	
+
 	public function __construct($options = null) {
 		if(isset($options['tid'])) {
 			$this->setTeamID($options['tid']);
@@ -15,21 +15,22 @@ class Reg2_Form_Register extends Zend_Form
 		}
 		parent::__construct($options);
 	}
-	
-	public function setTeamID($tid) 
+
+	public function setTeamID($tid)
 	{
 		$this->_tid = $tid;
 	}
-	
+
     public function init()
     {
+    	$config = Bootstrap::get('config');
     	$this->setName("register");
     	$this->setAction("");
     	$this->setMethod("POST");
     	$this->addElementPrefixPath('Reg2_Validate', APPLICATION_PATH. '/../library/Validate/', 'validate');
     	$this->addElementPrefixPath('Reg2_Decorator', APPLICATION_PATH. '/../library/Decorators/', 'decorator');
     	$this->addPrefixPath('Reg2_Form_Element', APPLICATION_PATH. '/../library/Elements/', 'element');
-    	
+
     	$this->setElementDecorators(array(
     		'ViewHelper',
     		'TableRow',
@@ -41,7 +42,7 @@ class Reg2_Form_Register extends Zend_Form
 //            	'ignore'   => true,
 //            ));
     	}
-    	
+
     	$this->addElement('text', 'name', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
@@ -70,15 +71,15 @@ class Reg2_Form_Register extends Zend_Form
 
         $this->addElement('RadioPlus', 'sezon2008', array(
 			    'multioptions'   => array(
-                            'y' => 'Команда играла в сезоне 2010 года',
+                            'y' => "Команда играла в сезоне {$config['ichb']['old']['year']} года",
                             'n' => 'Нет, команда не играла в прошлом сезоне',
                            ),
             'value' => 'n',
             'required'   => true,
-            'label'      => 'Сезон 2010',
+            'label'      => "Сезон {$config['ichb']['old']['year']}",
             'links'		=> array('y' => 'oldid'),
         ));
-        
+
         $this->addElement('text', 'oldid', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
@@ -155,7 +156,7 @@ class Reg2_Form_Register extends Zend_Form
             'label'      => 'в',
         	'decorators' => array('Label', 'ViewHelper'),
         ));
-        
+
         $this->addElement('RadioPlus', 'zlist', array(
 			    'multioptions'   => array(
                             'y' => 'Да, команда имеет доступ к материалам листов',
@@ -201,23 +202,23 @@ class Reg2_Form_Register extends Zend_Form
             'label'      => 'Комментарии',
     		'cols' => '100',
         ));
-              
-        
+
+
         /// Players
     	$decorators = array(
     		'ViewHelper',
     		array("HtmlTag", array("tag" => "td"))
     	);
-    	
+
     	$max = Bootstrap::get('model')->getMaxPlayers();
         for($i=0;$i<$max;$i++) {
         	$who = $i?"игрока $i":"капитана";
-        	
+
         	$this->addElement('checkbox', "pold$i", array(
 //        		'decorators' => array('DijitElement')
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
         	));
-        	
+
     		$this->addElement('text', "pname$i", array(
     	        'filters'    => array('StringTrim'),
         	    'required'   => true,
@@ -228,11 +229,11 @@ class Reg2_Form_Register extends Zend_Form
                 	new Reg2_Validate_OldName($i),
                 	new Reg2_Validate_UniquePlayerReg($i, $this->_tid)
              	),
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
         		"label" => "Имя $who",
             ));
 			$val = new Reg2_Validate_PlayerFieldsRequired($i);
-    		
+
         	$this->addElement('text', "pfamil$i", array(
             	'filters'    => array('StringTrim'),
         	    'required'   => true,
@@ -242,7 +243,7 @@ class Reg2_Form_Register extends Zend_Form
 	    	    'validators' => array(
                 	$val,
              	),
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
         		"label" => "Фамилия $who",
              	));
         	$this->addElement('text', "pcity$i", array(
@@ -254,7 +255,7 @@ class Reg2_Form_Register extends Zend_Form
 	    	    'validators' => array(
                 	$val,
         	   	),
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
         	   	"label" => "Город $who",
         	   	));
         	$this->addElement('text', "pcountry$i", array(
@@ -264,7 +265,7 @@ class Reg2_Form_Register extends Zend_Form
     	    	'validators' => array(
                    	new Reg2_Validate_PlayerFieldsRequired($i, true)
              	),
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
         		"label" => "Страна $who",
              	));
         	// optional - пол, дата рождения, адрес email
@@ -273,7 +274,7 @@ class Reg2_Form_Register extends Zend_Form
             	'required'   => false,
         		'multiOptions' => array("" => "", "m" => "М", "f" => "Ж"),
         		'class'		=> "short",
-        		"decorators" => $decorators, 
+        		"decorators" => $decorators,
         		"label" => "Пол $who",
         	));
 //        	$this->addElement('DateTextBox', "pbirth$i", array(
@@ -295,7 +296,7 @@ class Reg2_Form_Register extends Zend_Form
     				array("HtmlTag", array("tag" => "td"))
     			),
     			'label' => "Дата рождения $who",
-    			
+
             ));
         	$this->addElement('text', "pemail$i", array(
             	'filters'    => array('StringTrim'),
@@ -307,22 +308,22 @@ class Reg2_Form_Register extends Zend_Form
                 		new Reg2_Validate_UniqueKapEmail($i, $this->_tid)
                 ),
         		'class'		=> "player",
-				"decorators" => $decorators, 
+				"decorators" => $decorators,
                 "label" => "E-mail $who",
                 ));
-        	
+
         }
-        
+
         //$form_factory = Zend_Controller_Action_HelperBroker::getExistingHelper('getForm');
        	//$players = $form_factory->getForm('PlayerData');
         //$this->addSubForm($players, 'players');
-        
+
 //        $this->setSubFormDecorators(array(
 //        	array('ViewScript', array("viewScript" => "playerheader.phtml")),
 //   			 'FormElements',
 //    	 	array('HtmlTag', array('tag' => 'p', 'id' => 'players'))
 //		));
-        
+
         $this->addElement('submit', 'register', array(
             'required' => false,
             'ignore'   => true,

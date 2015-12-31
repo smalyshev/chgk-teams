@@ -28,6 +28,11 @@ log.format = "[%role%] %timestamp% %priorityName% (%priority%): %message%"
 log.file = APPLICATION_PATH "/../data/logs/reg2.log"
 
 urlprefix = "/reg2"
+ichb.name = "10"
+ichb.year = "2016"
+ichb.old.name = "9"
+ichb.old.year = "2013"
+
 [staging : production]
 
 [testing : production]
