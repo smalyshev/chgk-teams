@@ -34,7 +34,7 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
     		    $team = Reg2_Model_Data::getModel()->findTeam($user->tid);
     		    $this->team = $team->imia;
     			if(!empty($context["pold0"]) || !empty($context['pid0']) &&
-    					($context['name'] == $team->imia || $context['regno'] == $team->regno)) {
+    					($context['name'] == $team->imia || $context['oldid'] == $team->regno)) {
     				return true;
     			}
     			Zend_Registry::get('log')->info("Unique kap fail: $value {$this->_tid} team: {$user->tid} ");
