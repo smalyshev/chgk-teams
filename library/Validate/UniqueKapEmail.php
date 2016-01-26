@@ -35,7 +35,7 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
     			if(!empty($context["pold0"]) || !empty($context['pid0']) && $context['name'] == $this->team) {
     				return true;
     			}
-    			Zend_Registry::get('log')->info("Unique kap fail: $value {$this->_tid} ".var_export($context, true));
+    			Zend_Registry::get('log')->info("Unique kap fail: $value {$this->_tid} user: {$user->id} team: {$user->tid} ");
 
                	$this->_error(self::MAIL_ALREADY);
        	        return false;

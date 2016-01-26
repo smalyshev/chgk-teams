@@ -102,7 +102,7 @@ class Reg2_Model_Data
         1520 => 1, // Дмитрий Смирнов
         1511 => 1, // Владимир Степанов
         1521 => 1, // Ольга Ефремова
-	1535 => 1, // other Stalker
+		1535 => 1, // other Stalker
     );
 
 	public function __construct()
