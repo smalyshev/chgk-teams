@@ -31,11 +31,13 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
     	if($value) {
     		$user = Reg2_Model_Data::getModel()->findUserByEmail($value);
     		if($user && $user->tid != $this->_tid) {
-    		    $this->team = Reg2_Model_Data::getModel()->findTeam($user->tid)->imia;
-    			if(!empty($context["pold0"]) || !empty($context['pid0']) && $context['name'] == $this->team) {
+    		    $team = Reg2_Model_Data::getModel()->findTeam($user->tid);
+    		    $this->team = $team->imia;
+    			if(!empty($context["pold0"]) || !empty($context['pid0']) &&
+    					($context['name'] == $team->imia || $context['regno'] == $team->regno)) {
     				return true;
     			}
-    			Zend_Registry::get('log')->info("Unique kap fail: $value {$this->_tid} user: {$user->id} team: {$user->tid} ");
+    			Zend_Registry::get('log')->info("Unique kap fail: $value {$this->_tid} team: {$user->tid} ");
 
                	$this->_error(self::MAIL_ALREADY);
        	        return false;
