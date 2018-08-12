@@ -15,12 +15,12 @@ class Reg2_Form_Login extends Zend_Form
         $this->addElement('password', 'code', array(
             'required' => true,
             'ignore'   => false,
-            'label'    => 'Код доступа:',
+            'label'    => 'п п╬п╢ п╢п╬я│я┌я┐п©п╟:',
         )); 
         $this->addElement('submit', 'login', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'Войти',
+            'label'    => 'п▓п╬п╧я┌п╦',
         )); 
     }
 }

@@ -39,31 +39,31 @@ class Reg2_Form_Player extends Zend_Form
         $this->addElement('text', "pname", array(
    	        'filters'    => array('StringTrim'),
        	    'required'   => true,
-       		"label" => "éÍÑ",
+       		"label" => "Ð˜Ð¼Ñ",
         ));
 
         $this->addElement('text', "pfamil", array(
            	'filters'    => array('StringTrim'),
        	    'required'   => true,
-       		"label" => "æÁÍÉÌÉÑ",
+       		"label" => "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ",
         ));
         $this->addElement('text', "pcity", array(
             	'filters'    => array('StringTrim'),
         	    'required'   => true,
-        	   	"label" => "çÏÒÏÄ",
+        	   	"label" => "Ð“Ð¾Ñ€Ð¾Ð´",
         ));
        	$this->addElement('text', "pcountry", array(
            	'filters'    => array('StringTrim'),
        	    'required'   => false,
-          	"label" => "óÔÒÁÎÁ",
+          	"label" => "Ð¡Ñ‚Ñ€Ð°Ð½Ð°",
        	));
-       	// optional - ÐÏÌ, ÄÁÔÁ ÒÏÖÄÅÎÉÑ, ÁÄÒÅÓ email
+       	// optional - Ð¿Ð¾Ð», Ð´Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ, Ð°Ð´Ñ€ÐµÑ email
        	$this->addElement('select', "psex", array(
            	'filters'    => array('StringTrim'),
            	'required'   => false,
-       		'multiOptions' => array("" => "", "m" => "í", "f" => "ö"),
+       		'multiOptions' => array("" => "", "m" => "Ðœ", "f" => "Ð–"),
        		'class'		=> "short",
-       		"label" => "ðÏÌ",
+       		"label" => "ÐŸÐ¾Ð»",
        	));
 		$this->addElement('Date', "pborn", array(
         	    'required'   => false,
@@ -74,7 +74,7 @@ class Reg2_Form_Player extends Zend_Form
     				'Date',
     				'TableRow',
     			),
-    			'label' => "äÁÔÁ ÒÏÖÄÅÎÉÑ",
+    			'label' => "Ð”Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ",
         ));
        	$this->addElement('text', "pemail", array(
            	'filters'    => array('StringTrim'),
@@ -88,7 +88,7 @@ class Reg2_Form_Player extends Zend_Form
         $this->addElement('submit', 'edit', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'óÏÈÒÁÎÉÔØ',
+            'label'    => 'Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ',
         	'decorators' => array('ViewHelper')
         ));
     }

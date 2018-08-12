@@ -50,7 +50,7 @@ class Reg2_Form_Register extends Zend_Form
                 array('UniqueTeamName', true, $this->_tid),
              ),
             'required'   => true,
-            'label'      => 'îÁÚ×ÁÎÉÅ ËÏÍÁÎÄÙ',
+            'label'      => 'ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹',
         ));
         $this->addElement('text', 'email', array(
             'filters'    => array('StringTrim'),
@@ -58,7 +58,7 @@ class Reg2_Form_Register extends Zend_Form
                 array('EmailAddress', true),
             ),
             'required'   => true,
-            'label'      => 'E-mail ÒÅÇÉÓÔÒÉÒÕÀÝÅÇÏ',
+            'label'      => 'E-mail Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰ÐµÐ³Ð¾',
         ));
         $this->addElement('text', 'remail', array(
             'filters'    => array('StringTrim'),
@@ -66,17 +66,17 @@ class Reg2_Form_Register extends Zend_Form
                 array('EmailAddress', true),
             ),
             'required'   => false,
-            'label'      => 'òÅÚÅÒ×ÎÙÊ ËÏÎÔÁËÔÎÙÊ e-mail',
+            'label'      => 'Ð ÐµÐ·ÐµÑ€Ð²Ð½Ñ‹Ð¹ ÐºÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð½Ñ‹Ð¹ e-mail',
         ));
 
         $this->addElement('RadioPlus', 'sezon2008', array(
 			    'multioptions'   => array(
-                            'y' => "ëÏÍÁÎÄÁ ÉÇÒÁÌÁ × ÓÅÚÏÎÅ {$config['ichb']['old']['year']} ÇÏÄÁ",
-                            'n' => 'îÅÔ, ËÏÍÁÎÄÁ ÎÅ ÉÇÒÁÌÁ × ÐÒÏÛÌÏÍ ÓÅÚÏÎÅ',
+                            'y' => "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° Ð¸Ð³Ñ€Ð°Ð»Ð° Ð² ÑÐµÐ·Ð¾Ð½Ðµ {$config['ichb']['old']['year']} Ð³Ð¾Ð´Ð°",
+                            'n' => 'ÐÐµÑ‚, ÐºÐ¾Ð¼Ð°Ð½Ð´Ð° Ð½Ðµ Ð¸Ð³Ñ€Ð°Ð»Ð° Ð² Ð¿Ñ€Ð¾ÑˆÐ»Ð¾Ð¼ ÑÐµÐ·Ð¾Ð½Ðµ',
                            ),
             'value' => 'n',
             'required'   => true,
-            'label'      => "óÅÚÏÎ {$config['ichb']['old']['year']}",
+            'label'      => "Ð¡ÐµÐ·Ð¾Ð½ {$config['ichb']['old']['year']}",
             'links'		=> array('y' => 'oldid'),
         ));
 
@@ -88,24 +88,24 @@ class Reg2_Form_Register extends Zend_Form
             ),
             'trim' 		 => true,
             'required'   => false,
-            'label'      => 'òÅÇÉÓÔÒÁÃÉÏÎÎÙÊ ÎÏÍÅÒ ËÏÍÁÎÄÙ:',
+            'label'      => 'Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹:',
             'decorators' => array(array('Label', array("class" => "required")), 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
         ));
         $this->addElement('text', 'url', array(
             'filters'    => array('StringTrim'),
             'required'   => false,
-            'label'      => 'URL ËÏÍÁÎÄÎÏÊ ÓÔÒÁÎÉÃÙ',
+            'label'      => 'URL ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹',
         ));
         $this->addElement('RadioPlus', 'kadres', array(
 			    'multioptions'   => array(
-                            'kap' => 'ëÁÐÉÔÁÎ ËÏÍÁÎÄÙ',
-                            'reg' => 'òÅÇÉÓÔÒÉÒÕÀÝÉÊ',
-                            'list' => 'ëÏÍÁÎÄÎÙÊ ÌÉÓÔ:',
-                            'other' => 'äÒÕÇÏÊ ÁÄÒÅÓ:',
+                            'kap' => 'ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹',
+                            'reg' => 'Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ð¹',
+                            'list' => 'ÐšÐ¾Ð¼Ð°Ð½Ð´Ð½Ñ‹Ð¹ Ð»Ð¸ÑÑ‚:',
+                            'other' => 'Ð”Ñ€ÑƒÐ³Ð¾Ð¹ Ð°Ð´Ñ€ÐµÑ:',
         	),
         	'value' => 'kap',
             'required'   => true,
-            'label'      => 'ëÏÎÔÁËÔÎÙÊ ÁÄÒÅÓ',
+            'label'      => 'ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ð½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ',
             'links'		=> array('list' => 'tlist', 'other' => 'dradr'),
         ));
         $this->addElement('text', 'tlist', array(
@@ -128,12 +128,12 @@ class Reg2_Form_Register extends Zend_Form
         ));
         $this->addElement('RadioPlus', 'klist', array(
 			    'multioptions'   => array(
-                            'y' => 'ëÁÐÉÔÁÎ ÐÏÄÐÉÓÁÎ ÎÁ ÌÉÓÔ',
-                            'n' => 'ëÁÐÉÔÁÎ ÎÅ ÐÏÄÐÉÓÁÎ ÎÁ ÌÉÓÔ',
+                            'y' => 'ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½ Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ð½ Ð½Ð° Ð»Ð¸ÑÑ‚',
+                            'n' => 'ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½ Ð½Ðµ Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ð½ Ð½Ð° Ð»Ð¸ÑÑ‚',
         	),
         	'value' => 'y',
             'required'   => true,
-            'label'      => 'ìÉÓÔ óÏ×ÅÔÁ ëÁÐÉÔÁÎÏ×',
+            'label'      => 'Ð›Ð¸ÑÑ‚ Ð¡Ð¾Ð²ÐµÑ‚Ð° ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½Ð¾Ð²',
             'links'		=> array('n' => array('tsubs', 'tsubs_kod')),
         ));
         $this->addElement('text', 'tsubs', array(
@@ -141,30 +141,30 @@ class Reg2_Form_Register extends Zend_Form
             'validators' => array(
                 array('EmailAddress', true),
             ),
-            'label' => 'ÐÒÏÓØÂÁ ÐÏÄÐÉÓÁÔØ ÁÄÒÅÓ',
+            'label' => 'Ð¿Ñ€Ð¾ÑÑŒÐ±Ð° Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð°Ð´Ñ€ÐµÑ',
             'trim' 		 => true,
             'required'   => false,
             'decorators' => array('Label', 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
         ));
         $this->addElement('Select', 'tsubs_kod', array(
 			    'multioptions'   => array(
-                            'koi8' => 'ëïé8',
+                            'koi8' => 'ÐšÐžÐ˜8',
                             'translite' => 'translite',
         	),
         	'value' => 'koi8',
             'required'   => false,
-            'label'      => '×',
+            'label'      => 'Ð²',
         	'decorators' => array('Label', 'ViewHelper'),
         ));
 
         $this->addElement('RadioPlus', 'zlist', array(
 			    'multioptions'   => array(
-                            'y' => 'äÁ, ËÏÍÁÎÄÁ ÉÍÅÅÔ ÄÏÓÔÕÐ Ë ÍÁÔÅÒÉÁÌÁÍ ÌÉÓÔÏ×',
-                            'n' => 'îÅÔ,',
+                            'y' => 'Ð”Ð°, ÐºÐ¾Ð¼Ð°Ð½Ð´Ð° Ð¸Ð¼ÐµÐµÑ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»Ð°Ð¼ Ð»Ð¸ÑÑ‚Ð¾Ð²',
+                            'n' => 'ÐÐµÑ‚,',
         	),
         	'value' => 'y',
             'required'   => true,
-            'label'      => 'ìÉÓÔÙ ëÌÕÂÁ',
+            'label'      => 'Ð›Ð¸ÑÑ‚Ñ‹ ÐšÐ»ÑƒÐ±Ð°',
             'links'		=> array('n' => array('zsubs', 'zsubs_kod', 'zsubs_list')),
         ));
         $this->addElement('text', 'zsubs', array(
@@ -172,19 +172,19 @@ class Reg2_Form_Register extends Zend_Form
             'validators' => array(
                 array('EmailAddress', true),
             ),
-            'label' => 'ÐÒÏÓØÂÁ ÐÏÄÐÉÓÁÔØ ÁÄÒÅÓ',
+            'label' => 'Ð¿Ñ€Ð¾ÑÑŒÐ±Ð° Ð¿Ð¾Ð´Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð°Ð´Ñ€ÐµÑ',
             'trim' 		 => true,
             'required'   => false,
             'decorators' => array('Label', 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
         ));
         $this->addElement('Select', 'zsubs_kod', array(
 			    'multioptions'   => array(
-                            'koi8' => 'ëïé8',
+                            'koi8' => 'ÐšÐžÐ˜8',
                             'translite' => 'translite',
         	),
         	'value' => 'koi8',
             'required'   => false,
-            'label'      => '×',
+            'label'      => 'Ð²',
         	'decorators' => array('Label', 'ViewHelper'),
         ));
         $this->addElement('Select', 'zsubs_list', array(
@@ -194,12 +194,12 @@ class Reg2_Form_Register extends Zend_Form
         	),
         	'value' => 'znatok',
             'required'   => false,
-            'label'      => 'ÎÁ ÌÉÓÔ',
+            'label'      => 'Ð½Ð° Ð»Ð¸ÑÑ‚',
         	'decorators' => array('Label', 'ViewHelper'),
         ));
         $this->addElement('Textarea','comment', array(
             'required'   => false,
-            'label'      => 'ëÏÍÍÅÎÔÁÒÉÉ',
+            'label'      => 'ÐšÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¸',
     		'cols' => '100',
         ));
 
@@ -212,7 +212,7 @@ class Reg2_Form_Register extends Zend_Form
 
     	$max = Bootstrap::get('model')->getMaxPlayers();
         for($i=0;$i<$max;$i++) {
-        	$who = $i?"ÉÇÒÏËÁ $i":"ËÁÐÉÔÁÎÁ";
+        	$who = $i?"Ð¸Ð³Ñ€Ð¾ÐºÐ° $i":"ÐºÐ°Ð¿Ð¸Ñ‚Ð°Ð½Ð°";
 
         	$this->addElement('checkbox', "pold$i", array(
 //        		'decorators' => array('DijitElement')
@@ -230,7 +230,7 @@ class Reg2_Form_Register extends Zend_Form
                 	new Reg2_Validate_UniquePlayerReg($i, $this->_tid)
              	),
 				"decorators" => $decorators,
-        		"label" => "éÍÑ $who",
+        		"label" => "Ð˜Ð¼Ñ $who",
             ));
 			$val = new Reg2_Validate_PlayerFieldsRequired($i);
 
@@ -244,7 +244,7 @@ class Reg2_Form_Register extends Zend_Form
                 	$val,
              	),
 				"decorators" => $decorators,
-        		"label" => "æÁÍÉÌÉÑ $who",
+        		"label" => "Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ $who",
              	));
         	$this->addElement('text', "pcity$i", array(
             	'filters'    => array('StringTrim'),
@@ -256,7 +256,7 @@ class Reg2_Form_Register extends Zend_Form
                 	$val,
         	   	),
 				"decorators" => $decorators,
-        	   	"label" => "çÏÒÏÄ $who",
+        	   	"label" => "Ð“Ð¾Ñ€Ð¾Ð´ $who",
         	   	));
         	$this->addElement('text', "pcountry$i", array(
             	'filters'    => array('StringTrim'),
@@ -266,21 +266,21 @@ class Reg2_Form_Register extends Zend_Form
                    	new Reg2_Validate_PlayerFieldsRequired($i, true)
              	),
 				"decorators" => $decorators,
-        		"label" => "óÔÒÁÎÁ $who",
+        		"label" => "Ð¡Ñ‚Ñ€Ð°Ð½Ð° $who",
              	));
-        	// optional - ÐÏÌ, ÄÁÔÁ ÒÏÖÄÅÎÉÑ, ÁÄÒÅÓ email
+        	// optional - Ð¿Ð¾Ð», Ð´Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ, Ð°Ð´Ñ€ÐµÑ email
         	$this->addElement('select', "psex$i", array(
             	'filters'    => array('StringTrim'),
             	'required'   => false,
-        		'multiOptions' => array("" => "", "m" => "í", "f" => "ö"),
+        		'multiOptions' => array("" => "", "m" => "Ðœ", "f" => "Ð–"),
         		'class'		=> "short",
         		"decorators" => $decorators,
-        		"label" => "ðÏÌ $who",
+        		"label" => "ÐŸÐ¾Ð» $who",
         	));
 //        	$this->addElement('DateTextBox', "pbirth$i", array(
 //            	'filters'    => array('StringTrim'),
 //            	'required'   => false,
-//        		'invalidMessage' => 'îÅ×ÅÒÎÁÑ ÄÁÔÁ',
+//        		'invalidMessage' => 'ÐÐµÐ²ÐµÑ€Ð½Ð°Ñ Ð´Ð°Ñ‚Ð°',
 //        		'formatLength'   => 'short',
 //        		'class'		=> "player",
 //        		'decorators' => array('DijitElement'),
@@ -295,7 +295,7 @@ class Reg2_Form_Register extends Zend_Form
     				'Date',
     				array("HtmlTag", array("tag" => "td"))
     			),
-    			'label' => "äÁÔÁ ÒÏÖÄÅÎÉÑ $who",
+    			'label' => "Ð”Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ $who",
 
             ));
         	$this->addElement('text', "pemail$i", array(
@@ -327,7 +327,7 @@ class Reg2_Form_Register extends Zend_Form
         $this->addElement('submit', 'register', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'úÁÒÅÇÉÓÔÒÉÒÏ×ÁÔØ!',
+            'label'    => 'Ð—Ð°Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ!',
         	'decorators' => array('ViewHelper')
         ));
     }

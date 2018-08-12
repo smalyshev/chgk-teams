@@ -6,12 +6,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @var Zend_Log
      */
     protected $_logger;
-	
+
     public static function get($resource)
     {
-    	return Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource($resource);	
+    	return Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource($resource);
     }
-    
+
     protected function _initLoader()
     {
     	$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
@@ -24,7 +24,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$resourceLoader->addResourceType('form', 'forms/', 'Form');
 		return $resourceLoader;
     }
-    
+
     /**
      * Setup the logging
      */
@@ -53,7 +53,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $logger->debug("Start logging");
         return $logger;
     }
-	
+
 	/**
      * Add the config to the registry
      */
@@ -71,7 +71,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
     	Zend_Controller_Action_HelperBroker::addPath(APPLICATION_PATH .'/helpers', 'Reg2_Helper');
     }
-    
+
     /**
      * Setup the view
      */
@@ -85,9 +85,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->addHelperPath(APPLICATION_PATH . '/views/helpers', 'Zend_View_Helper');
         Zend_Dojo::enableView($this->_view);
 		//$this->_view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-		
+
         // set encoding and doctype
-        $this->_view->setEncoding('koi8-r');
+        $this->_view->setEncoding('UTF-8');
         $this->_view->doctype('XHTML1_STRICT');
 
         $config = $this->getResource('config');
@@ -97,18 +97,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 //        $this->_view->headLink()->appendStylesheet('/reg2/css/reset.css');
         $this->_view->headLink()->appendStylesheet($prefix.'/css/form.css');
         $this->_view->headLink()->appendStylesheet($prefix.'/css/reg2.css');
-        
+
         // setting the site in the title
-        $this->_view->headTitle('éþâ-10');
+        $this->_view->headTitle('Ð˜Ð§Ð‘-10');
 
         // setting a separator string for segments:
         $this->_view->headTitle()->setSeparator(' - ');
-        
+
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($this->_view);
         return $this->_view;
     }
-    
+
     protected function _initDb()
     {
     	$db = $this->getPluginResource('db')->getDbAdapter();
@@ -116,8 +116,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Registry::set('db', $db);
     	return $db;
     }
-    
-    protected function _initLang() 
+
+    protected function _initLang()
     {
 	$cache = Zend_Cache::factory('Core',
                              'File',
@@ -139,6 +139,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Registry::set('model', $model);
     	return $model;
     }
-    
+
 }
 

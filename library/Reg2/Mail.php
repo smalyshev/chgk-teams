@@ -12,7 +12,7 @@ class Reg2_Mail
     protected $_template;
     function __construct ($template)
     {
-        $this->_mailer = new Zend_Mail('koi8-r');
+        $this->_mailer = new Zend_Mail('UTF-8');
         $this->_view = new Zend_View();
         $this->_template = $template;
         $this->_view->setScriptPath(APPLICATION_PATH. '/views/scripts/email');
@@ -35,7 +35,7 @@ class Reg2_Mail
     function send ()
     {
     	Zend_Registry::get('log')->info("Sending email {$this->_template}");
-        $this->_mailer->setBodyText($this->_view->render($this->_template . ".phtml"), 'koi8-r');
+        $this->_mailer->setBodyText($this->_view->render($this->_template . ".phtml"), 'UTF-8');
         $this->_mailer->send();
     }
 }

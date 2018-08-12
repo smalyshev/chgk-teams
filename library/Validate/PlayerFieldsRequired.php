@@ -7,7 +7,7 @@ class Reg2_Validate_PlayerFieldsRequired extends Zend_Validate_Abstract
     const REQUIRED = 'player-required';   
 
     protected $_messageTemplates = array(   
-        self::REQUIRED => "Поле не должно быть пустым",   
+        self::REQUIRED => "п÷п╬п╩п╣ п╫п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п©я┐я│я┌я▀п╪",   
     );   
 	
     public function __construct($id, $oldok = false)

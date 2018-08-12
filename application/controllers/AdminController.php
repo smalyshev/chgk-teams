@@ -141,11 +141,11 @@ class AdminController extends Zend_Controller_Action
         $kap = $model->findPlayer($id);
         $user = $model->findUserByEmail($kap->email);
         if(!$user) {
-            throw new Exception("Не найдено капитанской записи для игрока номер $id");
+            throw new Exception("п²п╣ п╫п╟п╧п╢п╣п╫п╬ п╨п╟п©п╦я┌п╟п╫я│п╨п╬п╧ п╥п╟п©п╦я│п╦ п╢п╩я▐ п╦пЁя─п╬п╨п╟ п╫п╬п╪п╣я─ $id");
         }
         $team = $model->findTeam($user->tid);
         if(!$team || $team->kap != $id) {
-            throw new Exception("Не найдено капитанской записи для игрока номер $id");
+            throw new Exception("п²п╣ п╫п╟п╧п╢п╣п╫п╬ п╨п╟п©п╦я┌п╟п╫я│п╨п╬п╧ п╥п╟п©п╦я│п╦ п╢п╩я▐ п╦пЁя─п╬п╨п╟ п╫п╬п╪п╣я─ $id");
         }
         $mail = new Reg2_Mail('cappwd');
         $mail->getMailer()->addTo($kap->email)->setSubject("ICHB-{$this->config['ichb']['year']} - Captain's Access");

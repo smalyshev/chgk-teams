@@ -10,7 +10,7 @@ class Reg2_Validate_UniquePlayerReg extends Zend_Validate_Abstract
     const PLAYER_ALREADY = 'player-already';   
 
     protected $_messageTemplates = array(   
-        self::PLAYER_ALREADY => "éÇÒÏË ĞÏ ÉÍÅÎÉ %value% ÕÖÅ ÚÁÒÅÇÉÓÔÒÉÒÏ×ÁÎ ÎÁ ÜÔÏÔ ÔÕÒÎÉÒ ÚÁ ËÏÍÁÎÄÕ %team%",   
+        self::PLAYER_ALREADY => "Ğ˜Ğ³Ñ€Ğ¾Ğº Ğ¿Ğ¾ Ğ¸Ğ¼ĞµĞ½Ğ¸ %value% ÑƒĞ¶Ğµ Ğ·Ğ°Ñ€ĞµĞ³Ğ¸ÑÑ‚Ñ€Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½ Ğ½Ğ° ÑÑ‚Ğ¾Ñ‚ Ñ‚ÑƒÑ€Ğ½Ğ¸Ñ€ Ğ·Ğ° ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ñƒ %team%",   
     );   
     protected $_messageVariables = array(
         'team' => 'team',

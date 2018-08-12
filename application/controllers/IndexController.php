@@ -78,7 +78,7 @@ class IndexController extends Zend_Controller_Action
         		->setSubject("ICHB-{$this->config['ichb']['year']} - Subscribe");
         	$view->name = $values["name"];
         	if($values["klist"] == 'n') {
-        		$view->list = "óÏ×ÅÔÁ ëÁÐÉÔÁÎÏ×";
+        		$view->list = "Ð¡Ð¾Ð²ÐµÑ‚Ð° ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½Ð¾Ð²";
         		$view->kod = $values["tsubs_kod"];
         		$view->addr = $values["tsubs"];
         		$mail->getMailer()->setReplyTo($values["tsubs"], $values["name"]);

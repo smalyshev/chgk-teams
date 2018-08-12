@@ -56,18 +56,18 @@ class Reg2_Form_PlayerData extends Zend_Dojo_Form_SubForm
              	),
         		'decorators' => array('ViewHelper')
         	));
-        	// optional - ÐÏÌ, ÄÁÔÁ ÒÏÖÄÅÎÉÑ, ÁÄÒÅÓ email
+        	// optional - Ð¿Ð¾Ð», Ð´Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ, Ð°Ð´Ñ€ÐµÑ email
         	$this->addElement('select', "psex$i", array(
             	'filters'    => array('StringTrim'),
             	'required'   => false,
-        		'multiOptions' => array("" => "", "m" => "í", "f" => "ö"),
+        		'multiOptions' => array("" => "", "m" => "Ðœ", "f" => "Ð–"),
     			'decorators' => array('ViewHelper'),
         		'class'		=> "short"
         	));
         	$this->addElement('DateTextBox', "pbirth$i", array(
             	'filters'    => array('StringTrim'),
             	'required'   => false,
-        		'invalidMessage' => 'îÅ×ÅÒÎÁÑ ÄÁÔÁ',
+        		'invalidMessage' => 'ÐÐµÐ²ÐµÑ€Ð½Ð°Ñ Ð´Ð°Ñ‚Ð°',
         		'formatLength'   => 'short',
         		'class'		=> "player",
         		'decorators' => array('DijitElement'),
@@ -85,7 +85,7 @@ class Reg2_Form_PlayerData extends Zend_Dojo_Form_SubForm
         	));
         	$this->addDisplayGroup(array( "pold$i", "pname$i", "pfamil$i", "pcity$i", "pcountry$i", "psex$i", "pbirth$i", "pemail$i"),
         		"player$i",
-        		array('legend' => $i?"éÇÒÏË $i":"ëÁÐÉÔÁÎ")
+        		array('legend' => $i?"Ð˜Ð³Ñ€Ð¾Ðº $i":"ÐšÐ°Ð¿Ð¸Ñ‚Ð°Ð½")
         	);
     	}
 		$this->setDisplayGroupDecorators(array(

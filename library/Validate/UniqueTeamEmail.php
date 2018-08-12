@@ -6,7 +6,7 @@ class Reg2_Validate_UniqueTeamEmail extends Zend_Validate_Abstract
     const NAME_EXIST = 'team-emailExists';   
 
     protected $_messageTemplates = array(   
-        self::NAME_EXIST => "Команда с адресом '%value%' уже зарегистрирована",   
+        self::NAME_EXIST => "п п╬п╪п╟п╫п╢п╟ я│ п╟п╢я─п╣я│п╬п╪ '%value%' я┐п╤п╣ п╥п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫п╟",   
     );   
 	
     public function __construct($tid = null)

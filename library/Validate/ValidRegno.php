@@ -7,8 +7,8 @@ class Reg2_Validate_ValidRegno extends Zend_Validate_Abstract
     const REGNO_REGISTERED = 'regno-registered';   
     
     protected $_messageTemplates = array(   
-        self::REGNO_MISSING => "В прошлых турнирах нет команды с номером %value%",   
-        self::REGNO_REGISTERED => "Команда с номером %value% уже зарегистрирована",   
+        self::REGNO_MISSING => "п▓ п©я─п╬я┬п╩я▀я┘ я┌я┐я─п╫п╦я─п╟я┘ п╫п╣я┌ п╨п╬п╪п╟п╫п╢я▀ я│ п╫п╬п╪п╣я─п╬п╪ %value%",   
+        self::REGNO_REGISTERED => "п п╬п╪п╟п╫п╢п╟ я│ п╫п╬п╪п╣я─п╬п╪ %value% я┐п╤п╣ п╥п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫п╟",   
     );   
 	
     public function __construct($tid = null)

@@ -10,7 +10,7 @@ class Reg2_Validate_UniqueKapEmail extends Zend_Validate_Abstract
     const MAIL_ALREADY = 'player-already';
 
     protected $_messageTemplates = array(
-        self::MAIL_ALREADY => "íÅÊÌ %value% ÕÖÅ ÚÁÒÅÇÉÓÔÒÉÒÏ×ÁÎ ËÁĞÉÔÁÎÏÍ ËÏÍÁÎÄÙ %team%",
+        self::MAIL_ALREADY => "ĞœĞµĞ¹Ğ» %value% ÑƒĞ¶Ğµ Ğ·Ğ°Ñ€ĞµĞ³Ğ¸ÑÑ‚Ñ€Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½ ĞºĞ°Ğ¿Ğ¸Ñ‚Ğ°Ğ½Ğ¾Ğ¼ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´Ñ‹ %team%",
     );
     protected $_messageVariables = array(
         'team' => 'team',

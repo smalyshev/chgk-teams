@@ -48,7 +48,7 @@ class Reg2_Form_Regno extends Zend_Form
         $this->addElement('submit', 'regsubmit', array(
             'required' => false,
             'ignore'   => true,
-            'label'    => 'óÏÈÒÁÎÉÔØ',
+            'label'    => 'Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ',
         	'decorators' => array('ViewHelper')
         ));
     }

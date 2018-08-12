@@ -31,7 +31,7 @@ class Reg2_Form_Teamconfirm extends Reg2_Form_Register
                 array('EmailAddress', true),
             ),
             'required'   => true,
-            'label'      => 'E-mail для контакта',
+            'label'      => 'E-mail п╢п╩я▐ п╨п╬п╫я┌п╟п╨я┌п╟',
         ));
     	for($i=0;$i<$max;$i++) {
     		$this->addElement('text', "pid$i", array(
@@ -50,17 +50,17 @@ class Reg2_Form_Teamconfirm extends Reg2_Form_Register
     	}
         $this->addElement('submit', 'save', array(
             'required' => false,
-            'label'    => 'Записать',
+            'label'    => 'п≈п╟п©п╦я│п╟я┌я▄',
         	'decorators' => array('ViewHelper')
         ));
         $this->addElement('submit', 'confirm', array(
             'required' => false,
-            'label'    => 'Утвердить регистрацию!',
+            'label'    => 'пёя┌п╡п╣я─п╢п╦я┌я▄ я─п╣пЁп╦я│я┌я─п╟я├п╦я▌!',
         	'decorators' => array('ViewHelper')
         ));
         $this->addElement('submit', 'delete', array(
             'required' => false,
-            'label'    => 'Удалить!',
+            'label'    => 'пёп╢п╟п╩п╦я┌я▄!',
         	'decorators' => array('ViewHelper')
         ));
     }

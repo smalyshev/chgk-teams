@@ -140,7 +140,7 @@ class MembersController extends Zend_Controller_Action
         $this->view->player = $model->findPlayer($id);
         if(empty($this->view->player->foto)) {
             $this->view->player->foto = "Nofoto.jpg";
-            $this->view->fotoalt = "îÅÔ ÆÏÔÏÇÒÁÆÉÉ";
+            $this->view->fotoalt = "ĞĞµÑ‚ Ñ„Ğ¾Ñ‚Ğ¾Ğ³Ñ€Ğ°Ñ„Ğ¸Ğ¸";
         } else {
             $this->view->fotoalt = $this->player->famil . " " . $this->player->imia;
         }
