@@ -2,7 +2,7 @@
 class Reg2_Model_Data
 {
 	protected $_tables = array();
-	const TURNIR = 70;
+	const TURNIR = 80;
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 25;
 	const CODE_LEN = 8;
@@ -30,7 +30,6 @@ class Reg2_Model_Data
 "Виктория" => 1,
 "Веста" => 1,
 "Вика" => 1,
-"Виктория" => 1,
 "Виолетта" => 1,
 "Василиса" => 1,
 "Влада" => 1,
