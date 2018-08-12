@@ -127,7 +127,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $translator = new Zend_Translate(
           'array',
           ZF_PATH.'/resources/languages',
-          'ru',
+          'ru-utf8',
 	  array("scan" => Zend_Translate::LOCALE_DIRECTORY)
       );
       Zend_Validate_Abstract::setDefaultTranslator($translator);
