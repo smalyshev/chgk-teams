@@ -1,26 +1,26 @@
 <?php
-$this->headTitle("Команда знатоков \"{$this->team["name"]}\"");
+$this->headTitle("п п╬п╪п╟п╫п╢п╟ п╥п╫п╟я┌п╬п╨п╬п╡ \"{$this->team["name"]}\"");
 ?>
-<h1 align=center>Команда знатоков "<?= $this->team["name"] ?>", 
-турнир "<?= $this->actionLink($this->turnir->imia, "members", "turnir", array("id" => $this->turnir->id)) ?>"</h1>
+<h1 align=center>п п╬п╪п╟п╫п╢п╟ п╥п╫п╟я┌п╬п╨п╬п╡ "<?= $this->team["name"] ?>", 
+я┌я┐я─п╫п╦я─ "<?= $this->actionLink($this->turnir->imia, "members", "turnir", array("id" => $this->turnir->id)) ?>"</h1>
 
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<?= $this->printCardRow("Номер команды:", $this->team["oldid"]) ?>
-<?= $this->printCardRow("Командная страница:", $this->team["url"]?$this->a($this->team["url"], $this->team["url"]):"") ?>
-<?= $this->printCardRow("Контактный адрес:", $this->printEmail($this->team["contact"])) ?>
+<?= $this->printCardRow("п²п╬п╪п╣я─ п╨п╬п╪п╟п╫п╢я▀:", $this->team["oldid"]) ?>
+<?= $this->printCardRow("п п╬п╪п╟п╫п╢п╫п╟я▐ я│я┌я─п╟п╫п╦я├п╟:", $this->team["url"]?$this->a($this->team["url"], $this->team["url"]):"") ?>
+<?= $this->printCardRow("п п╬п╫я┌п╟п╨я┌п╫я▀п╧ п╟п╢я─п╣я│:", $this->printEmail($this->team["contact"])) ?>
 <tr class="cardhead"><td colspan=2 align=center>
-<?= $this->actionLink("Изменить данные", "members", "teamedit", array("id" => $this->team["tid"])) ?>
+<?= $this->actionLink("п≤п╥п╪п╣п╫п╦я┌я▄ п╢п╟п╫п╫я▀п╣", "members", "teamedit", array("id" => $this->team["tid"])) ?>
 </td></tr>
 </table>
 <br/>
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<TR class="cardhead"><TD ALIGN="center" COLSPAN="4">Игроки команды "<?= $this->team["name"] ?>"</TD></TR>
-<TR class="cardrow1"><TH>Имя</TH> <TH>E-mail</TH> <TH>Город</TH> <TH>Страна</TH></TR>
+<TR class="cardhead"><TD ALIGN="center" COLSPAN="4">п≤пЁя─п╬п╨п╦ п╨п╬п╪п╟п╫п╢я▀ "<?= $this->team["name"] ?>"</TD></TR>
+<TR class="cardrow1"><TH>п≤п╪я▐</TH> <TH>E-mail</TH> <TH>п⌠п╬я─п╬п╢</TH> <TH>п║я┌я─п╟п╫п╟</TH></TR>
 <?php for($i=0;$i<$this->maxplayers;$i++) {
 	if(empty($this->team["pname$i"])) continue;
 ?>
 <TR class="<?= $i%1?"cardrow1":"cardrow2" ?>">
-<TD><?php if($i == 0) { ?><b>Капитан</b><?php } ?> 
+<TD><?php if($i == 0) { ?><b>п п╟п©п╦я┌п╟п╫</b><?php } ?> 
 <?= $this->actionLink($this->team["pfamil$i"]." ".$this->team["pname$i"], "members", "player", array("id" => $this->team["pid$i"])) ?>
 </TD> 
 <TD><?= $this->printEmail($this->team["pemail$i"]) ?> &nbsp;</TD> 
@@ -30,7 +30,7 @@ $this->headTitle("Команда знатоков \"{$this->team["name"]}\"");
 <?php } ?>
 </table><br>
 <?php if(isset($this->turs) && count($this->turs) > 1) { ?>
-<center><B>В прошлых чемпионатах участвовала в: </B>
+<center><B>п▓ п©я─п╬я┬п╩я▀я┘ я┤п╣п╪п©п╦п╬п╫п╟я┌п╟я┘ я┐я┤п╟я│я┌п╡п╬п╡п╟п╩п╟ п╡: </B>
 <?php foreach($this->turs as $tur) {
 	if($tur["id"] == $this->team["turnir"]) continue;
 	$this->placeholder('turs')->append($this->actionLink($tur["imia"], "members", "team", array("id" => $tur["tid"])));

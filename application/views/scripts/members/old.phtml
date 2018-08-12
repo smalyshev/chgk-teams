@@ -1,11 +1,11 @@
 <?php
-$this->headTitle('Список прошлых турниров Интернет-Клуба "Что-Где-Когда"');
+$this->headTitle('п║п©п╦я│п╬п╨ п©я─п╬я┬п╩я▀я┘ я┌я┐я─п╫п╦я─п╬п╡ п≤п╫я┌п╣я─п╫п╣я┌-п п╩я┐п╠п╟ "п╖я┌п╬-п⌠п╢п╣-п п╬пЁп╢п╟"');
 ?>
-<h1 align=center>Список прошлых турниров Интернет-Клуба "Что-Где-Когда"</h1>
+<h1 align=center>п║п©п╦я│п╬п╨ п©я─п╬я┬п╩я▀я┘ я┌я┐я─п╫п╦я─п╬п╡ п≤п╫я┌п╣я─п╫п╣я┌-п п╩я┐п╠п╟ "п╖я┌п╬-п⌠п╢п╣-п п╬пЁп╢п╟"</h1>
 <table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
 <tr bgcolor="#EEFFEE">
 <?php foreach($this->turs as $tur) { ?>
-<td><nobr>Турнир <?= $this->actionLink($tur->imia, "members", "turnir", array("id" => $tur->id)) ?></nobr><br /><nobr><?= $this->Plural(count($this->teams[$tur->id]), " команд", "а", "ы", "")?>.</nobr></td>
+<td><nobr>п╒я┐я─п╫п╦я─ <?= $this->actionLink($tur->imia, "members", "turnir", array("id" => $tur->id)) ?></nobr><br /><nobr><?= $this->Plural(count($this->teams[$tur->id]), " п╨п╬п╪п╟п╫п╢", "п╟", "я▀", "")?>.</nobr></td>
 <?php } ?>
 </tr>
 <?php for($row=0, $cnt=1; $cnt>0; $row++) {  $cnt=0; ?>

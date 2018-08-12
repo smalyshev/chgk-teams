@@ -1,11 +1,11 @@
 <?php
-$this->headTitle('Список команд');
+$this->headTitle('п║п©п╦я│п╬п╨ п╨п╬п╪п╟п╫п╢');
 ?>
 <?php if(count($this->teams) == 0) { ?>
-Нет зарегистрированных команд.
+п²п╣я┌ п╥п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫п╫я▀я┘ п╨п╬п╪п╟п╫п╢.
 <?php } else { 
 	foreach($this->teams as $id => $team) { ?>
-<?= $this->actionLink("Команда {$team["name"]}", "members", "teamedit", array("id" => $id)) ?>
+<?= $this->actionLink("п п╬п╪п╟п╫п╢п╟ {$team["name"]}", "members", "teamedit", array("id" => $id)) ?>
 <?php if(($cnt = count($team["check"])) > 0 && (empty($this->known_err[$id]) || $cnt != $this->known_err[$id])) { echo "<span class=\"errors\">($cnt!)</span>"; } ?>
 <br/>
 <?php  

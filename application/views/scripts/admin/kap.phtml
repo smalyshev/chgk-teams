@@ -1,13 +1,13 @@
 <?php
-$this->headTitle('Список капитанов');
+$this->headTitle('п║п©п╦я│п╬п╨ п╨п╟п©п╦я┌п╟п╫п╬п╡');
 ?>
 <?php if(count($this->kaps) == 0) { ?>
-Нет команд.
+п²п╣я┌ п╨п╬п╪п╟п╫п╢.
 <?php } else { 
 	foreach($this->kaps as $kap) { ?>
-Команда "<?= $this->actionLink($kap["imia"], "members", "team", array("id" => $kap["tid"]))?>" - 
-капитан <?= $this->actionLink($kap["pfamil"]." ".$kap["pimia"], "members", "player", array("id" => $kap["uid"]))?>
- [<?= $this->actionLink("Выслать пароль", "admin", "newpwd", array("id" => $kap["uid"])) ?>]<br/>
+п п╬п╪п╟п╫п╢п╟ "<?= $this->actionLink($kap["imia"], "members", "team", array("id" => $kap["tid"]))?>" - 
+п╨п╟п©п╦я┌п╟п╫ <?= $this->actionLink($kap["pfamil"]." ".$kap["pimia"], "members", "player", array("id" => $kap["uid"]))?>
+ [<?= $this->actionLink("п▓я▀я│п╩п╟я┌я▄ п©п╟я─п╬п╩я▄", "admin", "newpwd", array("id" => $kap["uid"])) ?>]<br/>
 <?php  
 	}
 } ?>

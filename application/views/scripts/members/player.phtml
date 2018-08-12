@@ -1,28 +1,28 @@
 <?php
-$this->headTitle("Личная карточка знатока");
+$this->headTitle("п⌡п╦я┤п╫п╟я▐ п╨п╟я─я┌п╬я┤п╨п╟ п╥п╫п╟я┌п╬п╨п╟");
 ?>
-<h1 align=center>Личная карточка знатока</h1>
+<h1 align=center>п⌡п╦я┤п╫п╟я▐ п╨п╟я─я┌п╬я┤п╨п╟ п╥п╫п╟я┌п╬п╨п╟</h1>
 
 <table align=center border=2 cellpadding=0 cellspacing=0><tr><td><img src="<?= $this->baseUrl("foto/".$this->player->foto) ?>" border=0 alt="<?= $this->fotoalt ?>"></td></tr></table>
 
 <h3 align=center><?= $this->player->famil ?> <?= $this->player->imia ?></h3>
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<?= $this->printCardRow("День рождения:", $this->player->born) ?>
-<?= $this->printCardRow("Город:", $this->player->city.", ".$this->player->country) ?>
+<?= $this->printCardRow("п■п╣п╫я▄ я─п╬п╤п╢п╣п╫п╦я▐:", $this->player->born) ?>
+<?= $this->printCardRow("п⌠п╬я─п╬п╢:", $this->player->city.", ".$this->player->country) ?>
 <?= $this->printCardRow("E-mail:", $this->printEmail($this->player->email)) ?>
 
 <tr class="cardhead"><td colspan=2 align=center>
-<?= $this->actionLink("Изменить данные", "members", "playeredit", array("id" => $this->player->uid)) ?>
+<?= $this->actionLink("п≤п╥п╪п╣п╫п╦я┌я▄ п╢п╟п╫п╫я▀п╣", "members", "playeredit", array("id" => $this->player->uid)) ?>
 </td></tr>
 </table>
 <br/>
 
 <table align=center border=0 cellpadding=5 cellspacing=2>
-<tr class="cardhead"><th colspan=2 align="center">Участие в турнирах</th></tr>
+<tr class="cardhead"><th colspan=2 align="center">пёя┤п╟я│я┌п╦п╣ п╡ я┌я┐я─п╫п╦я─п╟я┘</th></tr>
 <?php foreach($this->turs as $tur) {?>
 <?= $this->printCardRow(
-		"Турнир ".$this->actionLink($tur["turname"], "members", "turnir", array("id" => $tur["id"])), 
-		"Команда ".$this->actionLink($tur["tname"], "members", "team", array("id" => $tur["tid"])), 
+		"п╒я┐я─п╫п╦я─ ".$this->actionLink($tur["turname"], "members", "turnir", array("id" => $tur["id"])), 
+		"п п╬п╪п╟п╫п╢п╟ ".$this->actionLink($tur["tname"], "members", "team", array("id" => $tur["tid"])), 
         $this->turnir == $tur["id"]) ?>
 <?php } ?>
 </table>

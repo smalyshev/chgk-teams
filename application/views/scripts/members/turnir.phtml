@@ -1,9 +1,9 @@
 <?php
-$this->headTitle('Список команд Интернет-Клуба "Что?Где?Когда?", турнир '.$this->turnir->imia);
+$this->headTitle('п║п©п╦я│п╬п╨ п╨п╬п╪п╟п╫п╢ п≤п╫я┌п╣я─п╫п╣я┌-п п╩я┐п╠п╟ "п╖я┌п╬?п⌠п╢п╣?п п╬пЁп╢п╟?", я┌я┐я─п╫п╦я─ '.$this->turnir->imia);
 ?>
-<h1 align=center>Список команд Интернет-Клуба "Что?Где?Когда?", турнир <a href="<?= $this->turnir->url ?>"><?= $this->turnir->imia ?></a></h1>
+<h1 align=center>п║п©п╦я│п╬п╨ п╨п╬п╪п╟п╫п╢ п≤п╫я┌п╣я─п╫п╣я┌-п п╩я┐п╠п╟ "п╖я┌п╬?п⌠п╢п╣?п п╬пЁп╢п╟?", я┌я┐я─п╫п╦я─ <a href="<?= $this->turnir->url ?>"><?= $this->turnir->imia ?></a></h1>
 <table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
-<tr bgcolor="#EEFFEE"><th>Номер</th><th>Команда</th><th>Игроков</th><th>E-mail</th><th>URL</th></tr>
+<tr bgcolor="#EEFFEE"><th>п²п╬п╪п╣я─</th><th>п п╬п╪п╟п╫п╢п╟</th><th>п≤пЁя─п╬п╨п╬п╡</th><th>E-mail</th><th>URL</th></tr>
 <?php foreach($this->teams as $team) { ?>
 <tr bgcolor="#CCCCCC">
 <td><?= $team['regno'] ?></td> 

@@ -1,5 +1,5 @@
 <?php 
-$this->headTitle('Редактирование записи команды');
+$this->headTitle('п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ п╥п╟п©п╦я│п╦ п╨п╬п╪п╟п╫п╢я▀');
 if($this->isadmin) {
 $this->dojo()->enable();
 ?>
@@ -19,7 +19,7 @@ function SwapFormFields(field1, field2)
 }
 <?php $this->headScript()->captureEnd(); 
 } ?>
-<h1 align="center">Данные команды номер <?= $this->tid?></h1>
+<h1 align="center">п■п╟п╫п╫я▀п╣ п╨п╬п╪п╟п╫п╢я▀ п╫п╬п╪п╣я─ <?= $this->tid?></h1>
 <div id="errors" class="errors">
 <?php
 	$errors = $this->form->getMessages();
@@ -44,9 +44,9 @@ function SwapFormFields(field1, field2)
         ?>
     <?= ($this->isadmin)?$this->printDataErrors($this->data_errors, "team", 2):"" ?>
 	<tr><td colspan=2 bgcolor="white"><table id="players">
-		<tr><td colspan="8">Чтобы удалить игрока из команды, сотрите номер в поле ID.</td></tr>
-	      <tr><th>ID</th><th class="required">Имя</th><th class="required">Фамилия</th><th>Город</th><th>Страна</th><th>E-mail</th><th>Дата рожд.  (дд/мм/гггг)</th><th>Пол</th></tr>
-        <tr><th colspan=8>Капитан команды:</th></tr>
+		<tr><td colspan="8">п╖я┌п╬п╠я▀ я┐п╢п╟п╩п╦я┌я▄ п╦пЁя─п╬п╨п╟ п╦п╥ п╨п╬п╪п╟п╫п╢я▀, я│п╬я┌я─п╦я┌п╣ п╫п╬п╪п╣я─ п╡ п©п╬п╩п╣ ID.</td></tr>
+	      <tr><th>ID</th><th class="required">п≤п╪я▐</th><th class="required">п╓п╟п╪п╦п╩п╦я▐</th><th>п⌠п╬я─п╬п╢</th><th>п║я┌я─п╟п╫п╟</th><th>E-mail</th><th>п■п╟я┌п╟ я─п╬п╤п╢.  (п╢п╢/п╪п╪/пЁпЁпЁпЁ)</th><th>п÷п╬п╩</th></tr>
+        <tr><th colspan=8>п п╟п©п╦я┌п╟п╫ п╨п╬п╪п╟п╫п╢я▀:</th></tr>
               <tr>
               	<?= $this->form->pid0->render()  ?>
               	<?= $this->form->pname0->render() ?>
@@ -58,7 +58,7 @@ function SwapFormFields(field1, field2)
               	<?= $this->form->psex0->render() ?>
               </tr>
 	    <?= ($this->isadmin)?$this->printDataErrors($this->data_errors, "p0", 8):"" ?>
-		<tr><th colspan=8>Игроки команды:</th></tr>
+		<tr><th colspan=8>п≤пЁя─п╬п╨п╦ п╨п╬п╪п╟п╫п╢я▀:</th></tr>
         <?php for($i=1; $i<$this->maxplayers; $i++) {?>
         <tr>
         <?= $this->form->getElement("pid$i")->render() ?>
