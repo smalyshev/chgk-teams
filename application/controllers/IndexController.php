@@ -34,7 +34,7 @@ class IndexController extends Zend_Controller_Action
         }
         $form = $this->_helper->getForm('register');
         if(!$form->isValid($request->getPost())) {
-        	return $this->forward('index');
+        	return $this->_forward('index');
         }
         $values = $form->getValues();
        	// success
