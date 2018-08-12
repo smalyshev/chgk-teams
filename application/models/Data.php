@@ -5,7 +5,7 @@ class Reg2_Model_Data
 	const TURNIR = 80;
 	const PENDING_TURNIR = -1;
 	const MAX_PLAYERS = 25;
-	const CODE_LEN = 8;
+	const CODE_LEN = 12;
 
     public static $V  = array("a", "e", "i", "o", "u", "y");
     public static $VN = array("a", "e", "i", "o", "u", "y","2","3","4","5","6","7","8","9");
@@ -319,7 +319,7 @@ class Reg2_Model_Data
 	{
 		$teams = $this->getTable('Teams');
 
-		Zend_Registry::get('log')->info("Add pending team: '$values[name] $values[email]' by '{$values[email]}'");
+		Zend_Registry::get('log')->info("Add pending team: '{$values["name"]} {$values['email']}' by '{$values['email']}'");
 		$tid = $teams->insert(array(
 			"imia" => $values["name"],
 			"turnir" => self::PENDING_TURNIR,
