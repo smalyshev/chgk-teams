@@ -26,7 +26,6 @@ $this->headTitle('Регистрация');
 	    <?= $this->form->sezon2008->render() ?>
 	    <?= $this->form->url->render() ?>
 	    <?= $this->form->kadres->render() ?>
-	    <?= $this->form->klist->render() ?>
 	    <?php $zlist = "Подписан ли кто-либо из команды на лист ZNATOK и/или Z-INFO?<br>".$this->form->zlist->renderRadioPlus(); ?>
 	    <?= $this->form->zlist->renderTableRow($zlist) ?>
 	    <?= $this->form->comment->render() ?>

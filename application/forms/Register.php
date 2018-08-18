@@ -126,36 +126,36 @@ class Reg2_Form_Register extends Zend_Form
             'required'   => false,
             'decorators' => array('ViewHelper'),
         ));
-        $this->addElement('RadioPlus', 'klist', array(
-			    'multioptions'   => array(
-                            'y' => 'Капитан подписан на лист',
-                            'n' => 'Капитан не подписан на лист',
-        	),
-        	'value' => 'y',
-            'required'   => true,
-            'label'      => 'Лист Совета Капитанов',
-            'links'		=> array('n' => array('tsubs', 'tsubs_kod')),
-        ));
-        $this->addElement('text', 'tsubs', array(
-            'filters'    => array('StringTrim'),
-            'validators' => array(
-                array('EmailAddress', true),
-            ),
-            'label' => 'просьба подписать адрес',
-            'trim' 		 => true,
-            'required'   => false,
-            'decorators' => array('Label', 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
-        ));
-        $this->addElement('Select', 'tsubs_kod', array(
-			    'multioptions'   => array(
-                            'koi8' => 'КОИ8',
-                            'translite' => 'translite',
-        	),
-        	'value' => 'koi8',
-            'required'   => false,
-            'label'      => 'в',
-        	'decorators' => array('Label', 'ViewHelper'),
-        ));
+//        $this->addElement('RadioPlus', 'klist', array(
+//			    'multioptions'   => array(
+//                            'y' => 'Капитан подписан на лист',
+//                            'n' => 'Капитан не подписан на лист',
+//        	),
+//        	'value' => 'y',
+//            'required'   => true,
+//            'label'      => 'Лист Совета Капитанов',
+//            'links'		=> array('n' => array('tsubs', 'tsubs_kod')),
+//        ));
+//        $this->addElement('text', 'tsubs', array(
+//            'filters'    => array('StringTrim'),
+//            'validators' => array(
+//                array('EmailAddress', true),
+//            ),
+//            'label' => 'просьба подписать адрес',
+//            'trim' 		 => true,
+//            'required'   => false,
+//            'decorators' => array('Label', 'ViewHelper', array("HtmlTag", array("tag" => "br"))),
+//        ));
+//        $this->addElement('Select', 'tsubs_kod', array(
+//			    'multioptions'   => array(
+//                            'koi8' => 'КОИ8',
+//                            'translite' => 'translite',
+//        	),
+//        	'value' => 'koi8',
+//            'required'   => false,
+//            'label'      => 'в',
+//        	'decorators' => array('Label', 'ViewHelper'),
+//        ));
 
         $this->addElement('RadioPlus', 'zlist', array(
 			    'multioptions'   => array(
