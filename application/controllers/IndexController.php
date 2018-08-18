@@ -70,20 +70,13 @@ class IndexController extends Zend_Controller_Action
         	->setSubject("ICHB-{$this->config['ichb']['year']} - New Registration: $teamname");
         $mail->send();
 
-        if($values["klist"] == 'n' || $values["zlist"] == 'n') {
+        if($values["zlist"] == 'n') {
         	$mail = new Reg2_Mail('subscribe');
         	$view = $mail->getView();
         	$mail->getMailer()
         		->addTo($this->config['mail']['pochta'])
         		->setSubject("ICHB-{$this->config['ichb']['year']} - Subscribe");
         	$view->name = $values["name"];
-        	if($values["klist"] == 'n') {
-        		$view->list = "Совета Капитанов";
-        		$view->kod = $values["tsubs_kod"];
-        		$view->addr = $values["tsubs"];
-        		$mail->getMailer()->setReplyTo($values["tsubs"], $values["name"]);
-        		$mail->send();
-        	}
 			$mail = new Reg2_Mail( 'subscribe' );
 			$view = $mail->getView();
 			$mail->getMailer()
