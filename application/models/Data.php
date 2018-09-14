@@ -4,7 +4,7 @@ class Reg2_Model_Data
 	protected $_tables = array();
 	const TURNIR = 80;
 	const PENDING_TURNIR = -1;
-	const MAX_PLAYERS = 25;
+	const MAX_PLAYERS = 50;
 	const CODE_LEN = 12;
 
     public static $V  = array("a", "e", "i", "o", "u", "y");
@@ -101,7 +101,8 @@ class Reg2_Model_Data
         1520 => 1, // Дмитрий Смирнов
         1511 => 1, // Владимир Степанов
         1521 => 1, // Ольга Ефремова
-		1535 => 1, // other Stalker
+	1535 => 1, // other Stalker
+	1672 => 1, // Дмитрий Смирнов
     );
 
 	public function __construct()
