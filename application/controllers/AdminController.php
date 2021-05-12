@@ -64,11 +64,11 @@ class AdminController extends Zend_Controller_Action
         $this->view->known_err = $model->getKnownErrors();
     }
 
-    /**
-     * Edit/confirm pending team
-     *
-     *
-     */
+	/**
+	 * Edit/confirm pending team
+	 *
+	 *
+	 */
     public function teamAction()
     {
         if(!$id = (int)$this->_getParam('id', false)) {
@@ -106,7 +106,8 @@ class AdminController extends Zend_Controller_Action
                         }
                         $mail->getView()->team = $team;
                         $mail->getView()->kadavr = $this->config['mail']['kadavr'];
-                        $mail->send();
+						$mail->getView()->ichb = $this->config['ichb']['name'];
+						$mail->send();
                         // send kap's pwd mail
                         $mail = new Reg2_Mail('cappwd');
                         $kap = $model->findPlayer($team->kap);
