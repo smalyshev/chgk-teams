@@ -80,6 +80,7 @@ class Reg2_Model_Data
 "Саида" => 1,
 "Света" => 1,
 "Светлана" => 1,
+"Серафима" => 1,
 "Tатьяна" => 1,
 "Тина" => 1,
 "Таня" => 1,
@@ -103,6 +104,8 @@ class Reg2_Model_Data
         1521 => 1, // Ольга Ефремова
 	1535 => 1, // other Stalker
 	1672 => 1, // Дмитрий Смирнов
+	1713 => 1, // Другая Мания Величия
+
     );
 
 	public function __construct()
@@ -504,6 +507,9 @@ class Reg2_Model_Data
 
 	protected function _suggestCountry($city, $uid = 0)
 	{
+	    if (empty($city) || $city === "?") {
+	        return null;
+	    }
 		$players = $this->getTable('Players');
 		$select = $players->select()->distinct()->from($players, 'country')
 				->where('city = ?', $city)->where('country <> \'\' AND country IS NOT NULL')
