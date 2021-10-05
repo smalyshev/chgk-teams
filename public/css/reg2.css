@@ -55,7 +55,7 @@ tr.cardrow td.datarow {
 }
 
 div#up-navigation {
-	alignment: center;
+	text-align: center;
 	width: 100%;
 	background-color: #EEFFEE;
 }

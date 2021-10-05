@@ -1,15 +1,15 @@
 <?php
-$this->headTitle('Список команд Интернет-Клуба "Что?Где?Когда?", турнир '.$this->turnir->imia);
+$this->headTitle('Список команд турнирa '.$this->turnir->imia);
 ?>
-<h1 align=center>Список команд Интернет-Клуба "Что?Где?Когда?", турнир <a href="<?= $this->turnir->url ?>"><?= $this->turnir->imia ?></a></h1>
+<h1 align=center>Список команд турнирa <a href="<?= $this->turnir->url ?>"><?= $this->turnir->imia ?></a></h1>
 <table width="80%" border=0 cellpadding=5 cellspacing=2 align=center>
 <tr bgcolor="#EEFFEE"><th>Номер</th><th>Команда</th><th>Игроков</th><th>E-mail</th><th>URL</th></tr>
 <?php foreach($this->teams as $team) { ?>
 <tr bgcolor="#CCCCCC">
-<td><?= $team['regno'] ?></td> 
+<td><?= $team['regno'] ?></td>
 <td><a href="<?= $this->url(array("controller" => "members", "action" => "team", "id" => $team['tid'])) ?>"><?= $team['imia'] ?></a></td>
-<td><?= $team['count'] ?></td> 
-<td><?= $this->printEmail($team['list']) ?> &nbsp;</td> 
+<td><?= $team['count'] ?></td>
+<td><?= $this->printEmail($team['list']) ?> &nbsp;</td>
 <td><?php if(!empty($team['url'])) { ?><a href="<?= $team['url'] ?>"><?= $team['url'] ?></a> <?php } ?>&nbsp;</td></tr>
 <?php } ?>
 </table>
