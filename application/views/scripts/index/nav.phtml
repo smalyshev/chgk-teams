@@ -1,2 +1,2 @@
 [<a href="<?= $this->url(array("controller" => "members", "action" => "index")) ?>">Список команд</a>]
-[<?= $this->actionLink($this->ichb['name'], "members", "turnir", array("id" => Reg2_Model_Data::TURNIR)) ?>]
+[<?= $this->actionLink("ИЧБ-" . $this->ichb['name'], "members", "turnir", array("id" => Reg2_Model_Data::TURNIR)) ?>]
