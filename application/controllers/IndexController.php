@@ -94,5 +94,11 @@ class IndexController extends Zend_Controller_Action
         	$this->view->pochta = $this->config['mail']['pochta'];
         }
     }
+
+    public function postDispatch()
+    {
+        $this->view->placeholder('upnav')->set($this->view->render("index/nav.phtml"));
+    }
+
 }
 
