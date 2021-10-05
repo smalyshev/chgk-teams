@@ -1,10 +1,10 @@
-.required { 
-	color: maroon; 
+.required {
+	color: maroon;
 	font-weight: bold;
 }
 
 #fieldset-player0 legend {
-	color: maroon; 
+	color: maroon;
 }
 
 div#errors {
@@ -52,4 +52,10 @@ tr.cardrow td.datarow {
 
 .cardrow2 {
 	background-color: #CCCCCC;
+}
+
+div#up-navigation {
+	alignment: center;
+	width: 100%;
+	background-color: #EEFFEE;
 }
