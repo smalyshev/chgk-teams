@@ -4,8 +4,8 @@
 
 - `mysql -u teams_user '-p****' teams`
 ```
-update turnir set old='y';`
-insert into turnir(id,imia,url,old) values(90,'ИЧБ-12', 'https://drive.google.com/file/d/1FP7lRd12SlsXb5dtkHheVFzZ7jEolMMl/', 'n');`
+update turnir set old='y';
+insert into turnir(id,imia,url,old) values(95,'ИЧБ-13', 'https://drive.google.com/file/d/1FP7lRd12SlsXb5dtkHheVFzZ7jEolMMl/', 'n');
 ```
 - Отредактировать application.ini, загрузить на сервер. Особое внимание уделить параметрам `ichb.*`
 
