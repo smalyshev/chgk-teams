@@ -174,6 +174,19 @@ class Reg2_Model_Data
         throw new Exception("Unknown team ID!");
     }
 
+    /**
+     * @param int  $id
+     * @return Zend_Db_Table_Row
+     */
+    public function findTeamOrNull ($id)
+    {
+        $res = $this->getTable('Teams')->find($id);
+        if (!empty($res) && $res->count() >0) {
+            return $res->current();
+        }
+        return null;
+    }
+
     /*
      * Find team by list email
      * @param string $email
@@ -909,7 +922,7 @@ class Reg2_Model_Data
 	/**
 	 * Find users by email
 	 *
-	 * @param unknown_type $email
+	 * @param string $email
 	 */
 	public function findUserByEmail($email)
 	{

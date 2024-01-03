@@ -10,3 +10,8 @@ insert into turnir(id,imia,url,old) values(95,'ИЧБ-13', 'https://drive.google
 - Отредактировать application.ini, загрузить на сервер. Особое внимание уделить параметрам `ichb.*`
 
 - Data.php: сменить `TURNIR`
+
+Обновить конфиг:
+```
+scp application/configs/application.ini teams:chgk-teams/application/configs/application.ini
+```
