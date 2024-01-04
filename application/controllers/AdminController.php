@@ -183,6 +183,16 @@ class AdminController extends Zend_Controller_Action
         }
     }
 
+    public function regno2Action()
+    {
+        $model = Reg2_Model_Data::getModel();
+        $teams = $model->getTeams();
+        $teamdata = [];
+		foreach($teams as $team) {
+            $teamdata[] = ["regno" => $team->regno, "name" => $team->imia];
+		}
+        $this->view->teams = $teamdata;
+    }
 }
 
 

@@ -1,0 +1,10 @@
+<?php
+$this->headTitle('Регистрационные номера');
+?>
+<h1 align="center">Регистрационные номера</h1>
+<table bgcolor="white" cellpadding=4 cellspacing=2>
+    <?php for ($i = 0; $i < $this->teamcount; $i++) {
+        echo $this->printCardRow($this->teams["name"], $this->teams["regno"]);
+    }
+    ?>
+</table>
