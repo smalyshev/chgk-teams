@@ -188,10 +188,13 @@ class AdminController extends Zend_Controller_Action
         $model = Reg2_Model_Data::getModel();
         $teams = $model->getTeams();
         $teamdata = [];
+        $maxlen = 0;
 		foreach($teams as $team) {
             $teamdata[] = ["regno" => $team->regno, "name" => $team->imia];
+            $maxlen = max($maxlen, mb_strlen($team->imia, "utf-8"));
 		}
         $this->view->teams = $teamdata;
+        $this->view->maxlen = $maxlen;
     }
 }
 
