@@ -192,7 +192,7 @@ class Reg2_Form_Register extends Zend_Form
                             'ZNATOK' => 'ZNATOK',
                             'Z-INFO' => 'Z-INFO',
         	),
-        	'value' => 'znatok',
+        	'value' => 'z-info',
             'required'   => false,
             'label'      => 'на лист',
         	'decorators' => array('Label', 'ViewHelper'),
