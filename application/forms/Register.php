@@ -189,10 +189,10 @@ class Reg2_Form_Register extends Zend_Form
         ));
         $this->addElement('Select', 'zsubs_list', array(
 			    'multioptions'   => array(
-                            'ZNATOK' => 'ZNATOK',
                             'Z-INFO' => 'Z-INFO',
+                            'ZNATOK' => 'ZNATOK',
         	),
-        	'value' => 'z-info',
+        	'value' => 'znatok',
             'required'   => false,
             'label'      => 'на лист',
         	'decorators' => array('Label', 'ViewHelper'),
