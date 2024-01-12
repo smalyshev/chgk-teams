@@ -162,13 +162,18 @@ class AdminController extends Zend_Controller_Action
         $model = Reg2_Model_Data::getModel();
         $teams = $model->getTeams();
         $teamdata = array(); $tnames = array(); $i = 0;
+        $max = 0;
 		foreach($teams as $team) {
 		    $teamdata["regno$i"] = $team->regno;
 		    $teamdata["tid$i"] = $team->tid;
 		    $tnames[$i] = $team->imia;
+            if ($team->regno) {
+                $max = max($max, $team->regno);
+            }
 		    $i++;
 		}
         $this->view->teamcount = $i;
+        $this->view->maxno = $max;
         $this->view->form = $form = $this->_helper->getForm('regno', array("teams" => $tnames));
         $request = $this->getRequest();
 

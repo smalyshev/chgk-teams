@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->headTitle('Регистрационные номера');
 ?>
 <h1 align="center">Регистрационные номера</h1>
@@ -24,4 +24,6 @@ $this->headTitle('Регистрационные номера');
 		<tr><th colspan=2><?= $this->form->regsubmit->render() ?></th></tr>
       </table>
     </form>
-        
+        <div>
+        Максимальный номер: <?= $this->maxno ?>.
+        </div>
