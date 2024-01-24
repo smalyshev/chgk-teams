@@ -157,6 +157,16 @@ class AdminController extends Zend_Controller_Action
         $this->view->user = $kap;
     }
 
+    public function mailtestAction()
+    {
+        $mail = new Reg2_Mail('cappwd');
+        $mail->getMailer()->addTo($this->config['mail']['kadavr'])->setSubject("ICHB-{$this->config['ichb']['year']} - Captain's Access TEST");
+        $mail->getView()->team = "TEST";
+        $mail->getView()->pwd = "TEST";
+        $mail->getView()->kadavr = $this->config['mail']['kadavr'];
+        $mail->send();
+    }
+
     public function regnoAction()
     {
         $model = Reg2_Model_Data::getModel();
