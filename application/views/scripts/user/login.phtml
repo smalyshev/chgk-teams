@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Логин'); 
+$this->headTitle('Логин');
 ?>
-<div class="login-msg"><?= join($this->messages, "<br>") ?></div><br>
+<div class="login-msg"><?= join("<br>", $this->messages) ?></div><br>
 <?= $this->loginForm ?>
