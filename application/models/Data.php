@@ -259,7 +259,7 @@ class Reg2_Model_Data
             "city" => $values["pcity$i"],
             "country" => $values["pcountry$i"],
             "sex" => $values["psex$i"],
-            "born" => formatDate($values["pborn$i"]);
+            "born" => $this->formatDate($values["pborn$i"]),
             "email" => $values["pemail$i"],
             "stamp" => null,
         ));
