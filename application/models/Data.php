@@ -251,7 +251,7 @@ class Reg2_Model_Data
             "city" => $values["pcity$i"],
             "country" => $values["pcountry$i"],
             "sex" => $values["psex$i"],
-            "born" => $values["pborn$i"],
+            "born" => $values["pborn$i"] ?? "0000-00-00",
             "email" => $values["pemail$i"],
             "stamp" => null,
         ));
