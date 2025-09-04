@@ -229,6 +229,14 @@ class Reg2_Model_Data
         return $table->fetchRow($select);
     }
 
+    private function formatDate($date)
+    {
+        if (empty($date) || strlen($date) == 0) {
+            return "0000-00-00";
+        }
+        return $date;
+    }
+
     /**
      * Insert data for player into the DB
      *
@@ -251,7 +259,7 @@ class Reg2_Model_Data
             "city" => $values["pcity$i"],
             "country" => $values["pcountry$i"],
             "sex" => $values["psex$i"],
-            "born" => $values["pborn$i"] ?? "0000-00-00",
+            "born" => formatDate($values["pborn$i"]);
             "email" => $values["pemail$i"],
             "stamp" => null,
         ));
