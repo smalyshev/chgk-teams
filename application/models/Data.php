@@ -232,7 +232,7 @@ class Reg2_Model_Data
     private function formatDate($date)
     {
         if (empty($date) || strlen($date) == 0) {
-            return "0000-00-00";
+            return null;
         }
         return $date;
     }
@@ -443,7 +443,7 @@ class Reg2_Model_Data
                         "city" => $values["pcity$i"],
                         "country" => $values["pcountry$i"],
                         "sex" => $values["psex$i"],
-                        "born" => $values["pborn$i"],
+                        "born" => $this->formatDate($values["pborn$i"]),
                         "email" => $values["pemail$i"],
                     ), "uid = " . (int)$values["pid$i"]);
                 }
