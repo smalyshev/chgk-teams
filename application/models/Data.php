@@ -345,7 +345,7 @@ class Reg2_Model_Data
 			"url" => $values["url"],
 			"second_email" => $values["remail"],
 			"regno" => $values["oldid"],
-			"stamp" => time(),
+			"stamp" => null,
 		));
 		$kap = 0;
 		for($i=0;$i<self::MAX_PLAYERS;$i++) {
