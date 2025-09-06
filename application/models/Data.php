@@ -258,7 +258,7 @@ class Reg2_Model_Data
             "famil" => $values["pfamil$i"],
             "city" => $values["pcity$i"],
             "country" => $values["pcountry$i"],
-            "sex" => $values["psex$i"],
+            "sex" => $values["psex$i"] ?? "m",
             "born" => $this->formatDate($values["pborn$i"]),
             "email" => $values["pemail$i"],
             "stamp" => null,
