@@ -466,6 +466,14 @@ class Reg2_Model_Data
         return true;
     }
 
+    private function fixDate($date)
+    {
+        if (empty($date) || $date == "0000-00-00" || $date == "1900-00-00") {
+            return null;
+        }
+        return $date;
+    }
+
     /**
      * Get player data as array
      *
@@ -480,7 +488,7 @@ class Reg2_Model_Data
         $values["pcity"] = $player->city;
         $values["pcountry"] = $player->country;
         $values["psex"] = $player->sex;
-        $values["pborn"] = $player->born;
+        $values["pborn"] = $this->fixDate($player->born);
         $values["pemail"] = $player->email;
         return $values;
     }
@@ -523,7 +531,7 @@ class Reg2_Model_Data
             $values["pcity$i"] = $player->city;
             $values["pcountry$i"] = $player->country;
             $values["psex$i"] = $player->sex;
-            $values["pborn$i"] = $player->born;
+            $values["pborn$i"] =  $this->fixDate($player->born);
             $values["pemail$i"] = $player->email;
         }
         return $values;
